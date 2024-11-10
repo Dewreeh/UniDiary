@@ -1,13 +1,28 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.header{
+  /* Rectangle 1 */
+  position: fixed;
+  width: 100%;
+  height: 97px;
+  left: 0px;
+  top: 0px;
+  background: #F9AC70;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.title{
+  /* UniDiary */
+
+  margin-left: 71px;
+  margin-top: 23px;
+
+  font-family: 'Paytone One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 56px;
+  /* identical to box height */
+
+  color: #3A3F50;
+
+
 }
