@@ -26,3 +26,29 @@
 
 
 }
+
+body{
+  background-color: #3A3F50
+}
+
+.AdminEntryButton{
+  /* Вход для администратора */
+
+  position: absolute;
+  width: 318px;
+  height: 25px;
+  left: 24px;
+  top: 640px;
+
+  font-family: 'Jaro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  /* identical to box height */
+  letter-spacing: 0.15em;
+
+  color: #FFFFFF;
+
+
+}
