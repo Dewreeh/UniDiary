@@ -49,6 +49,121 @@ body{
   letter-spacing: 0.15em;
 
   color: #FFFFFF;
+}
+
+.form-user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: fit-content;
+  
+}
+
+.login-horisontal-elems{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.login-vertical-elems{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form-title{
+  /* Вход в систему */
+
+  width: 422px;
+  height: 100px;
+  left: 501px;
+  top: 281px;
+
+  font-family: 'Kirang Haerang', system-ui;;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 100px;
+
+  letter-spacing: 0.15em;
+
+  color: #ffffff;
 
 
 }
+
+.input-item{
+  margin-bottom: 20px;
+  /* Rectangle 2 */
+
+
+  box-sizing: border-box;
+  width: 343px;
+  height: 52px;
+
+
+  background: #ECE6CD;
+  border: 2px solid #FFE2E2;
+  border-radius: 5px;
+
+
+
+}
+
+.entry-button{
+  margin-top: 15px;
+  /* Rectangle 2 */
+
+  box-sizing: border-box;
+
+  width: 343px;
+  height: 48px;
+
+
+  background: #F9AC70;
+  border: 2px solid #F9AC70;
+  border-radius: 6px;
+
+  
+}
+
+.body{
+  color: #3A3F50;
+}
+
+.login-form{
+  position: absolute;
+  margin-top: 180px;
+  left: 50%;
+  right: 50%;
+}
+
+.user-label{
+  /* Я студент */
+
+/* Я студент */
+
+box-sizing: border-box;
+
+
+
+
+
+font-family: 'Jaro';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 19px;
+/* identical to box height */
+
+color: #ECE6CD;
+
+
+
+
+
+}
+
