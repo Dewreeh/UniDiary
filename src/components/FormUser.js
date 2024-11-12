@@ -20,13 +20,13 @@ function FormUser(){
         </div>
         <div className="login-vertical-elems">
             <label className='user-label'>
-            <input type="radio" />Я студент
+                 <input type="radio" name="options" value="option1"/>Я студент
             </label>
             <label className='user-label'>
-            <input type="radio" title="" />Я преподаватель
+                <input type="radio" name="options" value="option2" />Я преподаватель
             </label>
             <label className='user-label'>
-            <input  type="radio" />Я сотрудник
+                <input  type="radio" name="options" value="option3"/>Я сотрудник
             </label>
         </div>
         <button className="entry-button">Войти</button>
