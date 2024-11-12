@@ -1,26 +1,32 @@
-import Header from './Header'
-import FormUser from './FormUser'
-
+import Header from './components/Header'
+import FormUser from './components/FormUser'
 import AdminLogin from './AdminLogin'
-import  './index.css';
+import  './components/index.css';
 import {Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
-        <div className="App">
-          <div className="body">
-            <Header />
-            <div className="login-form">
-            <FormUser />
+    <div className="App">
+      <Header />
+      
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <div className="body">
+              <div className="login-form">
+              <FormUser />
+              </div>
+              <Link to="/login_admin">
+                <a className="change-type-of-user">Вход для администратора</a>
+              </Link>
             </div>
-          </div>
-          <Link to='/login_admin'><a className="AdminEntryButton">Вход для администратора</a></Link>
-          
-          <Routes>
-            <Route path='/login_admin' element={<AdminLogin />} />
-          </Routes>
-
-        </div>
+          } 
+        />
+        
+        <Route path="/login_admin" element={<AdminLogin />} />
+      </Routes>
+    </div>
 
   );
 }
