@@ -13,7 +13,7 @@ function FormAdmin(){
                 />
                 <input
                 className="input-item"
-                type="text"
+                type="password"
                 placeholder="Пароль"
                 id="inputPasword"
                 />

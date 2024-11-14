@@ -35,12 +35,12 @@ body{
   /* Вход для администратора */
 
   position: absolute;
-  width: 318px;
+  width: 500px;
   height: 25px;
   left: 24px;
-  top: 680px;
+  bottom: 3%;
 
-  font-family: 'Jaro';
+  font-family: 'Kirang Haerang', system-ui;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -80,7 +80,7 @@ body{
 .form-title{
   /* Вход в систему */
 
-  width: 422px;
+  width: 406px;
   height: 100px;
 
   font-family: 'Kirang Haerang', system-ui;;
@@ -123,10 +123,20 @@ body{
   width: 343px;
   height: 48px;
 
-
+  font-family: 'Kirang Haerang', system-ui;
   background: #F9AC70;
   border: 2px solid #F9AC70;
   border-radius: 6px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+color: #3A3F58;
+
+
 
   
 }
@@ -146,7 +156,7 @@ body{
 
   box-sizing: border-box;
   display: inline-block;
-  font-family: 'Jaro';
+  font-family: 'Kirang Haerang', system-ui;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
