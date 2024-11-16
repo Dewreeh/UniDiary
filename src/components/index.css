@@ -168,3 +168,35 @@ color: #3A3F58;
 
 }
 
+.left-button-menu{
+  /* Group 3 */
+
+  width: 192px;
+  height: 70px;
+  left: 1px;
+  top: 279px;
+
+
+  background: #F9AC70;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 18px;
+
+  border: 0;
+
+  color: #3A3F50;
+
+
+}
+
+.text-button{
+  /* Кафедры */
+  font-size: 15px;
+
+}
+
+.kirang-font{
+  font-family: 'Kirang Haerang', system-ui;
+}
+
