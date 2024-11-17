@@ -27,6 +27,14 @@
 
 }
 
+.button{
+  background: #F9AC70;
+  border: 2px solid #F9AC70;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Kirang Haerang', system-ui;
+}
+
 body{
   background-color: #3A3F50
 }
@@ -169,13 +177,14 @@ color: #3A3F58;
 }
 
 .left-button-menu{
-  /* Group 3 */
+  display: flex;
+  justify-content: center; 
+  align-items: center;  
+
 
   width: 192px;
   height: 70px;
-  left: 1px;
-  top: 279px;
-
+  margin-top: 20px;
 
   background: #F9AC70;
   font-style: normal;
@@ -191,9 +200,7 @@ color: #3A3F58;
 }
 
 .text-button{
-  /* Кафедры */
   font-size: 15px;
-
 }
 
 .kirang-font{
@@ -211,7 +218,7 @@ color: #3A3F58;
 
 .table{
   position: relative;
-  width: 1000px;
+  width: 700px;
   top: 73px;
   font-family: 'Kirang Haerang', system-ui;
 }
@@ -219,6 +226,8 @@ color: #3A3F58;
 .custom-thead{
   background-color: #F9AC70;
 }
+
+
 
 
 
@@ -264,5 +273,11 @@ color: #3A3F58;
 
 body{
   background-color: #3A3F50;
+}
+
+.left-nav-bar{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 

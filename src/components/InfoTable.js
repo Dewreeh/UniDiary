@@ -5,7 +5,7 @@ function InfoTable(props){
   
         <div className="table-container">
     
-        <h1 className="table-title kirang-font">Список</h1>
+        <h1 className="table-title kirang-font">{props.title}</h1>
                 
         <table className="table table-hover">
             <thead className="custom-thead">

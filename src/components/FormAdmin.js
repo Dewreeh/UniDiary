@@ -6,10 +6,10 @@ function FormAdmin(){
             <div className="login-horisontal-elems">
                 <h1 className="form-title">Вход в систему</h1>
                 <input
-                className="input-item"
-                type="text"
-                placeholder="Почта"
-                id="inputEmail"
+                    className="input-item"
+                    type="text"
+                    placeholder="Почта"
+                    id="inputEmail"
                 />
                 <input
                 className="input-item"

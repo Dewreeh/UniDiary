@@ -8,6 +8,7 @@ function LeftMenuButton(props){
         </button>
 
     );
+
 }
 
 export default LeftMenuButton;
