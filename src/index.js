@@ -13,7 +13,6 @@ root.render(
   <React.StrictMode>
     <Router>
      <AdminPage />
-
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

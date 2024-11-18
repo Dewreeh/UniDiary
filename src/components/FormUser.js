@@ -5,18 +5,8 @@ function FormUser(){
     <div className="form-user">
         <div className="login-horisontal-elems">
             <h1 className="form-title">Вход в систему</h1>
-            <input
-            className="input-item"
-            type="text"
-            placeholder="Почта"
-            id="inputEmail"
-            />
-            <input
-            className="input-item"
-            type="password"
-            placeholder="Пароль"
-            id="inputPasword"
-            />
+            <input className="input-item" type="text" placeholder="Почта" id="inputEmail"/>
+            <input className="input-item" type="password" placeholder="Пароль" id="inputPasword"/>
         </div>
         <div className="login-vertical-elems">
             <label className='user-label'>

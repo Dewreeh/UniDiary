@@ -281,3 +281,12 @@ body{
   justify-content: space-around;
 }
 
+.navbar-expand-lg .sidenav  {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar{
+  padding: 0;
+  float: left;
+}
