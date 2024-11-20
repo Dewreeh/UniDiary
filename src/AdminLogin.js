@@ -7,7 +7,6 @@ import './components/index.css';
 function AdminLogin() {
   return (
         <div className="AdminLogin">
-        <Header />
           <div className="body">
             <div className="login-form">
             <FormAdmin />
