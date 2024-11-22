@@ -298,7 +298,9 @@ body{
 .navbar{
   padding: 0;
   float: left;
-  margin-top: 7%;
+  margin-top: auto;
+  height: 100%;
+  border-right: 8px solid #D9D9D9;
 }
 
 .workflow{
