@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css'
 import LeftMenuButton from './LeftMenuButton';
+import AdminLogin from '../AdminLogin';
+import {Routes, Route, Link, Router } from 'react-router-dom';
 function LeftNavBar(props){
     var data = props.data;
     /*return (
@@ -31,12 +33,19 @@ function LeftNavBar(props){
                 <ul class="navbar-nav mr-auto sidenav">
                     {data.map(item =>
                         <li class="nav-item active">
-                            <a class="nav-link"><LeftMenuButton text={item} /></a>
+                            <Link to="/login_admin"><a class="nav-link"><LeftMenuButton text={item} /></a></Link>
                         </li>
                     )}
                 </ul>
             </div>
+            <Routes>
+                <Route>
+                    <Route path="/login_admin" element={<AdminLogin />} />
+                </Route>
+            </Routes>
         </nav>
+
+
 
     );
 

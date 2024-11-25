@@ -6,7 +6,6 @@ function WorkFlow(props){
     return (
         <div className='workflow'>
                     <InfoTable title={props.title}/>
-
         </div>
     );
 }

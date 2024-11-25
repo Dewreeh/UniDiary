@@ -8,13 +8,15 @@ import LeftNavBar from './components/LeftNavBar';
 
 function AdminPage() {
   return (
-    <div className="App">
-      <Header />
-      <div className="workflow-container">
-        <LeftNavBar data={["Факультеты", "Сотрудники деканатов", "Статистика"]}/>
-        <WorkFlow title="Привет"/>
-      </div>
+    <div className="AdminPage">
+
+            <div className="workflow-container">
+              <LeftNavBar data={["Факультеты", "Сотрудники деканатов", "Статистика"]}/>
+              <WorkFlow title="Привет"/>
+            </div>
+            
     </div>
+    
 
   );
 }
