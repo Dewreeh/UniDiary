@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route 
-          path="/login" 
+          path="/" 
           element={
             <div className="body">
               <div className="login-form">
@@ -27,7 +27,6 @@ function App() {
         <Route path="/login_admin" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login-admin" element={<AdminLogin />} />
-
       </Routes>
     </div>
 
