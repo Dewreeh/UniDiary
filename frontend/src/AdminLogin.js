@@ -12,7 +12,7 @@ function AdminLogin() {
             <FormAdmin />
             </div>
           </div>
-          <Link to='/'><a className="change-type-of-user">Вход для остальных пользователей</a></Link>
+          <Link to="/" className="change-type-of-user">Вход для остальных пользователей</Link>
 
         </div>
 
