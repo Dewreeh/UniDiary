@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './index.css';
 
-function InfoTable({ title, data = [], onAdd, headers = [] }) {
+function InfoTable({ title, data, onAdd}) {
+
   // Создаем объект с пустыми значениями для нового элемента
   const [newItem, setNewItem] = useState(
-    headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {})
+    data.headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {})
   );
 
   const handleChange = (e) => {
@@ -18,10 +19,10 @@ function InfoTable({ title, data = [], onAdd, headers = [] }) {
     }
 
     // Если data пустой, превращаем его в массив
-    onAdd([...data, { ...newItem, id: data.length + 1 }]);
+    onAdd([...data.data, { ...newItem, id: data.data.length + 1 }]);
 
     // Очищаем форму
-    setNewItem(headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {}));
+    setNewItem(data.headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {}));
   };
 
   return (
@@ -31,33 +32,34 @@ function InfoTable({ title, data = [], onAdd, headers = [] }) {
       <table className="table table-hover">
         <thead className="custom-thead">
           <tr>
-            {
-              headers.map((header) => <th key={header}>{header}</th>)
-            }
-            
+            {data.headers.length > 0 ? (
+              data.headers.map((header) => <th key={header}>{header}</th>)
+            ) : (
+              <th>Нет данных</th>
+            )}
           </tr>
         </thead>
         <tbody className="custom-row">
-          {data && data.length > 0 ? (
-            data.map((item, index) => (
+          {data.data && data.data.length > 0 ? (
+            data.data.map((item, index) => (
               <tr key={index} className={`custom-row r${index + 1}`}>
-                {headers.map((header) => (
+                {data.headers.map((header) => (
                   <td key={header}>{item[header]}</td>
                 ))}
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={headers.length}>Нет данных</td>
+              <td colSpan={data.headers.length}>Нет данных</td>
             </tr>
           )}
         </tbody>
       </table>
 
       {/* Форма для добавления */}
-      {headers.length > 0 && (
+      {data.headers.length > 0 && (
         <div className="add-form">
-          {headers.map((header) => (
+          {data.headers.map((header) => (
             <input
               key={header}
               type="text"
