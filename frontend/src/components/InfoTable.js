@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import './index.css';
 
-function InfoTable({ title, data, onAdd }) {
-  // Если данных нет, устанавливаем пустой массив, чтобы избежать ошибки
-  const validData = data && data.length > 0 ? data : [];
-
-  // Определяем заголовки (если данных нет, берём пустой массив)
-  const headers = validData.length > 0 ? Object.keys(validData[0]) : [];
-
+function InfoTable({ title, data = [], onAdd, headers = [] }) {
+  // Создаем объект с пустыми значениями для нового элемента
   const [newItem, setNewItem] = useState(
     headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {})
   );
@@ -22,15 +17,12 @@ function InfoTable({ title, data, onAdd }) {
       return;
     }
 
-    onAdd({ ...newItem, id: validData.length + 1 });
+    // Если data пустой, превращаем его в массив
+    onAdd([...data, { ...newItem, id: data.length + 1 }]);
 
+    // Очищаем форму
     setNewItem(headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {}));
   };
-
-  // Возвращаем сообщение, если нет данных
-  if (validData.length === 0) {
-    return <div>Нет данных</div>;
-  }
 
   return (
     <div className="table-container">
@@ -39,40 +31,49 @@ function InfoTable({ title, data, onAdd }) {
       <table className="table table-hover">
         <thead className="custom-thead">
           <tr>
-            {headers.map((header) => (
-              <th key={header} scope="col">{header}</th>
-            ))}
+            {
+              headers.map((header) => <th key={header}>{header}</th>)
+            }
+            
           </tr>
         </thead>
         <tbody className="custom-row">
-          {validData.map((item, index) => (
-            <tr key={index} className={`custom-row r${index + 1}`}>
-              {headers.map((header) => (
-                <td key={header}>{item[header]}</td>
-              ))}
+          {data && data.length > 0 ? (
+            data.map((item, index) => (
+              <tr key={index} className={`custom-row r${index + 1}`}>
+                {headers.map((header) => (
+                  <td key={header}>{item[header]}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={headers.length}>Нет данных</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
-      <div className="add-form">
-        {headers.map((header) => (
-          <input
-            key={header}
-            type="text"
-            name={header}
-            placeholder={header}
-            value={newItem[header]}
-            onChange={handleChange}
-          />
-        ))}
-        <button className="button add-button" onClick={handleAdd}>
-          Добавить
-        </button>
-      </div>
+      {/* Форма для добавления */}
+      {headers.length > 0 && (
+        <div className="add-form">
+          {headers.map((header) => (
+            <input
+              key={header}
+              type="text"
+              name={header}
+              placeholder={header}
+              value={newItem[header]}
+              onChange={handleChange}
+            />
+          ))}
+          <button className="button add-button" onClick={handleAdd}>
+            Добавить
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
 export default InfoTable;
-
