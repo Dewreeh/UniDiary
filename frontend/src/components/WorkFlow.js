@@ -10,11 +10,21 @@ function WorkFlow() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const sectionTitles = {
+    fakultety: "Факультеты",
+    "sotrudniki-dekanatov": "Сотрудники деканатов",
+    statistika: "Статистика",
+  };
+
+  const title = sectionTitles[section] || section;
+
   useEffect(() => {
+    console.log('useEffect is triggered. Section:', section);
+
     const sectionToApiMap = {
-      fakultety: '/api/faculties',
-      'sotrudniki-dekanatov': '/api/staff',
-      statistika: '/api/statistics',
+      fakultety: '/api/get_faculties',
+      'sotrudniki-dekanatov': '/api/get_staff',
+      statistika: '/api/get_statistics',
     };
 
     const apiUrl = sectionToApiMap[section] || '/api/faculties';
@@ -30,22 +40,12 @@ function WorkFlow() {
       });
   }, [section]);
 
-  const handleAddEntity = (newEntity) => {
-    setData([...data, newEntity]); // Локально обновляем таблицу
-
-  };
-
-  if (loading) {
-    return <div>Загрузка...</div>;
-  }
-
-  if (error) {
-    return <div>Ошибка: {error.message}</div>;
-  }
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>Ошибка: {error.message}</div>;
 
   return (
     <div className="workflow">
-      <InfoTable title={section} data={data} onAdd={handleAddEntity} />
+      <InfoTable title={title} data={data} section={section} /> 
     </div>
   );
 }

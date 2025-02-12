@@ -1,22 +1,21 @@
 package org.repin.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.repin.dto.GenericTableDataDto;
+import org.repin.dto.FacultyDto;
 import org.repin.model.DeanStaffMember;
 import org.repin.model.Faculty;
 import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class ApiController {
 
     private final FacultyRepository facultyRepository;
@@ -29,18 +28,29 @@ public class ApiController {
         this.deanStaffRepository = deanStaffRepository;
     }
 
-    @GetMapping("/faculties")
+    @GetMapping("/get_faculties")
     ResponseEntity<Object> getFaculties(){
-        List<Faculty> faculties = (List<Faculty>) facultyRepository.findAll();
-        List<String> headers = List.of("#", "Название", "Адрес");
-        return ResponseEntity.ok().body(new GenericTableDataDto<Faculty>(headers, faculties));
+        List<Faculty> faculties =  facultyRepository.findAll();
+        List<String> headers = List.of("#", "Название", "Почта", "Номер телефона");
+        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, faculties));
     }
 
-    @GetMapping("/staff")
+    @GetMapping("/get_staff")
     ResponseEntity<Object> getStaff(){
-        List<DeanStaffMember> deanStaffMembers = (List<DeanStaffMember>) deanStaffRepository.findAll();
-        List<String> headers = List.of("#", "Название", "Адрес");
-        return ResponseEntity.ok().body(new GenericTableDataDto<DeanStaffMember>(headers, deanStaffMembers));
+        List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
+
+        List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
+        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
+    }
+
+    @PostMapping("add_faculty")
+    ResponseEntity<Object> addFaculty(@RequestBody FacultyDto facultyDto){
+        log.info("Запрос на API /api/add_faculty с данными: {}", facultyDto);
+        Faculty faculty = new Faculty(facultyDto.getName(),
+                                        facultyDto.getAddress(),
+                                        facultyDto.getPhoneNumber());
+
+        return ResponseEntity.ok().body(facultyRepository.save(faculty));
     }
 
 

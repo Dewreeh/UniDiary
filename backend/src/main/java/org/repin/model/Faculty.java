@@ -10,8 +10,12 @@ import java.util.UUID;
 @Table(name="faculties")
 public class Faculty {
     @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private String address;
     private String phone_number;
+
+    public Faculty(String name, String address, String phoneNumber) {
+    }
 }

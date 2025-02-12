@@ -1,5 +1,6 @@
 package org.repin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,9 +14,10 @@ public class DeanStaffMember {
     UUID id;
     String name;
     String email;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
     Faculty faculty;
+    @JsonIgnore
     String password;
 
 }
