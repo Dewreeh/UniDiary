@@ -49,7 +49,7 @@ public class ApiController {
         Faculty faculty = new Faculty(facultyDto.getName(),
                                         facultyDto.getAddress(),
                                         facultyDto.getPhoneNumber());
-
+        log.info("Сохранение сущности Faculty: {}", faculty);
         return ResponseEntity.ok().body(facultyRepository.save(faculty));
     }
 
