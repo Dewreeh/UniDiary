@@ -219,8 +219,6 @@ color: #3A3F58;
   font-family: 'Kirang Haerang', system-ui;
   background-color: #D9D9D9;
   
-  
-  
 }
 
 
@@ -315,7 +313,6 @@ body{
 }
 
 td{
-  font-family: 'Kirang Haerang', system-ui;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -346,5 +343,13 @@ th{
    position: relative;
    padding-right: .0rem; 
    padding-left: .0rem; 
+}
+
+.info-message{
+  color: white;
+  font-size: large;
+  font-weight: 600;
+  margin-top: 10%;
+  margin-left: 40%;
 }
 

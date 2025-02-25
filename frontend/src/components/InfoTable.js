@@ -54,8 +54,15 @@ function InfoTable({ title, data, onAdd, section}) {
   }
 };
   
+const columnMapping = {
+  "#": "id",
+  "Название": "name",
+  "Почта": "address",
+  "Номер телефона": "phone_number"
+};
 
   return (
+    
     <div className="table-container">
       <h1 className="table-title">{title}</h1>
 
@@ -74,7 +81,8 @@ function InfoTable({ title, data, onAdd, section}) {
             data.data.map((item, index) => (
               <tr key={index} className={`custom-row r${index + 1}`}>
                 {data.headers.map((header) => (
-                  <td key={header}>{item[header]}</td>
+                  header === "#" ? <td key={header}>{index}</td> : <td key={header}>{item[columnMapping[header]]}</td>
+    
                 ))}
               </tr>
             ))
@@ -90,7 +98,7 @@ function InfoTable({ title, data, onAdd, section}) {
       {data.headers.length > 0 && (
         <div className="add-form">
           {data.headers
-            .filter(header => header !== "#") //id не нужно добавлять вручную
+            .filter(header => header !== "#") 
             .map(header => (
               <input
                 key={header}
