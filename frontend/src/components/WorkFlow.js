@@ -40,8 +40,8 @@ function WorkFlow() {
       });
   }, [section]);
 
-  if (loading) return <div class='info-message'>Загрузка...</div>;
-  if (error) return <div class='info-message'>Ошибка: {error.message}</div>;
+  if (loading) return <div className='info-message'>Загрузка...</div>;
+  if (error) return <div className='info-message'>Ошибка: {error.message}</div>;
 
   return (
     <div className="workflow">
