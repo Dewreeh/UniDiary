@@ -14,13 +14,13 @@ public class Faculty {
     @GeneratedValue
     private UUID id;
     private String name;
-    private String address;
+    private String email;
     private String phone_number;
 
     public Faculty(){};
-    public Faculty(String name, String address, String phoneNumber) {
+    public Faculty(String name, String email, String phoneNumber) {
         this.name = name;
-        this.address = address;
+        this.email = email;
         this.phone_number = phoneNumber;
     }
 }

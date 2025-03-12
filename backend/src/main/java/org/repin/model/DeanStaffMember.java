@@ -10,7 +10,9 @@ import java.util.UUID;
 @Data
 @Table(name="dean_staff")
 public class DeanStaffMember {
+
     @Id
+    @GeneratedValue
     UUID id;
     String name;
     String email;
@@ -19,5 +21,12 @@ public class DeanStaffMember {
     Faculty faculty;
     @JsonIgnore
     String password;
+    public DeanStaffMember(){}
+    public DeanStaffMember(String name, String email, Faculty faculty, String password) {
+        this.name = name;
+        this.email = email;
+        this.faculty = faculty;
+        this.password = password;
+    }
 
 }
