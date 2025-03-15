@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { request } from '../api/api';
-import FacultyTable from './FacultyTable';
-import StaffTable from './StaffTable';
+import FacultyTable from './Admin/FacultyTable';
+import StaffTable from './Admin/StaffTable';
+import GroupsTable from './DeanStaff/GroupsTable';
 
 function WorkFlow() {
   const { section } = useParams();
