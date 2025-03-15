@@ -10,37 +10,46 @@ function StaffTable({ title, data, onAdd }) {
   };
 
   const [newItem, setNewItem] = useState(
-    (data?.headers ?? []).reduce((acc, key) => ({ ...acc, [key]: '' }), {})
+    Object.keys(columnMapping).reduce((acc, key) => ({ ...acc, [columnMapping[key]]: '' }), {})
   );
+
   const [faculties, setFaculties] = useState([]);
 
   useEffect(() => {
     request('/api/get_faculties')
-      .then(response => setFaculties(response.data))
+      .then(response => {
+        console.log("Факультеты с API:", response.data);
+        setFaculties(response.data);
+      })
       .catch(error => console.error("Ошибка загрузки факультетов:", error));
   }, []);
 
-  useEffect(() => {
-    setNewItem(data.headers.reduce((acc, key) => ({ ...acc, [columnMapping[key]]: '' }), {}));
-  }, [data.headers]);
-
   const handleChange = (e) => {
-    setNewItem({ ...newItem, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "faculty") {
+      const selectedFaculty = faculties.find(faculty => String(faculty.id) === value) || null;
+      console.log("Выбранный факультет:", selectedFaculty);
+      setNewItem(prevState => ({
+        ...prevState,
+        faculty: selectedFaculty
+      }));
+    } else {
+      setNewItem(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
 
   const handleAdd = async () => {
     const filteredNewItem = Object.keys(newItem)
-      .filter(key => key !== 'index')
       .reduce((acc, key) => ({ ...acc, [key]: newItem[key] }), {});
 
-    if (filteredNewItem.faculty) {
-      filteredNewItem.faculty = faculties.find(f => f.id === filteredNewItem.faculty);
-    }
 
     try {
       const savedItem = await request('/api/add_staff_member', 'POST', filteredNewItem);
-      setNewItem(data.headers.reduce((acc, key) => ({ ...acc, [columnMapping[key]]: '' }), {}));
-      
+
     } catch (error) {
       console.error("Ошибка при добавлении:", error);
       alert(error.message);
@@ -63,7 +72,7 @@ function StaffTable({ title, data, onAdd }) {
                 {data.headers.map((header) => (
                   <td key={header}>{
                     header === "#" ? index + 1 :
-                    header === "Факультет" ? item[columnMapping[header]]?.name : item[columnMapping[header]]
+                    header === "Факультет" ? item.faculty?.name : item[columnMapping[header]]
                   }</td>
                 ))}
               </tr>
@@ -79,7 +88,7 @@ function StaffTable({ title, data, onAdd }) {
             <select key={header} name="faculty" value={newItem.faculty?.id || ""} onChange={handleChange}>
               <option value="">Выберите факультет</option>
               {faculties.map(faculty => (
-                <option key={faculty.id} value={faculty.id}>{faculty.name}</option>
+                <option key={faculty.id} value={String(faculty.id)}>{faculty.name}</option>
               ))}
             </select>
           ) : (

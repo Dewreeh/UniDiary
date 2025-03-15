@@ -21,7 +21,7 @@ function InfoTable({ title, data, onAdd, section }) {
     setNewItem(getMappedHeaders());
   }, [data.headers]);
 
-  // Храним связанные сущности 
+ 
   const [relatedData, setRelatedData] = useState([]);
 
   // Загружаем связанные данные при изменении section

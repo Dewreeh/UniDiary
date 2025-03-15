@@ -3,7 +3,6 @@ import '../index.css';
 import { request } from '../../api/api';
 
 function FacultyTable({ title, data, onAdd }) {
-  // Маппинг заголовков (русские -> английские)
   const columnMapping = {
     "Название": "name",
     "Почта": "email",
