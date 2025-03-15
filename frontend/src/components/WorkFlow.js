@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './index.css';
-import InfoTable from './InfoTable';
 import { request } from '../api/api';
+import FacultyTable from './FacultyTable';
+import StaffTable from './StaffTable';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -10,34 +10,27 @@ function WorkFlow() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const sectionTitles = {
-    fakultety: "Факультеты",
-    "sotrudniki-dekanatov": "Сотрудники деканатов",
-    statistika: "Статистика",
-  };
-
-  const title = sectionTitles[section] || section;
-
   useEffect(() => {
-    console.log('useEffect is triggered. Section:', section);
-
-    const sectionToApiMap = {
+    const apiMap = {
       fakultety: '/api/get_faculties',
-      'sotrudniki-dekanatov': '/api/get_staff',
-      statistika: '/api/get_statistics',
+      'sotrudniki-dekanatov': '/api/get_staff'
     };
 
-    const apiUrl = sectionToApiMap[section] || '/api/faculties';
+    const apiUrl = apiMap[section];
 
-    request(apiUrl)
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+    if (apiUrl) {
+      request(apiUrl)
+        .then(data => {
+          setData(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          setError(error);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
   }, [section]);
 
   if (loading) return <div className='info-message'>Загрузка...</div>;
@@ -45,7 +38,8 @@ function WorkFlow() {
 
   return (
     <div className="workflow">
-      <InfoTable title={title} data={data} section={section} /> 
+      {section === "fakultety" && <FacultyTable data={data} onAdd={setData} />}
+      {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
     </div>
   );
 }

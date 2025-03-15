@@ -3,17 +3,31 @@ import './index.css';
 import { request } from '../api/api';
 
 function InfoTable({ title, data, onAdd, section }) {
-  const [newItem, setNewItem] = useState(
-    data.headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {})
-  );
+  const columnMapping = {
+    "#": "id",
+    "Название": "name",
+    "Почта": "email",
+    "Номер телефона": "phone_number",
+    "Факультет": "faculty",
+    "ФИО": "name"
+  };
 
-  // Храним связанные сущности (например, факультеты)
+  const getMappedHeaders = () => 
+    data.headers.reduce((acc, key) => ({ ...acc, [columnMapping[key] || key]: '' }), {});
+
+  const [newItem, setNewItem] = useState(getMappedHeaders());
+
+  useEffect(() => {
+    setNewItem(getMappedHeaders());
+  }, [data.headers]);
+
+  // Храним связанные сущности 
   const [relatedData, setRelatedData] = useState([]);
 
   // Загружаем связанные данные при изменении section
   useEffect(() => {
     const relatedEndpoints = {
-      'sotrudniki-dekanatov': '/api/get_faculties', //при добавлении сотрудника нам надо выбирать факультет среди существующих
+      'sotrudniki-dekanatov': '/api/get_faculties',
     };
 
     if (relatedEndpoints[section]) {
@@ -26,49 +40,46 @@ function InfoTable({ title, data, onAdd, section }) {
     }
   }, [section]);
 
-
   const handleChange = (e) => {
-    setNewItem({ ...newItem, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const mappedKey = columnMapping[name] || name;
+  
+    if (mappedKey === "faculty") {
+      const selectedFaculty = relatedData.find(f => String(f.id) === value);
+      setNewItem({ ...newItem, [mappedKey]: selectedFaculty || null });
+    } else {
+      setNewItem({ ...newItem, [mappedKey]: value });
+    }
   };
 
   const handleAdd = async () => {
     const filteredNewItem = Object.keys(newItem)
       .filter(key => key !== '#')
       .reduce((acc, key) => ({ ...acc, [key]: newItem[key] }), {});
-
-    if (Object.values(filteredNewItem).some(value => !value || (typeof value === 'string' && value.trim() === ''))) {
-      alert("Заполните все поля!");
-      return;
-    }
-
+  
     const sectionToApiMap = {
       fakultety: '/api/add_faculty',
-      'sotrudniki-dekanatov': '/api/add_staff',
+      'sotrudniki-dekanatov': '/api/add_staff_member',
       statistika: '/api/add_statistics',
     };
-
+  
     try {
       const endpoint = sectionToApiMap[section];
       if (!endpoint) throw new Error("Неизвестный раздел");
-
+  
       const savedItem = await request(endpoint, 'POST', filteredNewItem);
-      onAdd([...(data.data ?? []), savedItem]);
-
+  
+      if (savedItem.generatedPassword) {
+        alert(`Сгенерированный пароль: ${savedItem.generatedPassword}`);
+      }
+  
       setNewItem(data.headers.reduce((acc, key) => ({ ...acc, [key]: '' }), {}));
     } catch (error) {
       console.error("Ошибка при добавлении:", error);
       alert(error.message);
     }
   };
-
-  const columnMapping = {
-    "#": "id",
-    "Название": "name",
-    "Почта": "address",
-    "Номер телефона": "phone_number",
-    "Факультет": "facultyId"
-  };
-
+  
   return (
     <div className="table-container">
       <h1 className="table-title">{title}</h1>
@@ -88,7 +99,7 @@ function InfoTable({ title, data, onAdd, section }) {
             data.data.map((item, index) => (
               <tr key={index} className={`custom-row r${index + 1}`}>
                 {data.headers.map((header) =>
-                  header === "#" ? <td key={header}>{index}</td> : <td key={header}>{item[columnMapping[header]]}</td>
+                  header === "#" ? <td key={header}>{index}</td> : <td key={header}>{item[columnMapping[header]]?.name || item[columnMapping[header]]}</td>
                 )}
               </tr>
             ))
@@ -107,8 +118,8 @@ function InfoTable({ title, data, onAdd, section }) {
             header === "Факультет" && section === "sotrudniki-dekanatov" ? (
               <select
                 key={header}
-                name="facultyId"
-                value={newItem.facultyId || ""}
+                name="faculty"
+                value={newItem.faculty?.id || ""}
                 onChange={handleChange}
               >
                 <option value="">Выберите факультет</option>
@@ -124,7 +135,7 @@ function InfoTable({ title, data, onAdd, section }) {
                 type="text"
                 name={header}
                 placeholder={header}
-                value={newItem[header] || ""}
+                value={newItem[columnMapping[header]] || ""}
                 onChange={handleChange}
               />
             )
