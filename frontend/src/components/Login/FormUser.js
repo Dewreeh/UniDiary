@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css'
+import '../index.css'
 function FormUser(){
     return(
     <div className="form-user">

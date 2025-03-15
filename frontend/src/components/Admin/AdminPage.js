@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LeftNavBar from './components/LeftNavBar';
-import WorkFlow from './components/WorkFlow';
-import AdminLogin from './AdminLogin';
+import LeftNavBar from '../LeftNavBar';
+import WorkFlow from '../WorkFlow';
+import AdminLogin from '../Login/AdminLogin';
 
 function AdminPage() {
   const menuData = ["Факультеты", "Сотрудники деканатов", "Статистика"];

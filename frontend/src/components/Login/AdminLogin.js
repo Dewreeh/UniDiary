@@ -1,8 +1,8 @@
-import Header from './components/Header'
-import FormAdmin from './components/FormAdmin'
-import App from './App'
+import Header from '../Header'
+import FormAdmin from './FormAdmin'
+import App from '../../App'
 import {Link, Routes, Route} from 'react-router-dom';
-import './components/index.css';
+import '../index.css';
 
 function AdminLogin() {
   return (

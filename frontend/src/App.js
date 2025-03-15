@@ -1,7 +1,7 @@
 import Header from './components/Header'
-import FormUser from './components/FormUser'
-import AdminLogin from './AdminLogin'
-import AdminPage from './AdminPage'
+import FormUser from './components/Login/FormUser'
+import AdminLogin from './components/Login/AdminLogin'
+import AdminPage from './components/Admin/AdminPage'
 import  './components/index.css';
 import {Routes, Route, Link } from 'react-router-dom';
 
