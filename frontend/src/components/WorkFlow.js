@@ -14,7 +14,8 @@ function WorkFlow() {
   useEffect(() => {
     const apiMap = {
       fakultety: '/api/get_faculties',
-      'sotrudniki-dekanatov': '/api/get_staff'
+      'sotrudniki-dekanatov': '/api/get_staff',
+
     };
 
     const apiUrl = apiMap[section];
@@ -41,6 +42,8 @@ function WorkFlow() {
     <div className="workflow">
       {section === "fakultety" && <FacultyTable data={data} onAdd={setData} />}
       {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
+      {section === "gruppy" && <FacultyTable data={data} onAdd={setData} />}
+      {section === "studenty" && <StaffTable data={data} onAdd={setData} />}
     </div>
   );
 }

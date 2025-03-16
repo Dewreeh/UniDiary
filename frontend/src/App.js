@@ -4,6 +4,7 @@ import AdminLogin from './components/Login/AdminLogin'
 import AdminPage from './components/Admin/AdminPage'
 import  './components/index.css';
 import {Routes, Route, Link } from 'react-router-dom';
+import DeanStaffPage from './components/DeanStaff/DeanStaffPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         
         <Route path="/login_admin" element={<AdminLogin />} />
         <Route path="/admin/*" element={<AdminPage />} />
+        <Route path="/dean_staff/*" element={<DeanStaffPage />} />
       </Routes>
     </div>
 

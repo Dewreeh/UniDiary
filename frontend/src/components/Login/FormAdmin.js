@@ -21,8 +21,8 @@ function FormAdmin(){
                     id="inputPasword"
                     />
                 </div>
-                <Link to="/admin"><
-                    button className="entry-button">Войти</button>
+                <Link to="/admin">
+                <button className="entry-button">Войти</button>
                 </Link>
 
             </div>

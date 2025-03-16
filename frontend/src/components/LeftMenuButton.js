@@ -4,10 +4,10 @@ import './index.css';
 import { transliterate } from 'transliteration'; 
 
 function LeftMenuButton(props) {
-  const linkText = transliterate(props.text).toLowerCase().replace(/\s+/g, '-');  // Конвертируем текст в URL-формат
-
+  const linkText = transliterate(props.text).toLowerCase().replace(/\s+/g, '-');  
+  const role = props.role;
   return (
-    <Link to={`/admin/workflow/${linkText}`} className="left-button-menu">
+    <Link to={`/${role}/workflow/${linkText}`} className="left-button-menu">
       <p className="text-button kirang-font">{props.text}</p>
     </Link>
   );

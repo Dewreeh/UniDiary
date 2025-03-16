@@ -6,7 +6,7 @@ import { transliterate } from 'transliteration';
 
 function LeftNavBar(props) {
   const data = props.data;
-
+  const role = props.role;
   return (
     <nav className='navbar navbar-expand-lg'>
       <button
@@ -23,7 +23,7 @@ function LeftNavBar(props) {
         <ul className="navbar-nav mr-auto sidenav">
           {data.map(item => (
             <li className="nav-item active" key={item}>
-                <LeftMenuButton text={item} />
+                <LeftMenuButton text={item} role={role} />
             </li>
           ))}
         </ul>

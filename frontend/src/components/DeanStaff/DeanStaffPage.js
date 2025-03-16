@@ -6,14 +6,13 @@ import AdminLogin from '../Login/AdminLogin';
 
 function DeanStaffPage() {
   const menuData = ["Группы", "Студенты", "Старосты"];
-
+  const role = "dean_staff"
   return (
-    <div className="AdminPage">
+    <div className="DeanStaffPage">
       <div className="workflow-container">
-        <LeftNavBar data={menuData} />
+        <LeftNavBar data={menuData} role={role} />
         <Routes>
           <Route path="workflow/:section" element={<WorkFlow />} />
-          <Route path="/login_admin" element={<AdminLogin />} />
         </Routes>
       </div>
     </div>
