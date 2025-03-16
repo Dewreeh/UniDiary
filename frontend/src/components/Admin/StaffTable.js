@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import { request } from '../../api/api';
+import Table from '../Table';
 
 function StaffTable({ title, data, onAdd }) {
   const columnMapping = {
@@ -14,6 +15,7 @@ function StaffTable({ title, data, onAdd }) {
   );
 
   const [faculties, setFaculties] = useState([]);
+  const [passwordPopup, setPasswordPopup] = useState(null);
 
   useEffect(() => {
     request('/api/get_faculties')
@@ -23,6 +25,7 @@ function StaffTable({ title, data, onAdd }) {
       })
       .catch(error => console.error("Ошибка загрузки факультетов:", error));
   }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +45,8 @@ function StaffTable({ title, data, onAdd }) {
     }
   };
 
+  const [generatedPassword, setGeneratedPassword] = useState(null);
+
   const handleAdd = async () => {
     const filteredNewItem = Object.keys(newItem)
       .reduce((acc, key) => ({ ...acc, [key]: newItem[key] }), {});
@@ -49,6 +54,12 @@ function StaffTable({ title, data, onAdd }) {
 
     try {
       const savedItem = await request('/api/add_staff_member', 'POST', filteredNewItem);
+      
+      setPasswordPopup(savedItem.generatedPassword);
+
+      if (savedItem?.generatedPassword) {
+        setGeneratedPassword(savedItem.generatedPassword);
+      }
 
     } catch (error) {
       console.error("Ошибка при добавлении:", error);
@@ -58,30 +69,8 @@ function StaffTable({ title, data, onAdd }) {
 
   return (
     <div className="table-container">
-      <h1 className="table-title">{title}</h1>
-      <table className="table table-hover">
-        <thead className="custom-thead">
-          <tr>
-            {data.headers.map((header) => <th key={header}>{header}</th>)}
-          </tr>
-        </thead>
-        <tbody className="custom-row">
-          {data.data.length > 0 ? (
-            data.data.map((item, index) => (
-              <tr key={index} className={`custom-row r${index + 1}`}>
-                {data.headers.map((header) => (
-                  <td key={header}>{
-                    header === "#" ? index + 1 :
-                    header === "Факультет" ? item.faculty?.name : item[columnMapping[header]]
-                  }</td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr><td colSpan={data.headers.length}>Нет данных</td></tr>
-          )}
-        </tbody>
-      </table>
+      <h1 className="table-title">Сотрудники деканатов</h1>
+      <Table data={data} columnMapping={columnMapping}></Table>
       <div className="add-form">
         {data.headers.filter(header => header !== "#").map(header => (
           header === "Факультет" ? (
@@ -104,6 +93,20 @@ function StaffTable({ title, data, onAdd }) {
         ))}
         <button className="button add-button" onClick={handleAdd}>Добавить</button>
       </div>
+      
+        <div> 
+          {generatedPassword && (
+            <div className="password-info">
+              <p>Сгенерированный пароль: <strong>{generatedPassword}</strong></p>
+            </div>
+          )}
+        </div>
+        {passwordPopup && (
+        <div className="password-popup show">
+          Сгенерированный пароль: {passwordPopup}
+          <button className="close-btn" onClick={() => setPasswordPopup(null)}>OK</button>
+        </div>
+      )}
     </div>
   );
 }

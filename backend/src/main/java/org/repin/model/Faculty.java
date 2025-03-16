@@ -1,10 +1,9 @@
 package org.repin.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.UUID;
+import lombok.Data;
 
 @Entity
 @Data
@@ -15,6 +14,7 @@ public class Faculty {
     private UUID id;
     private String name;
     private String email;
+    @JsonProperty("phoneNumber")
     private String phone_number;
 
     public Faculty(){};

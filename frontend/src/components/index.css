@@ -268,6 +268,50 @@ table thead, table tbody tr {
   color: #FFFFFF;
 }
 
+.password-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 300px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.password-popup.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.password-popup .close-btn {
+  display: block;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: #ff5900;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.password-popup .close-btn:hover {
+  background: #ff9100;
+}
+
+
+
 .add-button{
   position: relative;
   width: 120px;

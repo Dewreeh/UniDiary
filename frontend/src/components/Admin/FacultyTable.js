@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import '../index.css';
 import { request } from '../../api/api';
+import Table from '../Table';
 
 function FacultyTable({ title, data, onAdd }) {
   const columnMapping = {
     "Название": "name",
     "Почта": "email",
-    "Номер телефона": "phone_number",
+    "Номер телефона": "phoneNumber",
   };
 
   // Начальное состояние newItem
@@ -29,7 +30,6 @@ function FacultyTable({ title, data, onAdd }) {
     try {
       const savedItem = await request('/api/add_faculty', 'POST', filteredNewItem);
       setNewItem(data.headers.reduce((acc, key) => ({ ...acc, [columnMapping[key]]: '' }), {}));
-
     } catch (error) {
       console.error("Ошибка при добавлении:", error);
       alert(error.message);
@@ -39,31 +39,8 @@ function FacultyTable({ title, data, onAdd }) {
 
   return (
     <div className="table-container">
-      <h1 className="table-title">{title}</h1>
-      <table className="table table-hover">
-        <thead className="custom-thead">
-          <tr>
-            {data.headers.map((header) => <th key={header}>{header}</th>)}
-          </tr>
-        </thead>
-        <tbody className="custom-row">
-          {data.data && data.data.length > 0 ? (
-            data.data.map((item, index) => (
-              <tr key={index} className={`custom-row r${index + 1}`}>
-                {data.headers.map((header) => (
-                  <td key={header}>
-                    {header === "#" ? index + 1 : item[columnMapping[header]]}
-                  </td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={data.headers.length}>Нет данных</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <h1 className="table-title">Факультеты</h1>
+      <Table data={data} columnMapping={columnMapping}></Table>
       <div className="add-form">
         {data.headers.filter(header => header !== "#").map(header => (
           <input
