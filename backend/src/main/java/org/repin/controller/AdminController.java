@@ -12,7 +12,6 @@ import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +20,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @Slf4j
-public class ApiController {
+public class AdminController {
 
     private final FacultyRepository facultyRepository;
     private final DeanStaffRepository deanStaffRepository;
 
     @Autowired
-    ApiController(FacultyRepository facultyRepository,
+    AdminController(FacultyRepository facultyRepository,
                   DeanStaffRepository deanStaffRepository){
         this.facultyRepository = facultyRepository;
         this.deanStaffRepository = deanStaffRepository;
@@ -52,8 +51,8 @@ public class ApiController {
     ResponseEntity<Object> addFaculty(@Valid @RequestBody FacultyDto facultyDto){
         log.info("Запрос на API /api/add_faculty с данными: {}", facultyDto);
         Faculty faculty = new Faculty(facultyDto.getName(),
-                                        facultyDto.getEmail(),
-                                        facultyDto.getPhoneNumber());
+                facultyDto.getEmail(),
+                facultyDto.getPhoneNumber());
         log.info("Сохранение сущности Faculty: {}", faculty);
         return ResponseEntity.ok().body(facultyRepository.save(faculty));
     }
@@ -64,13 +63,11 @@ public class ApiController {
         DeanStaffMember deanStaffMember = new DeanStaffMember(staffMemberDto.getName(),
                 staffMemberDto.getEmail(),
                 staffMemberDto.getFaculty(),
-                UUID.randomUUID() //генерируем пароль
+                UUID.randomUUID() //генерируем пароль //TODO сделать потом так, чтобы пароль отправлялся пользователю на почту, а не возвращался на клиент для отображения тому, кто его регает
                         .toString()
                         .substring(0, 8)
         );
         log.info("Сохранение сущности Faculty: {}", staffMemberDto);
         return ResponseEntity.ok().body(new GeneratedPasswordDto(deanStaffRepository.save(deanStaffMember).getPassword())); //сохраняем сущность и возвращаем пароль
     }
-
-
 }

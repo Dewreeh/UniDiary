@@ -14,11 +14,18 @@ public class Student {
     UUID id;
     String name;
 
-    StudentGroup studentGroups;
+    StudentGroup studentGroup;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="groups_id")
     Faculty faculty;
     @JsonIgnore
     String password;
+
+    public Student(String name, StudentGroup studentGroup, Faculty faculty, String password) {
+        this.name = name;
+        this.studentGroup = studentGroup;
+        this.faculty = faculty;
+        this.password = password;
+    }
 }
 
