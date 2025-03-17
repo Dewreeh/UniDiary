@@ -10,9 +10,7 @@ import java.util.UUID;
 @Data
 @Table(name="dean_staff")
 public class DeanStaffMember {
-
     @Id
-    @GeneratedValue
     UUID id;
     String name;
     String email;

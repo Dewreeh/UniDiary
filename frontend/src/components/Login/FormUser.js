@@ -11,9 +11,7 @@ function FormUser() {
     setSelectedRole(e.target.value);
   };
 
-  // Обработчик нажатия кнопки "Войти"
   const handleLogin = () => {
-    // Можно добавить валидацию данных и потом уже переходить
     if (!selectedRole) {
       alert('Выберите роль');
     }
