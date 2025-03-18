@@ -42,7 +42,6 @@ public class AdminController {
     @GetMapping("/get_staff")
     ResponseEntity<Object> getStaff(){
         List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
-
         List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
     }

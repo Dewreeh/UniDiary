@@ -11,6 +11,7 @@ import java.util.UUID;
 @Table(name="dean_staff")
 public class DeanStaffMember {
     @Id
+    @GeneratedValue
     UUID id;
     String name;
     String email;

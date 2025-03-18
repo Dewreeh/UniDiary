@@ -6,8 +6,6 @@ import java.util.List;
 
 @Data
 public class GenericTableDataDto<T> {
-
-
     private List<String> headers;
     private List<T> data;
 

@@ -8,15 +8,15 @@ import org.repin.repository.StudentGroupsRepository;
 import org.repin.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class DeanStaffController {
 
@@ -37,11 +37,10 @@ public class DeanStaffController {
         return ResponseEntity.ok().body(new GenericTableDataDto<Student>(headers, students));
     }
 
-    @PostMapping("add_staff_member")
+    @PostMapping("add_student")
     ResponseEntity<Object> addStudentAndGenerateDto(@Valid @RequestBody StudentDto dto){
             Student student = new Student(dto.getName(),
                     dto.getStudentGroup(),
-                    dto.getFaculty(),
                     UUID.randomUUID()
                             .toString()
                             .substring(0, 8));
@@ -56,7 +55,7 @@ public class DeanStaffController {
         return ResponseEntity.ok().body(new GenericTableDataDto<StudentGroup>(headers, studentGroups));
     }
 
-    // Добавление новой группы
+
     @PostMapping("/add_group")
     public ResponseEntity<Object> addStudentGroup(@Valid @RequestBody StudentGroupDto dto){
         StudentGroup studentGroup = new StudentGroup(dto.getName(),

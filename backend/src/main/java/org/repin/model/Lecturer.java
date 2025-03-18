@@ -11,12 +11,11 @@ import java.util.UUID;
 @Table(name="lecturers")
 public class Lecturer {
     @Id
+    @GeneratedValue
     UUID id;
     String name;
-
-    StudentGroup studentGroups;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="groups_id")
+    @JoinColumn(name="faculty_id")
     Faculty faculty;
     @JsonIgnore
     String password;

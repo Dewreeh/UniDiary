@@ -11,20 +11,18 @@ import java.util.UUID;
 @Table(name="students")
 public class Student {
     @Id
+    @GeneratedValue
     UUID id;
     String name;
-
-    StudentGroup studentGroup;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="groups_id")
-    Faculty faculty;
+    @JoinColumn(name="group_id")
+    StudentGroup studentGroup;
     @JsonIgnore
     String password;
 
-    public Student(String name, StudentGroup studentGroup, Faculty faculty, String password) {
+    public Student(String name, StudentGroup studentGroup, String password) {
         this.name = name;
         this.studentGroup = studentGroup;
-        this.faculty = faculty;
         this.password = password;
     }
 }

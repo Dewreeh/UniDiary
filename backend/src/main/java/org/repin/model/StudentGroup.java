@@ -10,18 +10,19 @@ import java.util.UUID;
 @Table(name="student_groups")
 public class StudentGroup {
     @Id
+    @GeneratedValue
     UUID id;
     String name;
     String speciality; //TODO сделать это через ENUM
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
     Faculty faculty;
-    String email;
+    String groupEmail;
 
     public StudentGroup(String name, String speciality, Faculty faculty, String email) {
         this.name = name;
         this.speciality = speciality;
         this.faculty = faculty;
-        this.email = email;
+        this.groupEmail = email;
     }
 }

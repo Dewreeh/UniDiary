@@ -1,21 +1,33 @@
-.header {
-  position: relative;
+.header{
+  /* Rectangle 1 */
+  position: relative ;
   width: 100%;
   height: 97px;
+  left: 0px;
+  top: 0px;
   background: #F9AC70;
+
 }
 
-.title {
-  position: absolute;
+.title{
+  /* UniDiary */
+  position: absolute;;
   margin-left: 71px;
   margin-top: 19px;
+
   font-family: 'Paytone One';
+  font-style: normal;
+  font-weight: 400;
   font-size: 40px;
   line-height: 56px;
+  /* identical to box height */
+
   color: #3A3F50;
+
+
 }
 
-.button {
+.button{
   background: #F9AC70;
   border: 2px solid #F9AC70;
   border-radius: 6px;
@@ -23,175 +35,236 @@
   font-family: 'Kirang Haerang', system-ui;
 }
 
-.App {
+.App{
   display: block;
   margin: auto;
 }
 
-body {
-  background-color: #3A3F50;
+body{
+  background-color: #3A3F50
 }
 
-.change-type-of-user {
+.change-type-of-user{
+  /* Вход для администратора */
+
   position: absolute;
   width: 500px;
   height: 25px;
   left: 24px;
   bottom: 3%;
+
   font-family: 'Kirang Haerang', system-ui;
+  font-style: normal;
+  font-weight: 400;
   font-size: 20px;
   line-height: 25px;
+  /* identical to box height */
   letter-spacing: 0.15em;
+
   color: #FFFFFF;
 }
 
-.form-user {
+.form-user{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: fit-content;
+  
 }
 
-.login-horisontal-elems {
+.login-horisontal-elems{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
-.login-vertical-elems {
+.login-vertical-elems{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  white-space: nowrap;
+  white-space: nowrap; 
+  
 }
 
-.form-title {
+.form-title{
+  /* Вход в систему */
+
   width: 406px;
   height: 100px;
-  font-family: 'Kirang Haerang', system-ui;
+
+  font-family: 'Kirang Haerang', system-ui;;
+  font-style: normal;
+  font-weight: 400;
   font-size: 45px;
   line-height: 100px;
+
   letter-spacing: 0.15em;
+
   color: #ffffff;
+
+
 }
 
-.input-item {
+.input-item{
   margin-bottom: 20px;
+  /* Rectangle 2 */
+
+
   box-sizing: border-box;
   width: 343px;
   height: 52px;
+
+
   background: #ECE6CD;
   border: 2px solid #FFE2E2;
   border-radius: 5px;
+
+
+
 }
 
-.entry-button {
+.entry-button{
   margin-top: 15px;
+  /* Rectangle 2 */
+
   box-sizing: border-box;
+
   width: 343px;
   height: 48px;
+
   font-family: 'Kirang Haerang', system-ui;
   background: #F9AC70;
   border: 2px solid #F9AC70;
   border-radius: 6px;
+  font-style: normal;
   font-weight: 900;
   font-size: 13px;
+  line-height: 15px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #3A3F58;
+
+color: #3A3F58;
+
+
+
+  
 }
 
-.body {
+.body{
   color: #3A3F50;
 }
 
-.login-form {
+.login-form{
   position: absolute;
   margin-top: 110px;
   left: 50%;
   right: 50%;
 }
 
-.user-label {
+.user-label{
+
+  box-sizing: border-box;
   display: inline-block;
   font-family: 'Kirang Haerang', system-ui;
+  font-style: normal;
+  font-weight: 400;
   font-size: 15px;
   line-height: 19px;
   margin-right: 10px;
+  /* identical to box height */
+
   color: #ECE6CD;
+
 }
 
-.left-button-menu {
+.left-button-menu{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; 
+  align-items: center;  
+
+
   width: 192px;
   height: 70px;
   margin-top: 20px;
+
   background: #F9AC70;
+  font-style: normal;
   font-weight: 900;
   font-size: 15px;
   line-height: 18px;
+
   border: 0;
+
   color: #3A3F50;
+
+
 }
 
-.text-button {
+.text-button{
   font-size: 15px;
   margin: auto;
 }
 
-.kirang-font {
+.kirang-font{
   font-family: 'Kirang Haerang', system-ui;
 }
 
-.custom-row {
+.custom-row{
   position: relative;
   top: 3px;
   font-family: system-ui;
   background-color: #D9D9D9;
+  
 }
 
-.table {
+
+.table{
   position: relative;
   width: 800px;
   top: 40px;
   font-family: 'Kirang Haerang', system-ui;
 }
 
-.custom-thead {
+.custom-thead{
   background-color: #F9AC70;
+  
 }
 
-.table-container {
+
+.table-container{
   position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   max-width: fit-content;
+
 }
+
 
 table tbody {
   display: block;
-  max-height: 300px;
+  max-height: 300px; 
   overflow-y: auto;
 }
 
 table thead, table tbody tr {
   display: table;
   width: 100%;
-  table-layout: fixed;
+  table-layout: fixed; 
 }
 
-.table-title {
+.table-title{
+  font-style: normal;
   font-weight: 900;
   font-size: 35px;
   line-height: 41px;
   letter-spacing: 0.15em;
+
   color: #FFFFFF;
 }
 
@@ -237,28 +310,41 @@ table thead, table tbody tr {
   background: #ff9100;
 }
 
-.add-button {
+
+
+.add-button{
   position: relative;
   width: 120px;
   height: fit-content;
-  font-family: 'Kirang Haerang', system-ui;
+  margin-top: 80px;
+  
+
+  font-family: 'Kirang Haerang', system-ui;;
+  font-style: normal;
   font-weight: 600;
   font-size: 18px;
+  line-height: 20px;
+
   color: #3A3F58;
+
 }
 
-.left-nav-bar {
+body{
+  background-color: #3A3F50;
+}
+
+.left-nav-bar{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.navbar-expand-lg .sidenav {
+.navbar-expand-lg .sidenav  {
   display: flex;
   flex-direction: column;
 }
 
-.navbar {
+.navbar{
   padding: 0;
   float: left;
   margin-top: auto;
@@ -266,35 +352,38 @@ table thead, table tbody tr {
   border-right: 8px solid #D9D9D9;
 }
 
-.workflow {
+.workflow{
   position: relative;
+  width: auto;
   margin-left: 30%;
+
+
   margin-top: 3%;
+  
+
 }
 
-.add-form{
-  display: flex;
-  flex-direction: row;
-  height: 30px;
-  margin-top: 5%;
-}
-
-td {
+td{
+  font-style: normal;
   font-weight: 600;
   font-size: 18px;
+  line-height: 21px;
   color: #3A3F58;
   margin: auto;
 }
 
-th {
+th{
   font-family: 'Kirang Haerang', system-ui;
+  font-style: normal;
   font-weight: 700;
   font-size: 18px;
+
   color: #3A3F58;
   margin: auto;
 }
 
-.workflow-container {
+
+.workflow-container{
   position: absolute;
   width: 100%;
   height: 640px;
@@ -302,12 +391,12 @@ th {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  position: relative;
-  padding-right: .0rem;
-  padding-left: .0rem;
+   position: relative;
+   padding-right: .0rem; 
+   padding-left: .0rem; 
 }
 
-.info-message {
+.info-message{
   color: white;
   font-size: large;
   font-weight: 600;
@@ -315,90 +404,3 @@ th {
   margin-left: 40%;
 }
 
-/* Адаптивные медиазапросы */
-@media (max-width: 768px) {
-  .header {
-    height: 80px;
-  }
-
-  .title {
-    font-size: 30px;
-    margin-left: 20px;
-  }
-
-  .change-type-of-user {
-    width: 100%;
-    font-size: 18px;
-    bottom: 10%;
-  }
-
-  .form-title {
-    font-size: 30px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .input-item, .entry-button {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  .left-button-menu {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .table {
-    width: 100%;
-  }
-
-  .workflow {
-    margin-left: 10%;
-  }
-
-  .workflow-container {
-    height: auto;
-  }
-
-  .info-message {
-    margin-left: 10%;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    height: 60px;
-  }
-
-  .title {
-    font-size: 24px;
-    margin-left: 10px;
-  }
-
-  .form-title {
-    font-size: 25px;
-  }
-
-  .input-item, .entry-button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .table {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .workflow {
-    margin-left: 5%;
-  }
-
-  .workflow-container {
-    height: auto;
-  }
-
-  .info-message {
-    font-size: 16px;
-    margin-left: 20%;
-  }
-}

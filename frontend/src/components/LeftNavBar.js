@@ -1,34 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import LeftMenuButton from './LeftMenuButton';
-import { Link } from 'react-router-dom';
-import { transliterate } from 'transliteration'; 
 
-function LeftNavBar(props) {
-  const data = props.data;
-  const role = props.role;
+function LeftNavBar({ data, role }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav className='navbar navbar-expand-lg'>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+    <>
+      <button className="menu-toggle" onClick={toggleMenu}>
+        ☰
       </button>
-      <div className="collapse navbar-collapse" id="navbarCollapse">
+
+      <nav className={`navbar navbar-expand-lg left-nav-bar ${isOpen ? 'open' : 'closed'}`}>
         <ul className="navbar-nav mr-auto sidenav">
-          {data.map(item => (
+          {data.map((item) => (
             <li className="nav-item active" key={item}>
-                <LeftMenuButton text={item} role={role} />
+              <LeftMenuButton text={item} role={role} />
             </li>
           ))}
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 
