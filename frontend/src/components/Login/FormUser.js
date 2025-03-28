@@ -1,19 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { request } from '../../api/api';
 import '../index.css';
 
 function FormUser() {
   const [selectedRole, setSelectedRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     if (!selectedRole) {
-      alert('Выберите роль');
+      setError('Выберите роль');
+      return;
+    }
+
+    try {
+      const response = await request('/api/auth/login', 'POST', { 
+        email, 
+        password, 
+        role: selectedRole 
+      });
+
+      localStorage.setItem('userToken', response.token);
+      localStorage.setItem('userRole', response.role);
+      
+      navigate(`/${selectedRole.toLowerCase()}`);
+    } catch (err) {
+      setError('Ошибка входа. Проверьте почту и пароль.');
     }
   };
 
@@ -25,7 +47,6 @@ function FormUser() {
           className="input-item"
           type="text"
           placeholder="Почта"
-          id="inputEmail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -33,45 +54,30 @@ function FormUser() {
           className="input-item"
           type="password"
           placeholder="Пароль"
-          id="inputPasword"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
       <div className="login-vertical-elems">
-        <label className='user-label'>
-          <input
-            type="radio"
-            name="options"
-            value="STUDENT"
-            onChange={handleRoleChange}
-          />
-          Я студент
-        </label>
-        <label className='user-label'>
-          <input
-            type="radio"
-            name="options"
-            value="LECTURER"
-            onChange={handleRoleChange}
-          />
-          Я преподаватель
-        </label>
-        <label className='user-label'>
-          <input
-            type="radio"
-            name="options"
-            value="DEAN_STAFF"
-            onChange={handleRoleChange}
-          />
-          Я сотрудник
-        </label>
+        {['STUDENT', 'LECTURER', 'DEAN_STAFF'].map((role) => (
+          <label key={role} className='user-label'>
+            <input
+              type="radio"
+              name="role"
+              value={role}
+              onChange={handleRoleChange}
+            />
+            {role === 'STUDENT' ? 'Я студент' :
+             role === 'LECTURER' ? 'Я преподаватель' :
+             'Я сотрудник'}
+          </label>
+        ))}
       </div>
-        <Link to={`/${selectedRole.toLowerCase()}`} onClick={handleLogin}>
-          <button className="entry-button">ВОЙТИ</button>
-        </Link>
-    
+
+      {error && <p className="info-message">{error}</p>}
+
+      <button className="entry-button" onClick={handleLogin}>ВОЙТИ</button>
     </div>
   );
 }

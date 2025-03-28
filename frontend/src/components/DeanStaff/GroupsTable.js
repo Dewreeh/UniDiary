@@ -5,9 +5,11 @@ import Table from '../Table';
 
 function GroupsTable({ title, data, onAdd }) {
   const columnMapping = {
-    "ФИО": "Название",
-    "Почта группы": "GroupEmail",
-    "Факультет": "faculty"
+    "Название": "name",
+    "Почта группы": "groupEmail",
+    "Факультет": "faculty",
+    "Специальность": "speciality"
+    
   };
 
   const [newItem, setNewItem] = useState(
@@ -52,7 +54,7 @@ function GroupsTable({ title, data, onAdd }) {
 
 
     try {
-      const savedItem = await request('/api/add_staff_member', 'POST', filteredNewItem);
+      const savedItem = await request('/api/add_group', 'POST', filteredNewItem);
       
 
 

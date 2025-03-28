@@ -15,6 +15,8 @@ function WorkFlow() {
     const apiMap = {
       fakultety: '/api/get_faculties',
       'sotrudniki-dekanatov': '/api/get_staff',
+      fakultety: '/api/get_faculties',
+      'gruppy': '/api/get_groups',
 
     };
 
@@ -42,7 +44,7 @@ function WorkFlow() {
     <div className="workflow">
       {section === "fakultety" && <FacultyTable data={data} onAdd={setData} />}
       {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
-      {section === "gruppy" && <FacultyTable data={data} onAdd={setData} />}
+      {section === "gruppy" && <GroupsTable data={data} onAdd={setData} />}
       {section === "studenty" && <StaffTable data={data} onAdd={setData} />}
     </div>
   );
