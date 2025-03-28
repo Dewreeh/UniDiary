@@ -16,7 +16,7 @@ function WorkFlow() {
       fakultety: '/api/get_faculties',
       'sotrudniki-dekanatov': '/api/get_staff',
       fakultety: '/api/get_faculties',
-      'gruppy': '/api/get_groups',
+        gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? `?userId=${localStorage.getItem('userId')}` : ''}`
 
     };
 

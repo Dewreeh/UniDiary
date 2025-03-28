@@ -1,4 +1,4 @@
-package org.repin.dto;
+package org.repin.dto.response_dto;
 
 import lombok.Data;
 

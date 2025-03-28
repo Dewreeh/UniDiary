@@ -31,63 +31,60 @@ function GroupsTable({ title, data, onAdd }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "faculty") {
-      const selectedFaculty = faculties.find(faculty => String(faculty.id) === value) || null;
-      console.log("Выбранный факультет:", selectedFaculty);
-      setNewItem(prevState => ({
-        ...prevState,
-        faculty: selectedFaculty
-      }));
-    } else {
+    
+    if (name !== "faculty") { 
       setNewItem(prevState => ({
         ...prevState,
         [name]: value
       }));
     }
   };
-
+  
 
   const handleAdd = async () => {
-    const filteredNewItem = Object.keys(newItem)
-      .reduce((acc, key) => ({ ...acc, [key]: newItem[key] }), {});
-
-
+    const userFacultyId = localStorage.getItem('facultyId');
+    const filteredNewItem = {
+      ...newItem,
+      faculty: userFacultyId ? { id: userFacultyId } : newItem.faculty 
+    };
+  
     try {
       const savedItem = await request('/api/add_group', 'POST', filteredNewItem);
-      
-
-
+      console.log("Группа добавлена:", savedItem);
     } catch (error) {
       console.error("Ошибка при добавлении:", error);
       alert(error.message);
     }
   };
+  
 
   return (
     <div className="table-container">
-      <h1 className="table-title">Сотрудники деканатов</h1>
+      <h1 className="table-title">Группы</h1>
       <Table data={data} columnMapping={columnMapping}></Table>
       <div className="add-form">
-        {data.headers.filter(header => header !== "#").map(header => (
-          header === "Факультет" ? (
-            <select key={header} name="faculty" value={newItem.faculty?.id || ""} onChange={handleChange}>
-              <option value="">Выберите факультет</option>
-              {faculties.map(faculty => (
-                <option key={faculty.id} value={String(faculty.id)}>{faculty.name}</option>
-              ))}
-            </select>
-          ) : (
-            <input
-              key={header}
-              type="text"
-              name={columnMapping[header]}
-              placeholder={header}
-              value={newItem[columnMapping[header]] || ""}
-              onChange={handleChange}
-            />
-          )
-        ))}
+      {data.headers.filter(header => header !== "#").map(header => (
+      header === "Факультет" && localStorage.getItem('userRole') === "DEAN_STAFF" ? null : (
+        header === "Факультет" ? (
+          <select key={header} name="faculty" value={newItem.faculty?.id || ""} onChange={handleChange}>
+            <option value="">Выберите факультет</option>
+            {faculties.map(faculty => (
+              <option key={faculty.id} value={String(faculty.id)}>{faculty.name}</option>
+            ))}
+          </select>
+        ) : (
+          <input
+            key={header}
+            type="text"
+            name={columnMapping[header]}
+            placeholder={header}
+            value={newItem[columnMapping[header]] || ""}
+            onChange={handleChange}
+          />
+        )
+      )
+    ))}
+
         <button className="button add-button" onClick={handleAdd}>Добавить</button>
       </div>
       

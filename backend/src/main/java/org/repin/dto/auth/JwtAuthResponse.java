@@ -23,7 +23,6 @@ public class JwtAuthResponse {
     @JsonProperty("role")
     private String role;
 
-    // Дополнительные поля, если нужно
     private String email;
     private UUID userId;
 

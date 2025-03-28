@@ -1,4 +1,4 @@
-package org.repin.dto;
+package org.repin.dto.request_dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

@@ -40,7 +40,6 @@ public class AuthController {
         log.debug("Сформированный логин с ролью: {}", usernameWithRole);
 
         try {
-            // Аутентификация пользователя
             log.debug("Попытка аутентификации...");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

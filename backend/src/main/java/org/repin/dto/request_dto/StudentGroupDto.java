@@ -1,4 +1,4 @@
-package org.repin.dto;
+package org.repin.dto.request_dto;
 
 import lombok.Data;
 import org.repin.model.Faculty;

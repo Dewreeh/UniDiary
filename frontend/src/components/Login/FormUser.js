@@ -32,6 +32,7 @@ function FormUser() {
 
       localStorage.setItem('userToken', response.token);
       localStorage.setItem('userRole', response.role);
+      localStorage.setItem('userId', response.userId);
       
       navigate(`/${selectedRole.toLowerCase()}`);
     } catch (err) {

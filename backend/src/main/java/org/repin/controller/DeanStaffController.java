@@ -1,17 +1,20 @@
 package org.repin.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.repin.dto.*;
+import org.repin.dto.request_dto.StudentDto;
+import org.repin.dto.request_dto.StudentGroupDto;
+import org.repin.dto.response_dto.GeneratedPasswordDto;
+import org.repin.dto.response_dto.GenericTableDataDto;
+import org.repin.model.Faculty;
 import org.repin.model.Student;
 import org.repin.model.StudentGroup;
+import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.StudentGroupsRepository;
 import org.repin.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,15 +25,18 @@ public class DeanStaffController {
 
     private final StudentGroupsRepository studentGroupsRepository;
     private final StudentRepository studentRepository;
+    private final DeanStaffRepository deanStaffRepository;
 
     @Autowired
     DeanStaffController(StudentGroupsRepository studentGroupsRepository,
-                        StudentRepository studentRepository){
+                        StudentRepository studentRepository,
+                        DeanStaffRepository deanStaffRepository){
         this.studentGroupsRepository = studentGroupsRepository;
         this.studentRepository = studentRepository;
+        this.deanStaffRepository = deanStaffRepository;
     }
 
-    @PostMapping("/get_students")
+    @GetMapping("/get_students")
     ResponseEntity<Object> getStudents(){
         List<Student> students = studentRepository.findAll();
         List<String> headers = List.of("#", "ФИО", "Группа", "Почта");
@@ -48,13 +54,18 @@ public class DeanStaffController {
     }
 
 
-    @PostMapping("/get_groups")
-    public ResponseEntity<Object> getStudentGroups(){
-        List<StudentGroup> studentGroups = studentGroupsRepository.findAll();
-        List<String> headers = List.of("#", "Название", "Факультет", "Почта группы");
-        return ResponseEntity.ok().body(new GenericTableDataDto<StudentGroup>(headers, studentGroups));
-    }
+    @GetMapping("/get_groups")
+    public ResponseEntity<GenericTableDataDto<StudentGroup>> getStudentGroups(@RequestParam("userId") UUID deanStaffId) {
 
+        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
+                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
+
+        List<StudentGroup> studentGroups = studentGroupsRepository.findByFacultyId(facultyId);
+
+
+        List<String> headers = List.of("#", "Название", "Специальность", "Факультет", "Почта группы");
+        return ResponseEntity.ok(new GenericTableDataDto<>(headers, studentGroups));
+    }
 
     @PostMapping("/add_group")
     public ResponseEntity<Object> addStudentGroup(@Valid @RequestBody StudentGroupDto dto){

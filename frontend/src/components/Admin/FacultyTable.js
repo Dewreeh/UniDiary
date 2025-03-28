@@ -10,7 +10,6 @@ function FacultyTable({ title, data, onAdd }) {
     "Номер телефона": "phoneNumber",
   };
 
-  // Начальное состояние newItem
   const [newItem, setNewItem] = useState(
     Object.keys(columnMapping).reduce((acc, key) => ({ ...acc, [columnMapping[key]]: '' }), {})
   );

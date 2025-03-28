@@ -1,7 +1,7 @@
 package org.repin.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import org.repin.dto.ErrorMessageDto;
+import org.repin.dto.response_dto.ErrorMessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
