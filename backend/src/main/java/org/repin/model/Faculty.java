@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="faculties")
-public class Faculty {
+public class Faculty{
     @Id
     @GeneratedValue
     private UUID id;

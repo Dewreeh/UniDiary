@@ -9,11 +9,12 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name="students")
-public class Student {
+public class Student implements AppUser{
     @Id
     @GeneratedValue
     UUID id;
     String name;
+    String email;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="group_id")
     StudentGroup studentGroup;
@@ -25,5 +26,10 @@ public class Student {
         this.studentGroup = studentGroup;
         this.password = password;
     }
+    @Override
+    public String getRole() {
+        return "ROLE_STUDENT";
+    }
+
 }
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name="dean_staff")
-public class DeanStaffMember {
+public class DeanStaffMember implements AppUser{
     @Id
     @GeneratedValue
     UUID id;
@@ -26,6 +26,11 @@ public class DeanStaffMember {
         this.email = email;
         this.faculty = faculty;
         this.password = password;
+    }
+
+    @Override
+    public String getRole() {
+        return "ROLE_DEAN_STAFF";
     }
 
 }
