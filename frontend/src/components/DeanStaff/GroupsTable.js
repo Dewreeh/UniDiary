@@ -31,8 +31,14 @@ function GroupsTable({ title, data, onAdd }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    if (name !== "faculty") { 
+
+    if (name === "faculty") {
+      const selectedFaculty = faculties.find(faculty => String(faculty.id) === value) || null;
+      setNewItem(prevState => ({
+        ...prevState,
+        faculty: selectedFaculty ? { id: selectedFaculty.id, name: selectedFaculty.name } : null
+      }));
+    } else {
       setNewItem(prevState => ({
         ...prevState,
         [name]: value
@@ -60,7 +66,7 @@ function GroupsTable({ title, data, onAdd }) {
 
   return (
     <div className="table-container">
-      <h1 className="table-title">Группы</h1>
+      <h1 className="table-title">Ваши группы</h1>
       <Table data={data} columnMapping={columnMapping}></Table>
       <div className="add-form">
       {data.headers.filter(header => header !== "#").map(header => (

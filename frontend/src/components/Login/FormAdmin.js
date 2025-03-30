@@ -22,8 +22,8 @@ function FormAdmin() {
                 return;
             }
     
-            localStorage.setItem('adminToken', response.token);
-            localStorage.setItem('adminRole', response.role); 
+            localStorage.setItem('accessToken', response.accessToken);
+            localStorage.setItem('userRole', response.role); 
             navigate('/admin');
         } catch (err) {
             setError('Ошибка входа. Проверьте почту и пароль.');

@@ -25,4 +25,6 @@ public class StudentGroup {
         this.faculty = faculty;
         this.groupEmail = email;
     }
+
+    StudentGroup(){}
 }

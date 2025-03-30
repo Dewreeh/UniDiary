@@ -37,8 +37,14 @@ public class DeanStaffController {
     }
 
     @GetMapping("/get_students")
-    ResponseEntity<Object> getStudents(){
-        List<Student> students = studentRepository.findAll();
+    ResponseEntity<Object> getStudents(@RequestParam("userId") UUID deanStaffId){
+
+        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
+                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
+
+
+        List<Student> students = studentRepository.findByFacultyId(facultyId);
+
         List<String> headers = List.of("#", "ФИО", "Группа", "Почта");
         return ResponseEntity.ok().body(new GenericTableDataDto<Student>(headers, students));
     }
@@ -75,4 +81,6 @@ public class DeanStaffController {
                 dto.getEmail());
         return ResponseEntity.ok().body(studentGroupsRepository.save(studentGroup));
     }
+
+
 }

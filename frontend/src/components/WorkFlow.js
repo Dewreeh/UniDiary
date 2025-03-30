@@ -4,6 +4,7 @@ import { request } from '../api/api';
 import FacultyTable from './Admin/FacultyTable';
 import StaffTable from './Admin/StaffTable';
 import GroupsTable from './DeanStaff/GroupsTable';
+import StudentsTable from './DeanStaff/StudentsTable';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -16,7 +17,8 @@ function WorkFlow() {
       fakultety: '/api/get_faculties',
       'sotrudniki-dekanatov': '/api/get_staff',
       fakultety: '/api/get_faculties',
-        gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? `?userId=${localStorage.getItem('userId')}` : ''}`
+      gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
+      studenty: `/api/get_students${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
 
     };
 
@@ -45,7 +47,7 @@ function WorkFlow() {
       {section === "fakultety" && <FacultyTable data={data} onAdd={setData} />}
       {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
       {section === "gruppy" && <GroupsTable data={data} onAdd={setData} />}
-      {section === "studenty" && <StaffTable data={data} onAdd={setData} />}
+      {section === "studenty" && <StudentsTable data={data} onAdd={setData} />}
     </div>
   );
 }

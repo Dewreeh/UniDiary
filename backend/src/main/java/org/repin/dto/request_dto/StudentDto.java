@@ -11,5 +11,7 @@ public class StudentDto {
     @NotBlank(message = "Поле не должно быть пустым!")
     StudentGroup studentGroup;
     @NotBlank(message = "Поле не должно быть пустым!")
+    StudentGroup speciality;
+    @NotBlank(message = "Поле не должно быть пустым!")
     String password;
 }
