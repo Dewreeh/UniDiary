@@ -1,0 +1,238 @@
+Index: ../frontend/src/components/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.header{\r\n  /* Rectangle 1 */\r\n  position: relative ;\r\n  width: 100%;\r\n  height: 97px;\r\n  left: 0px;\r\n  top: 0px;\r\n  background: #F9AC70;\r\n\r\n}\r\n\r\n.title{\r\n  /* UniDiary */\r\n  position: absolute;;\r\n  margin-left: 71px;\r\n  margin-top: 19px;\r\n\r\n  font-family: 'Paytone One';\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 40px;\r\n  line-height: 56px;\r\n  /* identical to box height */\r\n\r\n  color: #3A3F50;\r\n\r\n\r\n}\r\n\r\n.button{\r\n  background: #F9AC70;\r\n  border: 2px solid #F9AC70;\r\n  border-radius: 6px;\r\n  box-sizing: border-box;\r\n  font-family: 'Kirang Haerang', system-ui;\r\n}\r\n\r\n.App{\r\n  display: block;\r\n  margin: auto;\r\n}\r\n\r\nbody{\r\n  background-color: #3A3F50\r\n}\r\n\r\n.change-type-of-user{\r\n  /* Вход для администратора */\r\n\r\n  position: absolute;\r\n  width: 500px;\r\n  height: 25px;\r\n  left: 24px;\r\n  bottom: 3%;\r\n\r\n  font-family: 'Kirang Haerang', system-ui;\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 20px;\r\n  line-height: 25px;\r\n  /* identical to box height */\r\n  letter-spacing: 0.15em;\r\n\r\n  color: #FFFFFF;\r\n}\r\n\r\n.form-user{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  max-width: fit-content;\r\n  \r\n}\r\n\r\n.login-horisontal-elems{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n.login-vertical-elems{\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\r\n  white-space: nowrap; \r\n  \r\n}\r\n\r\n.form-title{\r\n  /* Вход в систему */\r\n\r\n  width: 406px;\r\n  height: 100px;\r\n\r\n  font-family: 'Kirang Haerang', system-ui;;\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 45px;\r\n  line-height: 100px;\r\n\r\n  letter-spacing: 0.15em;\r\n\r\n  color: #ffffff;\r\n\r\n\r\n}\r\n\r\n.input-item{\r\n  margin-bottom: 20px;\r\n  /* Rectangle 2 */\r\n\r\n\r\n  box-sizing: border-box;\r\n  width: 343px;\r\n  height: 52px;\r\n\r\n\r\n  background: #ECE6CD;\r\n  border: 2px solid #FFE2E2;\r\n  border-radius: 5px;\r\n\r\n\r\n\r\n}\r\n\r\n.entry-button{\r\n  margin-top: 15px;\r\n  /* Rectangle 2 */\r\n\r\n  box-sizing: border-box;\r\n\r\n  width: 343px;\r\n  height: 48px;\r\n\r\n  font-family: 'Kirang Haerang', system-ui;\r\n  background: #F9AC70;\r\n  border: 2px solid #F9AC70;\r\n  border-radius: 6px;\r\n  font-style: normal;\r\n  font-weight: 900;\r\n  font-size: 13px;\r\n  line-height: 15px;\r\n  letter-spacing: 0.04em;\r\n  text-transform: uppercase;\r\n\r\ncolor: #3A3F58;\r\n\r\n\r\n\r\n  \r\n}\r\n\r\n.body{\r\n  color: #3A3F50;\r\n}\r\n\r\n.login-form{\r\n  position: absolute;\r\n  margin-top: 110px;\r\n  left: 50%;\r\n  right: 50%;\r\n}\r\n\r\n.user-label{\r\n\r\n  box-sizing: border-box;\r\n  display: inline-block;\r\n  font-family: 'Kirang Haerang', system-ui;\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-size: 15px;\r\n  line-height: 19px;\r\n  margin-right: 10px;\r\n  /* identical to box height */\r\n\r\n  color: #ECE6CD;\r\n\r\n}\r\n\r\n.left-button-menu{\r\n  display: flex;\r\n  justify-content: center; \r\n  align-items: center;  \r\n\r\n\r\n  width: 192px;\r\n  height: 70px;\r\n  margin-top: 20px;\r\n\r\n  background: #F9AC70;\r\n  font-style: normal;\r\n  font-weight: 900;\r\n  font-size: 15px;\r\n  line-height: 18px;\r\n\r\n  border: 0;\r\n\r\n  color: #3A3F50;\r\n\r\n\r\n}\r\n\r\n.text-button{\r\n  font-size: 15px;\r\n  margin: auto;\r\n}\r\n\r\n.kirang-font{\r\n  font-family: 'Kirang Haerang', system-ui;\r\n}\r\n\r\n.custom-row{\r\n  position: relative;\r\n  top: 3px;\r\n  font-family: system-ui;\r\n  background-color: #D9D9D9;\r\n  \r\n}\r\n\r\n\r\n.table{\r\n  position: relative;\r\n  width: 800px;\r\n  top: 40px;\r\n  font-family: 'Kirang Haerang', system-ui;\r\n}\r\n\r\n.custom-thead{\r\n  background-color: #F9AC70;\r\n  \r\n}\r\n\r\n\r\n.table-container{\r\n  position: relative;\r\n  display: flex;\r\n  justify-content: space-around;\r\n  align-items: center;\r\n  flex-direction: column;\r\n  max-width: fit-content;\r\n\r\n}\r\n\r\n\r\ntable tbody {\r\n  display: block;\r\n  max-height: 300px; \r\n  overflow-y: auto;\r\n}\r\n\r\ntable thead, table tbody tr {\r\n  display: table;\r\n  width: 100%;\r\n  table-layout: fixed; \r\n}\r\n\r\n.table-title{\r\n  font-style: normal;\r\n  font-weight: 900;\r\n  font-size: 35px;\r\n  line-height: 41px;\r\n  letter-spacing: 0.15em;\r\n\r\n  color: #FFFFFF;\r\n}\r\n\r\n.password-popup {\r\n  position: fixed;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n  background: white;\r\n  border: 2px solid #007bff;\r\n  border-radius: 5px;\r\n  padding: 20px;\r\n  text-align: center;\r\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);\r\n  z-index: 1000;\r\n  width: 300px;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  color: #333;\r\n  visibility: hidden;\r\n  opacity: 0;\r\n  transition: visibility 0s, opacity 0.3s ease-in-out;\r\n}\r\n\r\n.password-popup.show {\r\n  visibility: visible;\r\n  opacity: 1;\r\n}\r\n\r\n.password-popup .close-btn {\r\n  display: block;\r\n  margin-top: 10px;\r\n  padding: 5px 10px;\r\n  border: none;\r\n  background: #ff5900;\r\n  color: white;\r\n  border-radius: 3px;\r\n  cursor: pointer;\r\n  font-size: 16px;\r\n}\r\n\r\n.password-popup .close-btn:hover {\r\n  background: #ff9100;\r\n}\r\n\r\n\r\n\r\n.add-button{\r\n  position: relative;\r\n  width: 120px;\r\n  height: fit-content;\r\n  margin-top: 80px;\r\n  \r\n\r\n  font-family: 'Kirang Haerang', system-ui;;\r\n  font-style: normal;\r\n  font-weight: 600;\r\n  font-size: 18px;\r\n  line-height: 20px;\r\n\r\n  color: #3A3F58;\r\n\r\n}\r\n\r\nbody{\r\n  background-color: #3A3F50;\r\n}\r\n\r\n.left-nav-bar{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n}\r\n\r\n.navbar-expand-lg .sidenav  {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.navbar{\r\n  padding: 0;\r\n  float: left;\r\n  margin-top: auto;\r\n  height: 100%;\r\n  border-right: 8px solid #D9D9D9;\r\n}\r\n\r\n.workflow{\r\n  position: relative;\r\n  width: auto;\r\n  margin-left: 30%;\r\n\r\n\r\n  margin-top: 3%;\r\n  \r\n\r\n}\r\n\r\ntd{\r\n  font-style: normal;\r\n  font-weight: 600;\r\n  font-size: 18px;\r\n  line-height: 21px;\r\n  color: #3A3F58;\r\n  margin: auto;\r\n}\r\n\r\nth{\r\n  font-family: 'Kirang Haerang', system-ui;\r\n  font-style: normal;\r\n  font-weight: 700;\r\n  font-size: 18px;\r\n\r\n  color: #3A3F58;\r\n  margin: auto;\r\n}\r\n\r\n\r\n.workflow-container{\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 640px;\r\n  display: inline-block;\r\n}\r\n\r\n.navbar-expand-lg .navbar-nav .nav-link {\r\n   position: relative;\r\n   padding-right: .0rem; \r\n   padding-left: .0rem; \r\n}\r\n\r\n.info-message{\r\n  color: white;\r\n  font-size: large;\r\n  font-weight: 600;\r\n  margin-top: 10%;\r\n  margin-left: 40%;\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/components/index.css b/../frontend/src/components/index.css
+--- a/../frontend/src/components/index.css	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../frontend/src/components/index.css	(date 1743187053025)
+@@ -329,6 +329,11 @@
+ 
+ }
+ 
++.logout-button{
++  float: right;
++  margin-right: 10px;
++}
++
+ body{
+   background-color: #3A3F50;
+ }
+Index: ../backend/src/main/java/org/repin/controller/ControllerAdvice.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/controller/ControllerAdvice.java b/../backend/src/main/java/org/repin/controller/GlobalExceptionHandler.java
+rename from ../backend/src/main/java/org/repin/controller/ControllerAdvice.java
+rename to ../backend/src/main/java/org/repin/controller/GlobalExceptionHandler.java
+--- a/../backend/src/main/java/org/repin/controller/ControllerAdvice.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/controller/GlobalExceptionHandler.java	(date 1743186415020)
+@@ -4,6 +4,7 @@
+ import org.repin.dto.response_dto.ErrorMessageDto;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
++import org.springframework.security.authentication.BadCredentialsException;
+ import org.springframework.web.bind.MethodArgumentNotValidException;
+ import org.springframework.web.bind.annotation.ExceptionHandler;
+ 
+@@ -11,7 +12,7 @@
+ import java.sql.SQLException;
+ 
+ @org.springframework.web.bind.annotation.ControllerAdvice
+-public class ControllerAdvice {
++public class GlobalExceptionHandler {
+ 
+     //TODO переделать возвращаемые ошибки под ErrorMessageDto
+     @ExceptionHandler(SQLException.class)
+@@ -28,7 +29,7 @@
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessageDto("Поля невалидны"));
+     }
+ 
+-    @ExceptionHandler(AuthenticationException.class)
++    @ExceptionHandler({AuthenticationException.class, BadCredentialsException.class})
+     public ResponseEntity<Object> AuthExceptionHandler(){
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessageDto("Ошибка аутентификации"));
+     }
+Index: ../backend/src/main/java/org/repin/service/auth/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.repin.service.auth;\r\n\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.repin.model.AppUser;\r\nimport org.repin.repository.AdminRepository;\r\nimport org.repin.repository.DeanStaffRepository;\r\nimport org.repin.repository.LecturerRepository;\r\nimport org.repin.repository.StudentRepository;\r\nimport org.springframework.security.core.userdetails.UserDetails;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.core.userdetails.UsernameNotFoundException;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\n\r\n@Service\r\n@RequiredArgsConstructor\r\npublic class UserService implements UserDetailsService {\r\n\r\n    private final StudentRepository studentRepository;\r\n    private final LecturerRepository lecturerRepository;\r\n    private final DeanStaffRepository deanStaffRepository;\r\n    private final AdminRepository adminRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n\r\n    @Override\r\n    public UserDetails loadUserByUsername(String usernameWithRole) throws UsernameNotFoundException {\r\n        UserRoleContext context = parseUsernameWithRole(usernameWithRole);\r\n\r\n        AppUser appUser = findUserByRoleAndEmail(context.role(), context.email())\r\n                .orElseThrow(() -> new UsernameNotFoundException(\r\n                        String.format(\"User with email %s and role %s not found\", context.email(), context.role())\r\n                ));\r\n\r\n        return buildUserDetails(appUser);\r\n    }\r\n\r\n    public AppUser loadAppUserByUsername(String usernameWithRole) throws UsernameNotFoundException {\r\n        UserRoleContext context = parseUsernameWithRole(usernameWithRole);\r\n        return findUserByRoleAndEmail(context.role(), context.email())\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"User not found\"));\r\n    }\r\n\r\n    private Optional<? extends AppUser> findUserByRoleAndEmail(String role, String email) {\r\n        return switch (role) {\r\n            case \"STUDENT\" -> studentRepository.findByEmail(email);\r\n            case \"LECTURER\" -> lecturerRepository.findByEmail(email);\r\n            case \"DEAN_STAFF\" -> deanStaffRepository.findByEmail(email);\r\n            case \"ADMIN\" -> adminRepository.findByEmail(email);\r\n            default -> throw new IllegalArgumentException(\"Unknown role: \" + role);\r\n        };\r\n    }\r\n\r\n    private UserRoleContext parseUsernameWithRole(String usernameWithRole) {\r\n        String[] parts = usernameWithRole.split(\":\");\r\n        if (parts.length != 2) {\r\n            throw new IllegalArgumentException(\"Username must be in format 'email:role'\");\r\n        }\r\n        return new UserRoleContext(parts[0], parts[1]);\r\n    }\r\n\r\n    private UserDetails buildUserDetails(AppUser appUser) {\r\n        return org.springframework.security.core.userdetails.User.builder()\r\n                .username(appUser.getEmail() + \":\" + appUser.getRole())\r\n                .password(appUser.getPassword())\r\n                .authorities(getAuthorities(appUser))\r\n                .accountLocked(false)\r\n                .disabled(false)\r\n                .credentialsExpired(false)\r\n                .accountExpired(false)\r\n                .build();\r\n    }\r\n\r\n    private String[] getAuthorities(AppUser appUser) {\r\n        return new String[] { appUser.getRole() };\r\n    }\r\n\r\n    // Вспомогательная record для хранения контекста\r\n    private record UserRoleContext(String email, String role) {}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/service/auth/UserService.java b/../backend/src/main/java/org/repin/service/auth/UserService.java
+--- a/../backend/src/main/java/org/repin/service/auth/UserService.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/service/auth/UserService.java	(date 1743337242311)
+@@ -76,6 +76,6 @@
+         return new String[] { appUser.getRole() };
+     }
+ 
+-    // Вспомогательная record для хранения контекста
++
+     private record UserRoleContext(String email, String role) {}
+ }
+\ No newline at end of file
+Index: ../backend/src/main/java/org/repin/service/auth/JwtTokenProvider.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.repin.service.auth;\r\n\r\nimport io.jsonwebtoken.*;\r\nimport io.jsonwebtoken.security.Keys;\r\nimport org.springframework.beans.factory.annotation.Value;\r\nimport org.springframework.security.core.Authentication;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport javax.crypto.SecretKey;\r\nimport java.util.Date;\r\nimport java.util.stream.Collectors;\r\nimport org.springframework.security.core.GrantedAuthority;\r\n\r\n\r\n@Service\r\npublic class JwtTokenProvider {\r\n\r\n    @Value(\"${app.jwt.secret}\")\r\n    private String jwtSecret;\r\n\r\n    @Value(\"${app.jwt.expiration-ms}\")\r\n    private int jwtExpirationInMs;\r\n\r\n    private SecretKey getSigningKey() {\r\n        return Keys.hmacShaKeyFor(jwtSecret.getBytes());\r\n    }\r\n\r\n    public String generateToken(Authentication authentication) {\r\n        String username = authentication.getName();\r\n        String role = authentication.getAuthorities().stream()\r\n                .map(GrantedAuthority::getAuthority)\r\n                .collect(Collectors.joining(\",\"));\r\n\r\n        Date now = new Date();\r\n        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);\r\n\r\n        return Jwts.builder()\r\n                .setSubject(username)\r\n                .claim(\"role\", role)\r\n                .setIssuedAt(now)\r\n                .setExpiration(expiryDate)\r\n                .signWith(getSigningKey(), SignatureAlgorithm.HS512)\r\n                .compact();\r\n    }\r\n\r\n    public String getUsernameFromJWT(String token) {\r\n        Claims claims = Jwts.parser()\r\n                .setSigningKey(getSigningKey())\r\n                .build()\r\n                .parseClaimsJws(token)\r\n                .getBody();\r\n\r\n        return claims.getSubject();\r\n    }\r\n\r\n    public String getRoleFromJWT(String token) {\r\n        Claims claims = Jwts.parser()\r\n                .setSigningKey(getSigningKey())\r\n                .build()\r\n                .parseClaimsJws(token)\r\n                .getBody();\r\n\r\n        return claims.get(\"role\", String.class);\r\n    }\r\n\r\n    public boolean validateToken(String token) {\r\n        try {\r\n            Jwts.parser()\r\n                    .setSigningKey(getSigningKey())\r\n                    .build()\r\n                    .parseClaimsJws(token);\r\n            return true;\r\n        } catch (MalformedJwtException ex) {\r\n            // Invalid JWT token\r\n        } catch (ExpiredJwtException ex) {\r\n            // Expired JWT token\r\n        } catch (UnsupportedJwtException ex) {\r\n            // Unsupported JWT token\r\n        } catch (IllegalArgumentException ex) {\r\n            // JWT claims string is empty\r\n        } catch (SecurityException ex) {\r\n            // Invalid signature\r\n        }\r\n        return false;\r\n    }\r\n\r\n    public long getExpirationInSeconds() {\r\n        return jwtExpirationInMs / 1000;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/service/auth/JwtTokenProvider.java b/../backend/src/main/java/org/repin/service/auth/JwtTokenProvider.java
+--- a/../backend/src/main/java/org/repin/service/auth/JwtTokenProvider.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/service/auth/JwtTokenProvider.java	(date 1743337242451)
+@@ -71,15 +71,15 @@
+                     .parseClaimsJws(token);
+             return true;
+         } catch (MalformedJwtException ex) {
+-            // Invalid JWT token
++
+         } catch (ExpiredJwtException ex) {
+-            // Expired JWT token
++
+         } catch (UnsupportedJwtException ex) {
+-            // Unsupported JWT token
++
+         } catch (IllegalArgumentException ex) {
+-            // JWT claims string is empty
++
+         } catch (SecurityException ex) {
+-            // Invalid signature
++
+         }
+         return false;
+     }
+Index: ../backend/src/main/java/org/repin/controller/AdminController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.repin.controller;\r\n\r\nimport jakarta.validation.Valid;\r\nimport lombok.extern.slf4j.Slf4j;\r\nimport org.apache.commons.lang3.RandomStringUtils;\r\nimport org.repin.dto.response_dto.GeneratedPasswordDto;\r\nimport org.repin.dto.response_dto.GenericTableDataDto;\r\nimport org.repin.dto.request_dto.FacultyDto;\r\nimport org.repin.dto.request_dto.StaffMemberDto;\r\nimport org.repin.model.DeanStaffMember;\r\nimport org.repin.model.Faculty;\r\nimport org.repin.repository.DeanStaffRepository;\r\nimport org.repin.repository.FacultyRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/api\")\r\n@Slf4j\r\npublic class AdminController {\r\n\r\n    private final FacultyRepository facultyRepository;\r\n    private final DeanStaffRepository deanStaffRepository;\r\n\r\n    @Autowired\r\n    AdminController(FacultyRepository facultyRepository,\r\n                  DeanStaffRepository deanStaffRepository){\r\n        this.facultyRepository = facultyRepository;\r\n        this.deanStaffRepository = deanStaffRepository;\r\n    }\r\n\r\n    @GetMapping(\"/get_faculties\")\r\n    ResponseEntity<Object> getFaculties(){\r\n        List<Faculty> faculties =  facultyRepository.findAll();\r\n        List<String> headers = List.of(\"#\", \"Название\", \"Почта\", \"Номер телефона\");\r\n        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, faculties));\r\n    }\r\n\r\n    @GetMapping(\"/get_staff\")\r\n    ResponseEntity<Object> getStaff(){\r\n        List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();\r\n        List<String> headers = List.of(\"#\", \"ФИО\", \"Почта\", \"Факультет\");\r\n        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));\r\n    }\r\n\r\n    @PostMapping(\"add_faculty\")\r\n    ResponseEntity<Object> addFaculty(@Valid @RequestBody FacultyDto facultyDto){\r\n        log.info(\"Запрос на API /api/add_faculty с данными: {}\", facultyDto);\r\n        Faculty faculty = new Faculty(facultyDto.getName(),\r\n                facultyDto.getEmail(),\r\n                facultyDto.getPhoneNumber());\r\n        log.info(\"Сохранение сущности Faculty: {}\", faculty);\r\n        return ResponseEntity.ok().body(facultyRepository.save(faculty));\r\n    }\r\n\r\n    @PostMapping(\"add_staff_member\")\r\n    ResponseEntity<Object> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){\r\n        String generatedPassword = RandomStringUtils.randomAlphanumeric(8);\r\n\r\n        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();\r\n        String encodedPassword = encoder.encode(generatedPassword);\r\n\r\n        DeanStaffMember deanStaffMember = new DeanStaffMember(\r\n                staffMemberDto.getName(),\r\n                staffMemberDto.getEmail(),\r\n                staffMemberDto.getFaculty(),\r\n                encodedPassword\r\n        );\r\n\r\n        deanStaffRepository.save(deanStaffMember);\r\n\r\n        log.info(\"Сохранение сущности Faculty: {}\", staffMemberDto);\r\n        return ResponseEntity.ok().body(new GeneratedPasswordDto(generatedPassword)); //сохраняем сущность и возвращаем пароль\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/controller/AdminController.java b/../backend/src/main/java/org/repin/controller/AdminController.java
+--- a/../backend/src/main/java/org/repin/controller/AdminController.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/controller/AdminController.java	(date 1743198505685)
+@@ -57,8 +57,9 @@
+         return ResponseEntity.ok().body(facultyRepository.save(faculty));
+     }
+ 
+-    @PostMapping("add_staff_member")
++    @PostMapping("/add_staff_member")
+     ResponseEntity<Object> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){
++
+         String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
+ 
+         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+@@ -73,6 +74,7 @@
+ 
+         deanStaffRepository.save(deanStaffMember);
+ 
++
+         log.info("Сохранение сущности Faculty: {}", staffMemberDto);
+         return ResponseEntity.ok().body(new GeneratedPasswordDto(generatedPassword)); //сохраняем сущность и возвращаем пароль
+     }
+Index: ../frontend/src/components/WorkFlow.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState, useEffect } from 'react';\r\nimport { useParams } from 'react-router-dom';\r\nimport { request } from '../api/api';\r\nimport FacultyTable from './Admin/FacultyTable';\r\nimport StaffTable from './Admin/StaffTable';\r\nimport GroupsTable from './DeanStaff/GroupsTable';\r\n\r\nfunction WorkFlow() {\r\n  const { section } = useParams();\r\n  const [data, setData] = useState([]);\r\n  const [loading, setLoading] = useState(true);\r\n  const [error, setError] = useState(null);\r\n\r\n  useEffect(() => {\r\n    const apiMap = {\r\n      fakultety: '/api/get_faculties',\r\n      'sotrudniki-dekanatov': '/api/get_staff',\r\n      fakultety: '/api/get_faculties',\r\n        gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? `?userId=${localStorage.getItem('userId')}` : ''}`\r\n\r\n    };\r\n\r\n    const apiUrl = apiMap[section];\r\n\r\n    if (apiUrl) {\r\n      request(apiUrl)\r\n        .then(data => {\r\n          setData(data);\r\n          setLoading(false);\r\n        })\r\n        .catch(error => {\r\n          setError(error);\r\n          setLoading(false);\r\n        });\r\n    } else {\r\n      setLoading(false);\r\n    }\r\n  }, [section]);\r\n\r\n  if (loading) return <div className='info-message'>Загрузка...</div>;\r\n  if (error) return <div className='info-message'>Ошибка: {error.message}</div>;\r\n\r\n  return (\r\n    <div className=\"workflow\">\r\n      {section === \"fakultety\" && <FacultyTable data={data} onAdd={setData} />}\r\n      {section === \"sotrudniki-dekanatov\" && <StaffTable data={data} onAdd={setData} />}\r\n      {section === \"gruppy\" && <GroupsTable data={data} onAdd={setData} />}\r\n      {section === \"studenty\" && <StaffTable data={data} onAdd={setData} />}\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default WorkFlow;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../frontend/src/components/WorkFlow.js b/../frontend/src/components/WorkFlow.js
+--- a/../frontend/src/components/WorkFlow.js	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../frontend/src/components/WorkFlow.js	(date 1743186986368)
+@@ -4,12 +4,14 @@
+ import FacultyTable from './Admin/FacultyTable';
+ import StaffTable from './Admin/StaffTable';
+ import GroupsTable from './DeanStaff/GroupsTable';
++import {useNavigate } from 'react-router-dom';
+ 
+ function WorkFlow() {
+   const { section } = useParams();
+   const [data, setData] = useState([]);
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
++  const navigate = useNavigate();
+ 
+   useEffect(() => {
+     const apiMap = {
+@@ -37,6 +39,11 @@
+     }
+   }, [section]);
+ 
++  const handleLogout = () => {
++    localStorage.clear(); 
++    navigate('/'); 
++  };
++
+   if (loading) return <div className='info-message'>Загрузка...</div>;
+   if (error) return <div className='info-message'>Ошибка: {error.message}</div>;
+ 
+@@ -46,6 +53,11 @@
+       {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
+       {section === "gruppy" && <GroupsTable data={data} onAdd={setData} />}
+       {section === "studenty" && <StaffTable data={data} onAdd={setData} />}
++
++
++      <button className="button logout-button" onClick={handleLogout}>
++        Выйти
++      </button>
+     </div>
+   );
+ }
+Index: ../backend/src/main/java/org/repin/model/DeanStaffMember.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.repin.model;\r\n\r\nimport com.fasterxml.jackson.annotation.JsonIgnore;\r\nimport jakarta.persistence.*;\r\nimport lombok.Data;\r\n\r\nimport java.util.UUID;\r\n\r\n@Entity\r\n@Data\r\n@Table(name=\"dean_staff\")\r\npublic class DeanStaffMember implements AppUser{\r\n    @Id\r\n    @GeneratedValue\r\n    UUID id;\r\n    String name;\r\n    String email;\r\n    @ManyToOne(fetch = FetchType.EAGER)\r\n    @JoinColumn(name=\"faculty_id\")\r\n    Faculty faculty;\r\n    @JsonIgnore\r\n    String password;\r\n    public DeanStaffMember(){}\r\n    public DeanStaffMember(String name, String email, Faculty faculty, String password) {\r\n        this.name = name;\r\n        this.email = email;\r\n        this.faculty = faculty;\r\n        this.password = password;\r\n    }\r\n\r\n    @Override\r\n    public String getRole() {\r\n        return \"ROLE_DEAN_STAFF\";\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/model/DeanStaffMember.java b/../backend/src/main/java/org/repin/model/DeanStaffMember.java
+--- a/../backend/src/main/java/org/repin/model/DeanStaffMember.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/model/DeanStaffMember.java	(date 1743198505674)
+@@ -13,11 +13,15 @@
+     @Id
+     @GeneratedValue
+     UUID id;
++
+     String name;
++
+     String email;
++
+     @ManyToOne(fetch = FetchType.EAGER)
+     @JoinColumn(name="faculty_id")
+     Faculty faculty;
++
+     @JsonIgnore
+     String password;
+     public DeanStaffMember(){}
+Index: ../backend/src/main/java/org/repin/controller/AuthController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.repin.controller;\r\n\r\nimport jakarta.validation.Valid;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.repin.dto.auth.JwtAuthResponse;\r\nimport org.repin.dto.auth.LoginRequest;\r\nimport org.repin.model.AppUser;\r\nimport org.repin.service.auth.JwtTokenProvider;\r\nimport org.repin.service.auth.UserService;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.authentication.UsernamePasswordAuthenticationToken;\r\nimport org.springframework.security.core.Authentication;\r\nimport org.springframework.security.core.context.SecurityContextHolder;\r\nimport org.springframework.web.bind.annotation.PostMapping;\r\nimport org.springframework.web.bind.annotation.RequestBody;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\nimport lombok.extern.slf4j.Slf4j;\r\n\r\n\r\n@Slf4j\r\n@RestController\r\n@RequestMapping(\"/api/auth\")\r\n@RequiredArgsConstructor\r\npublic class AuthController {\r\n\r\n    private final AuthenticationManager authenticationManager;\r\n    private final JwtTokenProvider tokenProvider;\r\n    private final UserService userService;\r\n\r\n    @PostMapping(\"/login\")\r\n    public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {\r\n        log.info(\"Попытка входа для email: {}, роль: {}\",\r\n                loginRequest.getEmail(),\r\n                loginRequest.getRole());\r\n\r\n        String usernameWithRole = loginRequest.getEmail() + \":\" + loginRequest.getRole().toUpperCase();\r\n        log.debug(\"Сформированный логин с ролью: {}\", usernameWithRole);\r\n\r\n        try {\r\n            log.debug(\"Попытка аутентификации...\");\r\n            Authentication authentication = authenticationManager.authenticate(\r\n                    new UsernamePasswordAuthenticationToken(\r\n                            usernameWithRole,\r\n                            loginRequest.getPassword()\r\n                    )\r\n            );\r\n\r\n            SecurityContextHolder.getContext().setAuthentication(authentication);\r\n            log.info(\"Аутентификация успешна для пользователя: {}\", usernameWithRole);\r\n\r\n            // Получение данных пользователя\r\n            log.debug(\"Загрузка данных пользователя...\");\r\n            AppUser appUser = userService.loadAppUserByUsername(usernameWithRole);\r\n            log.debug(\"Загружены данные пользователя: ID={}, Роль={}\", appUser.getId(), appUser.getRole());\r\n\r\n            // Генерация JWT токена\r\n            log.debug(\"Генерация JWT токена...\");\r\n            String token = tokenProvider.generateToken(authentication);\r\n            long expiresIn = tokenProvider.getExpirationInSeconds();\r\n            log.debug(\"Токен сгенерирован, срок действия: {} секунд\", expiresIn);\r\n\r\n            // Формирование ответа\r\n            JwtAuthResponse response = new JwtAuthResponse(\r\n                    token,\r\n                    \"Bearer\",\r\n                    expiresIn,\r\n                    appUser.getRole(),\r\n                    appUser.getEmail(),\r\n                    appUser.getId()\r\n            );\r\n\r\n            log.info(\"Успешный вход для пользователя: {}\", appUser.getEmail());\r\n            return ResponseEntity.ok(response);\r\n\r\n        } catch (Exception e) {\r\n            log.error(\"ОШИБКА АУТЕНТИФИКАЦИИ для {}: {}\", usernameWithRole, e.getMessage());\r\n            throw e;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../backend/src/main/java/org/repin/controller/AuthController.java b/../backend/src/main/java/org/repin/controller/AuthController.java
+--- a/../backend/src/main/java/org/repin/controller/AuthController.java	(revision 6117a70f72f8949981cb7820e28a1dbb40e944ed)
++++ b/../backend/src/main/java/org/repin/controller/AuthController.java	(date 1743337242512)
+@@ -51,7 +51,6 @@
+             SecurityContextHolder.getContext().setAuthentication(authentication);
+             log.info("Аутентификация успешна для пользователя: {}", usernameWithRole);
+ 
+-            // Получение данных пользователя
+             log.debug("Загрузка данных пользователя...");
+             AppUser appUser = userService.loadAppUserByUsername(usernameWithRole);
+             log.debug("Загружены данные пользователя: ID={}, Роль={}", appUser.getId(), appUser.getRole());
+@@ -62,7 +61,6 @@
+             long expiresIn = tokenProvider.getExpirationInSeconds();
+             log.debug("Токен сгенерирован, срок действия: {} секунд", expiresIn);
+ 
+-            // Формирование ответа
+             JwtAuthResponse response = new JwtAuthResponse(
+                     token,
+                     "Bearer",
