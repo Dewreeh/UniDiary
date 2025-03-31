@@ -224,7 +224,7 @@ color: #3A3F58;
 
 .table{
   position: relative;
-  width: 800px;
+  width: 70%;
   top: 40px;
   font-family: 'Kirang Haerang', system-ui;
 }
@@ -315,7 +315,7 @@ table thead, table tbody tr {
 .add-button{
   position: relative;
   width: 120px;
-  height: fit-content;
+  height: 40px;
   margin-top: 80px;
   
 
@@ -353,14 +353,8 @@ body{
 }
 
 .workflow{
-  position: relative;
-  width: auto;
-  margin-left: 30%;
-
-
-  margin-top: 3%;
-  
-
+  display: flex;
+  justify-content: center;
 }
 
 td{
@@ -370,6 +364,8 @@ td{
   line-height: 21px;
   color: #3A3F58;
   margin: auto;
+  text-align:start
+  
 }
 
 th{
@@ -382,6 +378,15 @@ th{
   margin: auto;
 }
 
+
+.add-form input,
+.add-form select {
+  height: 40px; 
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
 .workflow-container{
   position: absolute;

@@ -4,6 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 export const request = async (endpoint, method = 'GET', body = null) => {
   
+
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -20,7 +21,7 @@ export const request = async (endpoint, method = 'GET', body = null) => {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, options);
     if (!response.ok) {
-      throw new Error('Ошибка на сервере');
+      throw new Error('Ошибка на сервере: ${error.message}');
     }
     return await response.json();
   } catch (error) {
