@@ -13,11 +13,15 @@ public class Student implements AppUser{
     @Id
     @GeneratedValue
     UUID id;
+
     String name;
+
     String email;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="group_id")
     StudentGroup studentGroup;
+
     @JsonIgnore
     String password;
 

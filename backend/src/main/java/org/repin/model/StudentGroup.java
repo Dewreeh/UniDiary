@@ -1,5 +1,4 @@
 package org.repin.model;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,18 +11,24 @@ public class StudentGroup {
     @Id
     @GeneratedValue
     UUID id;
+
     String name;
-    String speciality; //TODO сделать это через ENUM
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="speciality_id")
+    Speciality speciality;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
     Faculty faculty;
-    String groupEmail;
 
-    public StudentGroup(String name, String speciality, Faculty faculty, String email) {
+    String email;
+
+    public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
         this.name = name;
         this.speciality = speciality;
         this.faculty = faculty;
-        this.groupEmail = email;
+        this.email = email;
     }
 
     StudentGroup(){}

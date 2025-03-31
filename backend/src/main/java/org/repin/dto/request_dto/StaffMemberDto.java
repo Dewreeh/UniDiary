@@ -9,8 +9,10 @@ import org.repin.model.Faculty;
 public class StaffMemberDto {
     @NotBlank(message = "Поле не должно быть пустым!")
     private String name;
+
     @NotBlank(message = "Поле не должно быть пустым!")
     private String email;
+
     @NotNull(message = "Поле не должно быть пустым!")
     private Faculty faculty;
 }

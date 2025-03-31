@@ -51,18 +51,15 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("Аутентификация успешна для пользователя: {}", usernameWithRole);
 
-            // Получение данных пользователя
             log.debug("Загрузка данных пользователя...");
             AppUser appUser = userService.loadAppUserByUsername(usernameWithRole);
             log.debug("Загружены данные пользователя: ID={}, Роль={}", appUser.getId(), appUser.getRole());
 
-            // Генерация JWT токена
             log.debug("Генерация JWT токена...");
             String token = tokenProvider.generateToken(authentication);
             long expiresIn = tokenProvider.getExpirationInSeconds();
             log.debug("Токен сгенерирован, срок действия: {} секунд", expiresIn);
 
-            // Формирование ответа
             JwtAuthResponse response = new JwtAuthResponse(
                     token,
                     "Bearer",

@@ -9,8 +9,10 @@ import org.repin.dto.request_dto.FacultyDto;
 import org.repin.dto.request_dto.StaffMemberDto;
 import org.repin.model.DeanStaffMember;
 import org.repin.model.Faculty;
+import org.repin.model.Speciality;
 import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.FacultyRepository;
+import org.repin.repository.SpecialityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,12 +27,15 @@ public class AdminController {
 
     private final FacultyRepository facultyRepository;
     private final DeanStaffRepository deanStaffRepository;
+    private final SpecialityRepository specialityRepository;
 
     @Autowired
     AdminController(FacultyRepository facultyRepository,
-                  DeanStaffRepository deanStaffRepository){
+                    DeanStaffRepository deanStaffRepository,
+                    SpecialityRepository specialityRepository){
         this.facultyRepository = facultyRepository;
         this.deanStaffRepository = deanStaffRepository;
+        this.specialityRepository = specialityRepository;
     }
 
     @GetMapping("/get_faculties")
@@ -61,7 +66,7 @@ public class AdminController {
     ResponseEntity<Object> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){
         String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();    //TODO вынести в отдельный сервис и сделать уведомления на почту через кафку
         String encodedPassword = encoder.encode(generatedPassword);
 
         DeanStaffMember deanStaffMember = new DeanStaffMember(
@@ -75,5 +80,12 @@ public class AdminController {
 
         log.info("Сохранение сущности Faculty: {}", staffMemberDto);
         return ResponseEntity.ok().body(new GeneratedPasswordDto(generatedPassword)); //сохраняем сущность и возвращаем пароль
+    }
+
+    @GetMapping("/get_specialities")
+    ResponseEntity<Object> getSpecialities(){
+        List<Speciality> specialities = specialityRepository.findAll();
+        List<String> headers = List.of("#", "Название", "Факультет");
+        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, specialities));
     }
 }

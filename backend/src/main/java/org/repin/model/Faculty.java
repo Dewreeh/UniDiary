@@ -12,8 +12,11 @@ public class Faculty{
     @Id
     @GeneratedValue
     private UUID id;
+
     private String name;
+
     private String email;
+
     @JsonProperty("phoneNumber")
     private String phone_number;
 

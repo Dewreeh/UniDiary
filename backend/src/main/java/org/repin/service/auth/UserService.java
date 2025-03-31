@@ -22,7 +22,6 @@ public class UserService implements UserDetailsService {
     private final LecturerRepository lecturerRepository;
     private final DeanStaffRepository deanStaffRepository;
     private final AdminRepository adminRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String usernameWithRole) throws UsernameNotFoundException {
@@ -30,7 +29,7 @@ public class UserService implements UserDetailsService {
 
         AppUser appUser = findUserByRoleAndEmail(context.role(), context.email())
                 .orElseThrow(() -> new UsernameNotFoundException(
-                        String.format("User with email %s and role %s not found", context.email(), context.role())
+                        String.format("Пользователь не найден ({}, {})", context.email(), context.role())
                 ));
 
         return buildUserDetails(appUser);

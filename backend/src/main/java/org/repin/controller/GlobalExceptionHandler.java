@@ -4,14 +4,14 @@ import com.fasterxml.jackson.core.JsonParseException;
 import org.repin.dto.response_dto.ErrorMessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.security.sasl.AuthenticationException;
 import java.sql.SQLException;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
-public class ControllerAdvice {
+public class GlobalExceptionHandler {
 
     //TODO переделать возвращаемые ошибки под ErrorMessageDto
     @ExceptionHandler(SQLException.class)
@@ -23,14 +23,15 @@ public class ControllerAdvice {
     public ResponseEntity<Object> JSONParseExceptionHandler(){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessageDto("Ошибка обработки JSON"));
     }
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> MethodArgumentNotValidExceptionHandler(){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessageDto("Поля невалидны"));
-    }
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Object> AuthExceptionHandler(){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessageDto("Ошибка аутентификации"));
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<Object> UserNotFoundExceptionHandler(){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessageDto("Пользователь не найден"));
     }
 
 

@@ -13,11 +13,15 @@ public class DeanStaffMember implements AppUser{
     @Id
     @GeneratedValue
     UUID id;
+
     String name;
+
     String email;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
     Faculty faculty;
+
     @JsonIgnore
     String password;
     public DeanStaffMember(){}
