@@ -7,7 +7,7 @@ function StudensTable({ title, data, onAdd }) {
   const columnMapping = {
     "ФИО": "name",
     "Почта": "email",
-    "Группа": "group",
+    "Группа": "studentGroup",
 
   };
 
@@ -64,7 +64,9 @@ function StudensTable({ title, data, onAdd }) {
   return (
     <div className="table-container">
       <h1 className="table-title">Студенты ваших групп</h1>
+
       <Table data={data} columnMapping={columnMapping}></Table>
+      
       <div className="add-form">
         {data.headers.filter(header => header !== "#").map(header => (
           header === "Группа" ? (

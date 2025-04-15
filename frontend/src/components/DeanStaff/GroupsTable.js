@@ -13,7 +13,7 @@ function GroupsTable({ data }) {
   };
 
   const [faculties, setFaculties] = useState([]);
-  const [specialities, setSpecialities] = useState([]); // 🔹 Список специальностей
+  const [specialities, setSpecialities] = useState([]); 
 
   const [newItem, setNewItem] = useState({
     name: '',
@@ -83,9 +83,13 @@ function GroupsTable({ data }) {
 
   return (
     <div className="table-container">
-      <h1 className="table-title">Ваши группы</h1>
+      <h1 className="table-title">Группы вашего факультета</h1>
 
-      <Table data={dataWithLinks} columnMapping={columnMapping} />
+      <Table
+        data={data} 
+        columnMapping={columnMapping}
+        getRowLink={(group) => `/group/${group.id}`}  
+    />
 
       <div className="add-form">
         <input
@@ -103,7 +107,6 @@ function GroupsTable({ data }) {
           onChange={handleChange}
         />
 
-        {/* 🔹 Выпадающий список для факультетов */}
         <select name="faculty" value={newItem.faculty?.id || ""} onChange={handleChange}>
           <option value="">Выберите факультет</option>
           {faculties.map(faculty => (
