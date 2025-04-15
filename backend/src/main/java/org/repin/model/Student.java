@@ -25,11 +25,14 @@ public class Student implements AppUser{
     @JsonIgnore
     String password;
 
-    public Student(String name, StudentGroup studentGroup, String password) {
+    public Student(String name, StudentGroup studentGroup, String password, String email) {
         this.name = name;
         this.studentGroup = studentGroup;
         this.password = password;
+        this.email = email;
     }
+
+    public Student(){}
     @Override
     public String getRole() {
         return "ROLE_STUDENT";

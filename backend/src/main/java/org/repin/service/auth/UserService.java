@@ -16,24 +16,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final StudentRepository studentRepository;
     private final LecturerRepository lecturerRepository;
     private final DeanStaffRepository deanStaffRepository;
     private final AdminRepository adminRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String usernameWithRole) throws UsernameNotFoundException {
-        UserRoleContext context = parseUsernameWithRole(usernameWithRole);
 
-        AppUser appUser = findUserByRoleAndEmail(context.role(), context.email())
-                .orElseThrow(() -> new UsernameNotFoundException(
-                        String.format("Пользователь не найден ({}, {})", context.email(), context.role())
-                ));
-
-        return buildUserDetails(appUser);
-    }
 
     public AppUser loadAppUserByUsername(String usernameWithRole) throws UsernameNotFoundException {
         UserRoleContext context = parseUsernameWithRole(usernameWithRole);
@@ -75,6 +65,5 @@ public class UserService implements UserDetailsService {
         return new String[] { appUser.getRole() };
     }
 
-    // Вспомогательная record для хранения контекста
     private record UserRoleContext(String email, String role) {}
 }
