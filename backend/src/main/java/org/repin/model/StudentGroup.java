@@ -1,7 +1,10 @@
 package org.repin.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +26,10 @@ public class StudentGroup {
     Faculty faculty;
 
     String email;
+
+    @ManyToMany(mappedBy = "groups")
+    @JsonIgnore
+    private Set<ScheduleItem> scheduleItems = new HashSet<>();
 
     public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
         this.name = name;
