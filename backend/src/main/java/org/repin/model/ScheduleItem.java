@@ -2,6 +2,7 @@ package org.repin.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
 import org.repin.enums.Weekday;
 
@@ -22,15 +23,18 @@ public class ScheduleItem {
     @JoinColumn(name = "lecturer_id")
     private Lecturer lecturer;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "discipline_id")
-//    private Discipline discipline;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "discipline_id")
+    private Discipline discipline;
 
     @Enumerated(EnumType.STRING)
     private Weekday weekday;
 
     @Enumerated(EnumType.STRING)
     private WeekType weekType;
+
+    @Enumerated(EnumType.STRING)
+    private LessonType lessonType;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;

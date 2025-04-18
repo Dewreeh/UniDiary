@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a2fa22f-1619-41b7-beca-ae8c1b7465df" name="Changes" comment="Kafka consumer for emails initialisation">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/org/repin/controller/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/org/repin/dto/request_dto/StudentGroupDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/org/repin/dto/request_dto/StudentGroupDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
