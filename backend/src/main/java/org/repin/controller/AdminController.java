@@ -39,21 +39,21 @@ public class AdminController {
     }
 
     @GetMapping("/get_faculties")
-    ResponseEntity<Object> getFaculties(){
+    ResponseEntity<GenericTableDataDto<Faculty>> getFaculties(){
         List<Faculty> faculties =  facultyRepository.findAll();
         List<String> headers = List.of("#", "Название", "Почта", "Номер телефона");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, faculties));
     }
 
     @GetMapping("/get_staff")
-    ResponseEntity<Object> getStaff(){
+    ResponseEntity<GenericTableDataDto<DeanStaffMember>> getStaff(){
         List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
         List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
     }
 
     @PostMapping("add_faculty")
-    ResponseEntity<Object> addFaculty(@Valid @RequestBody FacultyDto facultyDto){
+    ResponseEntity<Faculty> addFaculty(@Valid @RequestBody FacultyDto facultyDto){
         log.info("Запрос на API /api/add_faculty с данными: {}", facultyDto);
         Faculty faculty = new Faculty(facultyDto.getName(),
                 facultyDto.getEmail(),
@@ -63,7 +63,7 @@ public class AdminController {
     }
 
     @PostMapping("add_staff_member")
-    ResponseEntity<Object> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){
+    ResponseEntity<GeneratedPasswordDto> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){
         String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();    //TODO вынести в отдельный сервис и сделать уведомления на почту через кафку
@@ -83,7 +83,7 @@ public class AdminController {
     }
 
     @GetMapping("/get_specialities")
-    ResponseEntity<Object> getSpecialities(){
+    ResponseEntity<GenericTableDataDto<Speciality>> getSpecialities(){
         List<Speciality> specialities = specialityRepository.findAll();
         List<String> headers = List.of("#", "Название", "Факультет");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, specialities));
