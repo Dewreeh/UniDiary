@@ -7,7 +7,7 @@ import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
 import org.repin.enums.Weekday;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,5 +26,5 @@ public class ScheduleAddDto {
     @NotBlank
     LessonType lessonType;
     @NotBlank
-    LocalDateTime startTime;
+    LocalTime startTime;
 }

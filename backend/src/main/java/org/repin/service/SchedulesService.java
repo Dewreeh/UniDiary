@@ -4,6 +4,7 @@ import org.repin.dto.request_dto.ScheduleAddDto;
 import org.repin.model.GroupSchedule;
 import org.repin.model.ScheduleItem;
 import org.repin.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ public class SchedulesService {
     private final LecturerRepository lecturerRepository;
     private final GroupScheduleRepository groupScheduleRepository;
 
+    @Autowired
     SchedulesService(ScheduleItemRepository scheduleItemRepository,
                      StudentGroupsRepository studentGroupsRepository,
                      DisciplineRepository disciplineRepository,

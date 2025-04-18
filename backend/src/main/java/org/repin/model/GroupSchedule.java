@@ -14,7 +14,7 @@ public class GroupSchedule {
     private StudentGroup group;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("scheduleId")
+    @MapsId("scheduleItemId")
     @JoinColumn(name = "schedule_id")
     private ScheduleItem scheduleItem;
 

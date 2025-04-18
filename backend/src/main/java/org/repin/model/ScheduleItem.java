@@ -7,7 +7,7 @@ import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
 import org.repin.enums.Weekday;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -38,13 +38,13 @@ public class ScheduleItem {
     @Enumerated(EnumType.STRING)
     private LessonType lessonType;
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     @ManyToMany
     @JoinTable(
-            name = "schedule_groups",
-            joinColumns = @JoinColumn(name = "schedule_item_id"),
+            name = "group_schedule",
+            joinColumns = @JoinColumn(name = "schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     private Set<StudentGroup> groups = new HashSet<>();
