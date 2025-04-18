@@ -1,6 +1,7 @@
 package org.repin.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "schedules")
 @Data
+@Builder
 public class ScheduleItem {
     @Id
     @GeneratedValue

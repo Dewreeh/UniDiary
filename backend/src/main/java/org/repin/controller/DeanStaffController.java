@@ -7,7 +7,6 @@ import org.repin.dto.request_dto.StudentDto;
 import org.repin.dto.request_dto.StudentGroupDto;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
-import org.repin.model.Faculty;
 import org.repin.model.Student;
 import org.repin.model.StudentGroup;
 import org.repin.repository.DeanStaffRepository;
