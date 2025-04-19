@@ -5,6 +5,7 @@ import FacultyTable from './Admin/FacultyTable';
 import StaffTable from './Admin/StaffTable';
 import GroupsTable from './DeanStaff/GroupsTable';
 import StudentsTable from './DeanStaff/StudentsTable';
+import DisciplinesTable from './DeanStaff/DisciplinesTable';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -19,6 +20,7 @@ function WorkFlow() {
       fakultety: '/api/get_faculties',
       gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       studenty: `/api/get_students${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
+      discipliny: `/api/get_disciplines${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`
 
     };
 
@@ -48,6 +50,7 @@ function WorkFlow() {
       {section === "sotrudniki-dekanatov" && <StaffTable data={data} onAdd={setData} />}
       {section === "gruppy" && <GroupsTable data={data} onAdd={setData} />}
       {section === "studenty" && <StudentsTable data={data} onAdd={setData} />}
+      {section === "discipliny" && <DisciplinesTable data={data} onAdd={setData} />}
     </div>
   );
 }
