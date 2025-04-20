@@ -2,7 +2,6 @@ package org.repin.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.repin.dto.request_dto.DisciplineDto;
 import org.repin.dto.request_dto.StudentDto;
 import org.repin.dto.request_dto.StudentGroupDto;
@@ -12,9 +11,10 @@ import org.repin.model.Discipline;
 import org.repin.model.Student;
 import org.repin.model.StudentGroup;
 import org.repin.repository.*;
+import org.repin.service.GroupsService;
+import org.repin.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,68 +29,49 @@ public class DeanStaffController {
     private final DeanStaffRepository deanStaffRepository;
     private final FacultyRepository facultyRepository;
     private final DisciplineRepository disciplineRepository;
+    private final GroupsService groupsService;
+    private final StudentsService studentsService;
 
     @Autowired
     DeanStaffController(StudentGroupsRepository studentGroupsRepository,
                         StudentRepository studentRepository,
                         DeanStaffRepository deanStaffRepository,
                         FacultyRepository facultyRepository,
-                        DisciplineRepository disciplineRepository){
+                        DisciplineRepository disciplineRepository,
+                        GroupsService groupsService,
+                        StudentsService studentsService){
         this.studentGroupsRepository = studentGroupsRepository;
         this.studentRepository = studentRepository;
         this.deanStaffRepository = deanStaffRepository;
         this.facultyRepository = facultyRepository;
         this.disciplineRepository = disciplineRepository;
+        this.groupsService = groupsService;
+        this.studentsService = studentsService;
     }
 
     @GetMapping("/get_students")
-    ResponseEntity<Object> getStudents(@RequestParam("userId") UUID deanStaffId){
+    ResponseEntity<GenericTableDataDto<Student>> getStudents(@RequestParam("userId") UUID deanStaffId){
 
-        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
-                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
-
-
-        List<Student> students = studentRepository.findByFacultyId(facultyId);
-
-        List<String> headers = List.of("#", "ФИО", "Группа", "Почта");
-        return ResponseEntity.ok().body(new GenericTableDataDto<Student>(headers, students));
+        return ResponseEntity.ok().body(studentsService.getStudents(deanStaffId));
     }
 
     @PostMapping("add_student")
-    ResponseEntity<Object> addStudentAndGenerateDto(@Valid @RequestBody StudentDto dto){
-        String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
+    ResponseEntity<GeneratedPasswordDto> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();    //TODO вынести в отдельный сервис и сделать уведомления на почту через кафку
-        String encodedPassword = encoder.encode(generatedPassword);
-
-            Student student = new Student(dto.getName(),
-                    studentGroupsRepository.getReferenceById(dto.getStudentGroup()),
-                    generatedPassword,
-                    dto.getEmail());
-        return ResponseEntity.ok().body(new GeneratedPasswordDto(studentRepository.save(student).getPassword())); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(studentsService.addStudentAndGeneratePassword(dto)); //сохраняем сущность и возвращаем пароль
     }
 
 
     @GetMapping("/get_groups")
     public ResponseEntity<GenericTableDataDto<StudentGroup>> getStudentGroups(@RequestParam("userId") UUID deanStaffId) {
 
-        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
-                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
-
-        List<StudentGroup> studentGroups = studentGroupsRepository.findByFacultyId(facultyId);
-
-
-        List<String> headers = List.of("#", "Название", "Специальность", "Факультет", "Почта группы");
-        return ResponseEntity.ok(new GenericTableDataDto<>(headers, studentGroups));
+        return ResponseEntity.ok(groupsService.getStudentGroups(deanStaffId));
     }
 
     @PostMapping("/add_group")
     public ResponseEntity<Object> addStudentGroup(@Valid @RequestBody StudentGroupDto dto){
-        StudentGroup studentGroup = new StudentGroup(dto.getName(),
-                dto.getSpeciality(),
-                dto.getFaculty(),
-                dto.getEmail());
-        return ResponseEntity.ok().body(studentGroupsRepository.save(studentGroup));
+
+        return ResponseEntity.ok().body(groupsService.addStudentGroup(dto));
     }
 
     @GetMapping("/get_disciplines")
