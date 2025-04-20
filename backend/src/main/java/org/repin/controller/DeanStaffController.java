@@ -1,6 +1,5 @@
 package org.repin.controller;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.repin.dto.request_dto.DisciplineDto;
 import org.repin.dto.request_dto.StudentDto;
@@ -11,42 +10,30 @@ import org.repin.model.Discipline;
 import org.repin.model.Student;
 import org.repin.model.StudentGroup;
 import org.repin.repository.*;
+import org.repin.service.DisciplinesService;
 import org.repin.service.GroupsService;
 import org.repin.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
 public class DeanStaffController {
 
-    private final StudentGroupsRepository studentGroupsRepository;
-    private final StudentRepository studentRepository;
-    private final DeanStaffRepository deanStaffRepository;
-    private final FacultyRepository facultyRepository;
-    private final DisciplineRepository disciplineRepository;
     private final GroupsService groupsService;
     private final StudentsService studentsService;
+    private final DisciplinesService disciplinesService;
 
     @Autowired
-    DeanStaffController(StudentGroupsRepository studentGroupsRepository,
-                        StudentRepository studentRepository,
-                        DeanStaffRepository deanStaffRepository,
-                        FacultyRepository facultyRepository,
-                        DisciplineRepository disciplineRepository,
-                        GroupsService groupsService,
-                        StudentsService studentsService){
-        this.studentGroupsRepository = studentGroupsRepository;
-        this.studentRepository = studentRepository;
-        this.deanStaffRepository = deanStaffRepository;
-        this.facultyRepository = facultyRepository;
-        this.disciplineRepository = disciplineRepository;
+    DeanStaffController(GroupsService groupsService,
+                        StudentsService studentsService,
+                        DisciplinesService disciplinesService){
         this.groupsService = groupsService;
         this.studentsService = studentsService;
+        this.disciplinesService = disciplinesService;
     }
 
     @GetMapping("/get_students")
@@ -77,24 +64,13 @@ public class DeanStaffController {
     @GetMapping("/get_disciplines")
     public ResponseEntity<GenericTableDataDto<Discipline>> getDisciplines(@RequestParam("userId") UUID deanStaffId) {
 
-        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
-                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
-
-        List<Discipline> disciplines = disciplineRepository.findByFacultyId(facultyId);
-
-
-        List<String> headers = List.of("#", "Название", "Факультет");
-        return ResponseEntity.ok(new GenericTableDataDto<>(headers, disciplines));
+        return ResponseEntity.ok(disciplinesService.getDisciplines(deanStaffId));
     }
 
     @PostMapping("/add_discipline")
     public ResponseEntity<Object> addDiscipline(@Valid @RequestBody DisciplineDto dto){
-        Discipline discipline = new Discipline(dto.getName(),
-                facultyRepository.getReferenceById(dto.getFacultyId()));
 
-        disciplineRepository.save(discipline);
-
-        return ResponseEntity.ok().body(dto); //TODO тут не dto Надо возвращать, а сущность. но там пока с этим проблема из-за прокси Faculty
+        return ResponseEntity.ok().body(disciplinesService.addDiscipline(dto)); //TODO тут не dto Надо возвращать, а сущность. но там пока с этим проблема из-за прокси Faculty
     }
 
 
