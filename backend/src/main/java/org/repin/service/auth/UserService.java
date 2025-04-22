@@ -2,10 +2,7 @@ package org.repin.service.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.repin.model.AppUser;
-import org.repin.repository.AdminRepository;
-import org.repin.repository.DeanStaffRepository;
-import org.repin.repository.LecturerRepository;
-import org.repin.repository.StudentRepository;
+import org.repin.repository.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

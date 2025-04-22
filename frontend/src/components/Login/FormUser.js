@@ -61,7 +61,7 @@ function FormUser() {
       </div>
 
       <div className="login-vertical-elems">
-        {['STUDENT', 'LECTURER', 'DEAN_STAFF'].map((role) => (
+        {['HEADMAN', 'LECTURER', 'DEAN_STAFF'].map((role) => (
           <label key={role} className='user-label'>
             <input
               type="radio"
@@ -69,7 +69,7 @@ function FormUser() {
               value={role}
               onChange={handleRoleChange}
             />
-            {role === 'STUDENT' ? 'Я студент' :
+            {role === 'HEADMAN' ? 'Я староста' :
              role === 'LECTURER' ? 'Я преподаватель' :
              'Я сотрудник'}
           </label>

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,9 +28,14 @@ public class StudentGroup {
 
     String email;
 
+
+
     @ManyToMany(mappedBy = "groups")
     @JsonIgnore
     private Set<ScheduleItem> scheduleItems = new HashSet<>();
+
+    @OneToMany(mappedBy = "studentGroup")
+    private List<Student> students;
 
     public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
         this.name = name;

@@ -43,9 +43,9 @@ public class DeanStaffController {
     }
 
     @PostMapping("add_student")
-    ResponseEntity<GeneratedPasswordDto> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
+    ResponseEntity<Student> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
 
-        return ResponseEntity.ok().body(studentsService.addStudentAndGeneratePassword(dto)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(studentsService.addStudent(dto)); //сохраняем сущность и возвращаем пароль
     }
 
 
@@ -72,7 +72,6 @@ public class DeanStaffController {
 
         return ResponseEntity.ok().body(disciplinesService.addDiscipline(dto)); //TODO тут не dto Надо возвращать, а сущность. но там пока с этим проблема из-за прокси Faculty
     }
-
 
 
 }
