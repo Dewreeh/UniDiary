@@ -2,16 +2,18 @@ package org.repin.controller;
 
 import jakarta.validation.Valid;
 import org.repin.dto.request_dto.DisciplineDto;
+import org.repin.dto.request_dto.LecturerDto;
 import org.repin.dto.request_dto.StudentDto;
 import org.repin.dto.request_dto.StudentGroupDto;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.model.Discipline;
+import org.repin.model.Lecturer;
 import org.repin.model.Student;
 import org.repin.model.StudentGroup;
-import org.repin.repository.*;
 import org.repin.service.DisciplinesService;
 import org.repin.service.GroupsService;
+import org.repin.service.LecturerService;
 import org.repin.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +28,17 @@ public class DeanStaffController {
     private final GroupsService groupsService;
     private final StudentsService studentsService;
     private final DisciplinesService disciplinesService;
+    private final LecturerService lecturerService;
 
     @Autowired
     DeanStaffController(GroupsService groupsService,
                         StudentsService studentsService,
-                        DisciplinesService disciplinesService){
+                        DisciplinesService disciplinesService,
+                        LecturerService lecturerService){
         this.groupsService = groupsService;
         this.studentsService = studentsService;
         this.disciplinesService = disciplinesService;
+        this.lecturerService = lecturerService;
     }
 
     @GetMapping("/get_students")
@@ -85,5 +90,15 @@ public class DeanStaffController {
         return ResponseEntity.ok().body(studentsService.promoteStudentToHeadman(studentId)); //сохраняем сущность и возвращаем пароль
     }
 
+    @GetMapping("/get_lecturers")
+    ResponseEntity<GenericTableDataDto<Lecturer>> getLecturers(){
 
+        return ResponseEntity.ok().body(lecturerService.getLecturers());
+    }
+
+    @PostMapping("/add_lecturer")
+    ResponseEntity<GeneratedPasswordDto> addLecturer(@Valid @RequestBody LecturerDto lecturerDto){
+
+        return ResponseEntity.ok().body(lecturerService.addLecturer(lecturerDto)); //сохраняем сущность и возвращаем пароль
+    }
 }

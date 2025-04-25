@@ -2,5 +2,6 @@ package org.repin.enums;
 
 public enum WeekType {
     HIGH,
-    LOW
+    LOW,
+    BOTH
 }

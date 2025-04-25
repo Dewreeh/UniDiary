@@ -35,4 +35,11 @@ public class Lecturer implements AppUser{
     public String getRole() {
         return "ROLE_LECTURER";
     }
+
+    public Lecturer(String name, String email, Faculty faculty, String password) {
+        this.name = name;
+        this.email = email;
+        this.faculty = faculty;
+        this.password = password;
+    }
 }
