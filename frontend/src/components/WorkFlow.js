@@ -7,6 +7,7 @@ import GroupsTable from './DeanStaff/GroupsTable';
 import StudentsTable from './DeanStaff/StudentsTable';
 import DisciplinesTable from './DeanStaff/DisciplinesTable';
 import HeadmanTable from './DeanStaff/HeadmanTable';
+import LecturersTable from './DeanStaff/LecturersTable';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -22,7 +23,8 @@ function WorkFlow() {
       gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       studenty: `/api/get_students${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       discipliny: `/api/get_disciplines${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
-      starosty: `/api/get_headmen${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`
+      starosty: `/api/get_headmen${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
+      prepodavateli: '/api/get_lecturers'
 
       
 
@@ -56,6 +58,7 @@ function WorkFlow() {
       {section === "studenty" && <StudentsTable data={data} onAdd={setData} />}
       {section === "discipliny" && <DisciplinesTable data={data} onAdd={setData} />}
       {section === "starosty" && <HeadmanTable data={data} onAdd={setData} />}
+      {section === "prepodavateli" && <LecturersTable data={data} onAdd={setData} />}
     </div>
   );
 }

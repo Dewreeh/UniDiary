@@ -5,7 +5,7 @@ import WorkFlow from '../WorkFlow';
 import AdminLogin from '../Login/AdminLogin';
 
 function DeanStaffPage() {
-  const menuData = ["Группы", "Студенты", "Расписание", "Старосты", "Дисциплины"];
+  const menuData = ["Группы", "Студенты", "Преподаватели", "Расписание", "Старосты", "Дисциплины"];
   const role = "dean_staff"
   return (
     <div className="DeanStaffPage">
