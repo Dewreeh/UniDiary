@@ -70,7 +70,7 @@ function StudensTable({ title, data, onAdd }) {
       <div className="add-form">
         {data.headers.filter(header => header !== "#").map(header => (
           header === "Группа" ? (
-              <select key={header} name="group" value={newItem.group || ""} onChange={handleChange}>
+              <select key={header} name="studentGroup" value={newItem.group || ""} onChange={handleChange}>
               <option value="">Выберите группу</option>
               {groups.map(group => (
                 <option key={group.id} value={String(group.id)}>{group.name}</option>

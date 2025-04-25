@@ -47,7 +47,7 @@ public class StudentsService {
     public Student addStudent(StudentDto dto){
 
         Student student = new Student(dto.getName(),
-                studentGroupsRepository.getReferenceById(dto.getStudentGroup()),
+                studentGroupsRepository.findById(dto.getStudentGroup()).orElseThrow(),
                 null,
                 dto.getEmail(),
                 false);
@@ -59,7 +59,7 @@ public class StudentsService {
         UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
                 .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
 
-        List<Student> headmen = studentRepository.findByFacultyId(facultyId);
+        List<Student> headmen = studentRepository.findHeadmanByFacultyId(facultyId);
 
         List<String> headers = List.of("#", "ФИО", "Группа", "Почта");
 

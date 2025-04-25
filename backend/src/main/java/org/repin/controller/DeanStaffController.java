@@ -45,7 +45,7 @@ public class DeanStaffController {
     @PostMapping("add_student")
     ResponseEntity<Student> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
 
-        return ResponseEntity.ok().body(studentsService.addStudent(dto)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(studentsService.addStudent(dto));
     }
 
 
@@ -80,9 +80,9 @@ public class DeanStaffController {
     }
 
     @PostMapping("/add_headman")
-    ResponseEntity<GeneratedPasswordDto> promoteStudentToHeadman(@PathVariable("studentId") UUID stusentId){
+    ResponseEntity<GeneratedPasswordDto> promoteStudentToHeadman(@RequestParam("studentId") UUID studentId){
 
-        return ResponseEntity.ok().body(studentsService.promoteStudentToHeadman(stusentId)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(studentsService.promoteStudentToHeadman(studentId)); //сохраняем сущность и возвращаем пароль
     }
 
 

@@ -35,6 +35,7 @@ public class StudentGroup {
     private Set<ScheduleItem> scheduleItems = new HashSet<>();
 
     @OneToMany(mappedBy = "studentGroup")
+    @JsonIgnore
     private List<Student> students;
 
     public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
