@@ -3,6 +3,7 @@ package org.repin.model;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import net.bytebuddy.utility.nullability.MaybeNull;
 import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
 import org.repin.enums.Weekday;
@@ -40,6 +41,10 @@ public class ScheduleItem {
 
     private LocalTime startTime;
     private LocalTime endTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "semester")
+    private Semester semester;
 
     @ManyToMany
     @JoinTable(

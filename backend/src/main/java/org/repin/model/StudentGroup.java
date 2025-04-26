@@ -28,8 +28,6 @@ public class StudentGroup {
 
     String email;
 
-
-
     @ManyToMany(mappedBy = "groups")
     @JsonIgnore
     private Set<ScheduleItem> scheduleItems = new HashSet<>();

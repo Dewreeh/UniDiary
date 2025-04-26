@@ -18,7 +18,7 @@ public class ScheduleAddDto {
     @NotBlank
     UUID lecturerId;
     @NotBlank
-    UUID discipline_id;
+    UUID disciplineId;
     @NotBlank
     Weekday weekday;
     @NotBlank
