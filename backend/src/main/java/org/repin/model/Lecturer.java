@@ -42,4 +42,6 @@ public class Lecturer implements AppUser{
         this.faculty = faculty;
         this.password = password;
     }
+
+    Lecturer(){}
 }
