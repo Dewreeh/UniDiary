@@ -28,19 +28,18 @@ public class StudentGroup {
 
     String email;
 
-    @ManyToMany(mappedBy = "groups")
-    @JsonIgnore
-    private Set<ScheduleItem> scheduleItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "studentGroup")
-    @JsonIgnore
-    private List<Student> students;
 
     public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
         this.name = name;
         this.speciality = speciality;
         this.faculty = faculty;
         this.email = email;
+    }
+
+    public StudentGroup(UUID id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     StudentGroup(){}

@@ -1,8 +1,12 @@
 package org.repin.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
+@Data
 @Table(name = "group_schedule")
 public class GroupSchedule {
     @EmbeddedId
@@ -19,7 +23,10 @@ public class GroupSchedule {
     private ScheduleItem scheduleItem;
 
     public GroupSchedule(StudentGroup group, ScheduleItem scheduleItem) {
+        this.id = new GroupScheduleId(group.getId(), scheduleItem.getId());
         this.group = group;
         this.scheduleItem = scheduleItem;
     }
+
+
 }

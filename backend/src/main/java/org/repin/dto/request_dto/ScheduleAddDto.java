@@ -2,6 +2,7 @@ package org.repin.dto.request_dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
@@ -13,18 +14,19 @@ import java.util.UUID;
 
 @Data
 public class ScheduleAddDto {
-    @NotBlank @Schema(description = "Список групп, которые привязываются к занятию")
+    @NotNull
+    @Schema(description = "Список групп, которые привязываются к занятию")
     List<UUID> groupsIds;
-    @NotBlank
+    @NotNull
     UUID lecturerId;
-    @NotBlank
+    @NotNull
     UUID disciplineId;
-    @NotBlank
+    @NotNull
     Weekday weekday;
-    @NotBlank
+    @NotNull
     WeekType weekType;
-    @NotBlank
+    @NotNull
     LessonType lessonType;
-    @NotBlank
+    @NotNull
     LocalTime startTime;
 }

@@ -19,4 +19,6 @@ public class StudentGroupDto {
 
     @NotBlank(message = "Поле не должно быть пустым!")
     String email;
+
+
 }
