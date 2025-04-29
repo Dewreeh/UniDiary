@@ -1,43 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Table({ data, columnMapping, getRowLink }) {
+function Table({ data, columnMapping, headers, getRowLink }) {
+  const resolvedHeaders = headers || data?.headers || Object.keys(columnMapping || {});
+  const resolvedData = Array.isArray(data) ? data : data?.data || [];
+
   return (
     <table className="table table-hover">
       <thead className="custom-thead">
         <tr>
-          {data.headers.map((header) => (
+          {resolvedHeaders.map((header) => (
             <th key={header}>{header}</th>
           ))}
         </tr>
       </thead>
       <tbody className="custom-row">
-        {data.data && data.data.length > 0 ? (
-          data.data.map((item, index) => {
+        {resolvedData.length > 0 ? (
+          resolvedData.map((item, index) => {
             const rowLink = getRowLink ? getRowLink(item) : null;
+            const rowKey = item.id || index;
 
             return rowLink ? (
-              <Link key={index} to={rowLink} className="table-row-link">
+              <Link key={rowKey} to={rowLink} className="table-row-link">
                 <tr className={`custom-row r${index + 1}`}>
-                  {data.headers.map((header) => {
-                    if (header === "#") return <td key={header}>{index + 1}</td>;
-                    const value = item[columnMapping[header]];
+                  {resolvedHeaders.map((header) => {
+                    if (header === "#") return <td key={`${rowKey}-${header}`}>{index + 1}</td>;
+                    
+                    const value = columnMapping 
+                      ? item[columnMapping[header]] 
+                      : item[header];
+                    
                     return (
-                      <td key={header}>
-                        {typeof value === "object" && value !== null ? value.name : value}
+                      <td key={`${rowKey}-${header}`}>
+                        {renderCell(value, header)}
                       </td>
                     );
                   })}
                 </tr>
               </Link>
             ) : (
-              <tr key={index} className={`custom-row r${index + 1}`}>
-                {data.headers.map((header) => {
-                  if (header === "#") return <td key={header}>{index + 1}</td>;
-                  const value = item[columnMapping[header]];
+              <tr key={rowKey} className={`custom-row r${index + 1}`}>
+                {resolvedHeaders.map((header) => {
+                  if (header === "#") return <td key={`${rowKey}-${header}`}>{index + 1}</td>;
+                  
+                  const value = columnMapping 
+                    ? item[columnMapping[header]] 
+                    : item[header];
+                  
                   return (
-                    <td key={header}>
-                      {typeof value === "object" && value !== null ? value.name : value}
+                    <td key={`${rowKey}-${header}`}>
+                      {renderCell(value, header)}
                     </td>
                   );
                 })}
@@ -46,12 +58,25 @@ function Table({ data, columnMapping, getRowLink }) {
           })
         ) : (
           <tr>
-            <td colSpan={data.headers.length}>Нет данных</td>
+            <td colSpan={resolvedHeaders.length}>Нет данных</td>
           </tr>
         )}
       </tbody>
     </table>
   );
+}
+
+
+function renderCell(value, header) {
+  if (header === "Группы" && Array.isArray(value)) {
+    return value.map(g => g.name).join(', ');
+  }
+  
+  if (typeof value === "object" && value !== null) {
+    return value.name || JSON.stringify(value);
+  }
+  
+  return value;
 }
 
 export default Table;
