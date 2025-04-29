@@ -5,7 +5,7 @@ import WorkFlow from '../WorkFlow';
 import AdminLogin from '../Login/AdminLogin';
 
 function AdminPage() {
-  const menuData = ["Факультеты", "Сотрудники деканатов", "Статистика"];
+  const menuData = ["Факультеты", "Сотрудники деканатов", "Статистика", "Семестры"];
   const role = "admin";
   return (
     <div className="AdminPage">

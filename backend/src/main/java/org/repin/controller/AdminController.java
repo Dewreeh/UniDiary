@@ -3,16 +3,19 @@ package org.repin.controller;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.repin.dto.request_dto.SemesterDto;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.dto.request_dto.FacultyDto;
 import org.repin.dto.request_dto.StaffMemberDto;
 import org.repin.model.DeanStaffMember;
 import org.repin.model.Faculty;
+import org.repin.model.Semester;
 import org.repin.model.Speciality;
 import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.FacultyRepository;
 import org.repin.repository.SpecialityRepository;
+import org.repin.service.SemestersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,14 +31,17 @@ public class AdminController {
     private final FacultyRepository facultyRepository;
     private final DeanStaffRepository deanStaffRepository;
     private final SpecialityRepository specialityRepository;
+    private final SemestersService semestersService;
 
     @Autowired
     AdminController(FacultyRepository facultyRepository,
                     DeanStaffRepository deanStaffRepository,
-                    SpecialityRepository specialityRepository){
+                    SpecialityRepository specialityRepository,
+                    SemestersService semestersService){
         this.facultyRepository = facultyRepository;
         this.deanStaffRepository = deanStaffRepository;
         this.specialityRepository = specialityRepository;
+        this.semestersService = semestersService;
     }
 
     @GetMapping("/get_faculties")
@@ -43,13 +49,6 @@ public class AdminController {
         List<Faculty> faculties =  facultyRepository.findAll();
         List<String> headers = List.of("#", "Название", "Почта", "Номер телефона");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, faculties));
-    }
-
-    @GetMapping("/get_staff")
-    ResponseEntity<GenericTableDataDto<DeanStaffMember>> getStaff(){
-        List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
-        List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
-        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
     }
 
     @PostMapping("add_faculty")
@@ -60,6 +59,13 @@ public class AdminController {
                 facultyDto.getPhoneNumber());
         log.info("Сохранение сущности Faculty: {}", faculty);
         return ResponseEntity.ok().body(facultyRepository.save(faculty));
+    }
+
+    @GetMapping("/get_staff")
+    ResponseEntity<GenericTableDataDto<DeanStaffMember>> getStaff(){
+        List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
+        List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
+        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
     }
 
     @PostMapping("add_staff_member")
@@ -88,4 +94,17 @@ public class AdminController {
         List<String> headers = List.of("#", "Название", "Факультет");
         return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, specialities));
     }
+
+    @GetMapping("/get_semesters")
+    ResponseEntity<GenericTableDataDto<Semester>> getSemesters(){
+
+        return ResponseEntity.ok().body(semestersService.getSemesters());
+    }
+
+    @PostMapping("/add_semester")
+    ResponseEntity<Semester> addSemester(@Valid @RequestBody SemesterDto dto){
+
+        return ResponseEntity.ok().body(semestersService.addSemester(dto));
+    }
+
 }

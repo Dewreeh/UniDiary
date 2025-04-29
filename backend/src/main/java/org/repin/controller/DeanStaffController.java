@@ -1,24 +1,17 @@
 package org.repin.controller;
 
 import jakarta.validation.Valid;
-import org.repin.dto.request_dto.DisciplineDto;
-import org.repin.dto.request_dto.LecturerDto;
-import org.repin.dto.request_dto.StudentDto;
-import org.repin.dto.request_dto.StudentGroupDto;
+import org.repin.dto.request_dto.*;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
-import org.repin.model.Discipline;
-import org.repin.model.Lecturer;
-import org.repin.model.Student;
-import org.repin.model.StudentGroup;
-import org.repin.service.DisciplinesService;
-import org.repin.service.GroupsService;
-import org.repin.service.LecturerService;
-import org.repin.service.StudentsService;
+import org.repin.dto.response_dto.ScheduleResponseDto;
+import org.repin.model.*;
+import org.repin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,16 +22,19 @@ public class DeanStaffController {
     private final StudentsService studentsService;
     private final DisciplinesService disciplinesService;
     private final LecturerService lecturerService;
+    private final SchedulesService schedulesService;
 
     @Autowired
     DeanStaffController(GroupsService groupsService,
                         StudentsService studentsService,
                         DisciplinesService disciplinesService,
-                        LecturerService lecturerService){
+                        LecturerService lecturerService,
+                        SchedulesService schedulesService){
         this.groupsService = groupsService;
         this.studentsService = studentsService;
         this.disciplinesService = disciplinesService;
         this.lecturerService = lecturerService;
+        this.schedulesService = schedulesService;
     }
 
     @GetMapping("/get_students")
@@ -47,7 +43,7 @@ public class DeanStaffController {
         return ResponseEntity.ok().body(studentsService.getStudents(deanStaffId));
     }
 
-    @PostMapping("add_student")
+    @PostMapping("/add_student")
     ResponseEntity<Student> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
 
         return ResponseEntity.ok().body(studentsService.addStudent(dto));
@@ -100,5 +96,17 @@ public class DeanStaffController {
     ResponseEntity<GeneratedPasswordDto> addLecturer(@Valid @RequestBody LecturerDto lecturerDto){
 
         return ResponseEntity.ok().body(lecturerService.addLecturer(lecturerDto)); //сохраняем сущность и возвращаем пароль
+    }
+
+    @GetMapping("/get_schedules_for_faculty")
+    ResponseEntity<List<ScheduleResponseDto>> getSchedules(@RequestParam("userId") UUID userId){
+
+        return ResponseEntity.ok().body(schedulesService.getSchedulesByFaculty(userId));
+    }
+
+    @PostMapping("/add_schedule_item")
+    ResponseEntity<ScheduleItem> addScheduleItem(@Valid @RequestBody ScheduleAddDto dto){
+
+        return ResponseEntity.ok().body(schedulesService.createScheduleItem(dto)); //сохраняем сущность и возвращаем пароль
     }
 }

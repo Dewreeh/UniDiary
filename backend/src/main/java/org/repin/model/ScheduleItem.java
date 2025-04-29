@@ -1,9 +1,9 @@
 package org.repin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import net.bytebuddy.utility.nullability.MaybeNull;
+import lombok.*;
 import org.repin.enums.LessonType;
 import org.repin.enums.WeekType;
 import org.repin.enums.Weekday;
@@ -16,17 +16,20 @@ import java.util.UUID;
 @Entity
 @Table(name = "schedules")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 public class ScheduleItem {
     @Id
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lecturer_id")
     private Lecturer lecturer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
@@ -46,11 +49,18 @@ public class ScheduleItem {
     @JoinColumn(name = "semester")
     private Semester semester;
 
+    @OneToMany(mappedBy = "scheduleItem")
+    @JsonIgnore
+    private Set<GroupSchedule> groupSchedules = new HashSet<>();
+
     @ManyToMany
+    @JsonIgnoreProperties("scheduleItems")
+    @JsonIgnore
     @JoinTable(
             name = "group_schedule",
             joinColumns = @JoinColumn(name = "schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     private Set<StudentGroup> groups = new HashSet<>();
+
 }
