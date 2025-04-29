@@ -57,14 +57,14 @@ public class SchedulesService {
         //На тот случаей, если сотрудник деканата создаст занятие со своими группами, при этом занятие уже существует (его создал сотрудник другого факультета, добавив туда свои группы)
         //Тогда не создаем новое занятие, а добавляем группы второго сотрудника с существующему
         if(existingSchedule.isPresent()){
-            return addGroupsToExistedLesson(existingSchedule.get().getId(), dto.getGroupsIds());
+            return addGroupsToExistedLesson(existingSchedule.get().getId(), dto.getGroupIds());
         }
 
         //создаём новое
         ScheduleItem scheduleItem = buildScheduleItem(dto);
         ScheduleItem savedScheduleItem  = scheduleItemRepository.save(scheduleItem);
 
-        List<GroupSchedule> groupScheduleList = getGroupSchdeduleList(dto.getGroupsIds(), savedScheduleItem);
+        List<GroupSchedule> groupScheduleList = getGroupSchdeduleList(dto.getGroupIds(), savedScheduleItem);
 
         groupScheduleRepository.saveAll(groupScheduleList); //TODO пересмотреть, возможно можно сохранять данные в промежуточную таблицу средствами hibernate (через set<group> в сущности ScheduleItem)
 

@@ -33,10 +33,10 @@ public class DisciplinesService {
 
     public GenericTableDataDto<Discipline> getDisciplines(UUID deanStaffId) {
 
-        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
-                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
+//        UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
+//                .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
 
-        List<Discipline> disciplines = disciplineRepository.findByFacultyId(facultyId);
+        List<Discipline> disciplines = disciplineRepository.findAll();
 
 
         List<String> headers = List.of("#", "Название", "Факультет");

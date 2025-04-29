@@ -344,6 +344,73 @@ body{
   flex-direction: column;
 }
 
+.groups-dropdown {
+  position: relative;
+  grid-column: span 1;
+}
+
+.groups-trigger {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.groups-trigger::after {
+  content: "▼";
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+.groups-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 4px 4px;
+  border-top: none;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.groups-dropdown.active .groups-list {
+  display: block;
+}
+
+.group-item {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.group-item:hover {
+  background-color: #f5f5f5;
+}
+
+.group-item input {
+  margin-right: 8px;
+}
+
+.selected-count {
+  font-size: 12px;
+  color: #666;
+  margin-left: auto;
+  padding-left: 8px;
+}
+
 .navbar{
   padding: 0;
   float: left;
@@ -386,6 +453,61 @@ th{
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.add-form-many input,
+.add-form-many select {
+  height: 40px; 
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-form-many {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 5%;
+  align-items: start;
+}
+
+.add-form-many select[multiple] {
+  min-height: 100px;
+}
+
+.groups-container {
+  grid-column: span 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+
+.group-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.group-checkbox:hover {
+  background-color: #f0f0f0;
+}
+
+.group-checkbox input {
+  margin-right: 8px;
+}
+
+
+
+
+.add-form > * {
+  min-height: 40px;
 }
 
 .workflow-container{

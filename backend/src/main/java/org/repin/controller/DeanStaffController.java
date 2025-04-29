@@ -1,5 +1,6 @@
 package org.repin.controller;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.validation.Valid;
 import org.repin.dto.request_dto.*;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
@@ -63,7 +64,7 @@ public class DeanStaffController {
     }
 
     @GetMapping("/get_disciplines")
-    public ResponseEntity<GenericTableDataDto<Discipline>> getDisciplines(@RequestParam("userId") UUID deanStaffId) {
+    public ResponseEntity<GenericTableDataDto<Discipline>> getDisciplines(@Nullable @RequestParam("userId") UUID deanStaffId) {
 
         return ResponseEntity.ok(disciplinesService.getDisciplines(deanStaffId));
     }

@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ScheduleAddDto {
     @NotNull
     @Schema(description = "Список групп, которые привязываются к занятию")
-    List<UUID> groupsIds;
+    List<UUID> groupIds;
     @NotNull
     UUID lecturerId;
     @NotNull
