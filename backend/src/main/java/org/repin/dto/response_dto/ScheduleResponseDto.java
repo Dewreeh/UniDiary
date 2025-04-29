@@ -1,6 +1,7 @@
 package org.repin.dto.response_dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.repin.dto.request_dto.StudentGroupDto;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ScheduleResponseDto {
     private UUID id;
 

@@ -1,6 +1,7 @@
 package org.repin.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import jakarta.persistence.EntityNotFoundException;
 import org.repin.dto.response_dto.ErrorMessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<Object> UserNotFoundExceptionHandler(){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessageDto("Пользователь не найден"));
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Object> EntityNotFoundExceptionHandler(){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessageDto("Сущность не найдена"));
     }
 
 

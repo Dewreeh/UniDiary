@@ -3,6 +3,7 @@ package org.repin.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="lecturers")
 public class Lecturer implements AppUser{
     @Id
@@ -26,10 +28,6 @@ public class Lecturer implements AppUser{
 
     @JsonIgnore
     String password;
-
-    @OneToMany(mappedBy = "lecturer")
-    @JsonIgnore
-    private Set<ScheduleItem> scheduleItems = new HashSet<>();
 
     @Override
     public String getRole() {
