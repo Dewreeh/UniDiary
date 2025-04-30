@@ -6,6 +6,7 @@ import org.repin.dto.request_dto.*;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.dto.response_dto.ScheduleResponseDto;
+import org.repin.enums.Weekday;
 import org.repin.model.*;
 import org.repin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,9 +101,19 @@ public class DeanStaffController {
     }
 
     @GetMapping("/get_schedules_for_faculty")
-    ResponseEntity<List<ScheduleResponseDto>> getSchedules(@RequestParam("userId") UUID userId){
+    ResponseEntity<List<ScheduleResponseDto>> getSchedules(@RequestParam("userId") UUID userId,
+                                                           @RequestParam(name="groupId", required = false) UUID groupId,
+                                                           @RequestParam(name="weekday", required = false) Weekday weekday,
+                                                           @RequestParam(name="lecturerId", required = false) UUID lecturerId,
+                                                           @RequestParam(name="disciplineId", required = false) UUID disciplineId){
 
-        return ResponseEntity.ok().body(schedulesService.getSchedulesByFaculty(userId));
+        return ResponseEntity.ok().body(schedulesService.getSchedulesForFaculty(
+                        userId,
+                        groupId,
+                        weekday,
+                        lecturerId,
+                        disciplineId)
+        );
     }
 
     @PostMapping("/add_schedule_item")

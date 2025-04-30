@@ -22,6 +22,24 @@ public interface ScheduleItemRepository extends JpaRepository<ScheduleItem, UUID
     Optional<ScheduleItem> checkExistance(@Param("lecturerId") UUID lecturerId, @Param("disciplineId") UUID disciplineId, @Param("weekday") Weekday weekday, @Param("startTime") LocalTime startTime, @Param("semesterId") UUID semesterId);
 
     @EntityGraph(attributePaths = {"lecturer", "discipline", "groups.faculty"})
-    @Query("SELECT DISTINCT si FROM ScheduleItem si JOIN si.groups g WHERE g.faculty.id = :facultyId ORDER BY si.weekday, si.startTime ASC")
-    List<ScheduleItem> findByFacultyIdWithGroups(@Param("facultyId") UUID facultyId);
+    @Query("""
+    SELECT DISTINCT si FROM ScheduleItem si
+    JOIN FETCH si.lecturer
+    JOIN FETCH si.discipline
+    JOIN FETCH si.groups g
+    JOIN FETCH g.faculty f
+    WHERE (:groupId IS NULL OR g.id = :groupId)
+    AND (:facultyId IS NULL OR f.id = :facultyId)
+    AND (:weekday IS NULL OR si.weekday = :weekday)
+    AND (:lecturerId IS NULL OR si.lecturer.id = :lecturerId)
+    AND (:disciplineId IS NULL OR si.discipline.id = :disciplineId)
+    ORDER BY si.weekday, si.startTime
+""")
+    List<ScheduleItem> findByFilters(
+            @Param("groupId") UUID groupId,
+            @Param("facultyId") UUID facultyId,
+            @Param("weekday") Weekday weekday,
+            @Param("lecturerId") UUID lecturerId,
+            @Param("disciplineId") UUID disciplineId
+    );
 }

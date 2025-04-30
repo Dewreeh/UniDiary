@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.repin.dto.request_dto.ScheduleAddDto;
 import org.repin.dto.request_dto.StudentGroupDto;
 import org.repin.dto.response_dto.ScheduleResponseDto;
+import org.repin.enums.Weekday;
 import org.repin.model.*;
 import org.repin.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,12 +124,22 @@ public class SchedulesService {
         return scheduleItem;
     }
 
-    public List<ScheduleResponseDto> getSchedulesByFaculty(UUID staffId) {
+    public List<ScheduleResponseDto> getSchedulesForFaculty(UUID staffId,
+                                                            UUID groupId,
+                                                            Weekday weekday,
+                                                            UUID lecturerId,
+                                                            UUID disciplineId) {
+
         UUID facultyId = deanStaffRepository.findFacultyByStaffId(staffId)
                 .orElseThrow(() -> new EntityNotFoundException());
 
-        List<ScheduleItem> items = scheduleItemRepository.findByFacultyIdWithGroups(facultyId);
-
+        List<ScheduleItem> items = scheduleItemRepository.findByFilters(
+                groupId,
+                facultyId,
+                weekday,
+                lecturerId,
+                disciplineId
+        );
 
 
         Map<UUID, ScheduleItem> scheduleItems = items.stream()
