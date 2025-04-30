@@ -5,14 +5,13 @@ import Table from '../Table';
 
 function ScheduleTable({ title }) {
   const headers = [
+    "День недели", 
+    "Тип недели", 
     "Дисциплина", 
     "Преподаватель", 
     "Группы", 
-    "День недели", 
-    "Тип недели", 
     "Тип занятия", 
-    "Начало", 
-    "Конец"
+    "Начало"
   ];
 
   const columnMapping = {
@@ -23,7 +22,6 @@ function ScheduleTable({ title }) {
     "Тип недели": "weekType",
     "Тип занятия": "lessonType",
     "Начало": "startTime",
-    "Конец": "endTime"
   };
 
   const [schedule, setSchedule] = useState({ headers, data: [] });
@@ -41,7 +39,7 @@ function ScheduleTable({ title }) {
         const userId = localStorage.getItem('userId');
         const param = userId ? `?userId=${userId}` : '';
         
-        const [scheduleRes, lecturersRes, disciplinesRes, groupsRes] = await Promise.all([
+        const [schedule, lecturersRes, disciplinesRes, groupsRes] = await Promise.all([
           request(`/api/get_schedules_for_faculty${param}`),
           request(`/api/get_lecturers${param}`),
           request('/api/get_disciplines'),
@@ -49,8 +47,8 @@ function ScheduleTable({ title }) {
         ]);
         
         
-        const formattedData = Array.isArray(scheduleRes?.data) 
-          ? scheduleRes.data.map(item => ({
+        const formattedData = Array.isArray(schedule) 
+          ? schedule.map(item => ({
               ...item,
               groups: item.groups?.map(g => g.name).join(', ') || '',
               weekday: formatWeekday(item.weekday),
@@ -160,12 +158,9 @@ function ScheduleTable({ title }) {
   return (
     <div className="table-container">
       <h1 className="table-title">{title || "Расписание занятий"}</h1>
-  
-      {schedule.data && schedule.data.length > 0 ? (
-        <Table data={schedule} columnMapping={columnMapping} />
-      ) : (
-        <div className="no-data">Нет данных для отображения</div>
-      )}
+
+      <Table data={schedule} columnMapping={columnMapping} />
+      {console.log(schedule.length)}
       
       
       <div className="add-form-many">
@@ -238,7 +233,7 @@ function ScheduleTable({ title }) {
         </select>
   
         <select name="weekType" value={newItem.weekType} onChange={handleChange}>
-          <option value="BOTH">Каждую неделю</option>
+          <option value="BOTH">Обе</option>
           <option value="HIGH">Верхняя</option>
           <option value="LOW">Нижняя</option>
         </select>
@@ -277,9 +272,9 @@ function formatWeekday(weekday) {
 
 function formatWeekType(weekType) {
   const types = {
-    BOTH: 'Каждую неделю',
-    EVEN: 'Четная неделя',
-    ODD: 'Нечетная неделя'
+    HIGH: 'Верхняя',
+    LOW: 'Нижняя',
+    BOTH: 'Обе'
   };
   return types[weekType] || weekType;
 }

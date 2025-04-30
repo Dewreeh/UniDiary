@@ -224,8 +224,10 @@ color: #3A3F58;
 
 .table{
   position: relative;
-  width: 70%;
-  top: 40px;
+  width: fit-content;
+  margin-left: 2%;
+  margin-right: 2%;
+  top: 5%;
   font-family: 'Kirang Haerang', system-ui;
 }
 
@@ -241,7 +243,7 @@ color: #3A3F58;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  max-width: fit-content;
+  max-width: 100%;
 
 }
 
@@ -250,12 +252,18 @@ table tbody {
   display: block;
   max-height: 300px; 
   overflow-y: auto;
+  width: auto;
 }
 
 table thead, table tbody tr {
   display: table;
   width: 100%;
   table-layout: fixed; 
+}
+
+.table td.long-text {
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .table-title{
@@ -314,9 +322,8 @@ table thead, table tbody tr {
 
 .add-button{
   position: relative;
-  width: 120px;
+  width: auto;
   height: 40px;
-  margin-top: 80px;
   
 
   font-family: 'Kirang Haerang', system-ui;;
@@ -431,7 +438,7 @@ td{
   line-height: 21px;
   color: #3A3F58;
   margin: auto;
-  text-align:start
+  text-align:start;
   
 }
 
@@ -453,6 +460,7 @@ th{
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 5%;
 }
 
 .add-form-many input,
