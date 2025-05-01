@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import LeftNavBar from '../LeftNavBar';
 import WorkFlow from '../WorkFlow';
 import AdminLogin from '../Login/AdminLogin';
+import ScheduleTable from './SchedulePage';
 
 function DeanStaffPage() {
   const menuData = ["Группы", "Студенты", "Преподаватели", "Расписание", "Старосты", "Дисциплины"];

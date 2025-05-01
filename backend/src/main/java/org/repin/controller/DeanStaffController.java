@@ -40,15 +40,28 @@ public class DeanStaffController {
     }
 
     @GetMapping("/get_students")
-    ResponseEntity<GenericTableDataDto<Student>> getStudents(@RequestParam("userId") UUID deanStaffId){
+    ResponseEntity<GenericTableDataDto<Student>> getStudents(@RequestParam(name = "userId") UUID deanStaffId){
 
         return ResponseEntity.ok().body(studentsService.getStudents(deanStaffId));
+    }
+
+    @GetMapping("/get_students_by_group")
+    ResponseEntity<GenericTableDataDto<Student>> getStudentsByGroup(@RequestParam(name = "groupId") UUID groupId){
+
+        return ResponseEntity.ok().body(studentsService.getStudentsByGroup(groupId));
     }
 
     @PostMapping("/add_student")
     ResponseEntity<Student> addStudentAndGeneratePassword(@Valid @RequestBody StudentDto dto){
 
         return ResponseEntity.ok().body(studentsService.addStudent(dto));
+    }
+
+    @DeleteMapping("/delete_student")
+    ResponseEntity<Student> deleteStudent(@RequestParam("studentId") UUID studentId){
+
+        studentsService.deleteStudent(studentId);
+        return ResponseEntity.ok().build();
     }
 
 

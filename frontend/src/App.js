@@ -5,6 +5,9 @@ import AdminPage from './components/Admin/AdminPage'
 import  './components/index.css';
 import {Routes, Route, Link } from 'react-router-dom';
 import DeanStaffPage from './components/DeanStaff/DeanStaffPage';
+import HeadmanPage from './components/Headman/HeadmanPage';
+import StudensTable from './components/DeanStaff/StudentsTable';
+import GroupStudentsTable from './components/DeanStaff/GroupStudentsPage';
 
 function App() {
   return (
@@ -28,6 +31,10 @@ function App() {
         <Route path="/login_admin" element={<AdminLogin />} />
         <Route path="/admin/*" element={<AdminPage />} />
         <Route path="/dean_staff/*" element={<DeanStaffPage />} />
+        <Route path="/headman/*" element={<HeadmanPage />} />
+
+        <Route path="dean_staff/workflow/gruppy/group/:groupId" element={<GroupStudentsTable />} />
+
       </Routes>
     </div>
 

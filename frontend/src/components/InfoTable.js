@@ -24,7 +24,7 @@ function InfoTable({ title, data, onAdd, section }) {
  
   const [relatedData, setRelatedData] = useState([]);
 
-  // Загружаем связанные данные при изменении section
+
   useEffect(() => {
     const relatedEndpoints = {
       'sotrudniki-dekanatov': '/api/get_faculties',

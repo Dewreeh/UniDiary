@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "group_schedule")
 public class GroupSchedule {
     @EmbeddedId

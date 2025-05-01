@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Route, Routes } from 'react';
 import { useParams } from 'react-router-dom';
 import { request } from '../api/api';
 import FacultyTable from './Admin/FacultyTable';
@@ -64,6 +64,7 @@ function WorkFlow() {
       {section === "prepodavateli" && <LecturersTable data={data} onAdd={setData} />}
       {section === "semestry" && <SemesterTable data={data} onAdd={setData} />}
       {section === "raspisanie" && <SchedulePage data={data} onAdd={setData} />}
+
     </div>
   );
 }

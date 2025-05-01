@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Route, Routes } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 import { request } from '../../api/api';
 import Table from '../Table';
+import ScheduleTable from './SchedulePage';
 
 function GroupsTable({ data }) {
   const columnMapping = {
@@ -14,6 +15,7 @@ function GroupsTable({ data }) {
 
   const [faculties, setFaculties] = useState([]);
   const [specialities, setSpecialities] = useState([]); 
+
 
   const [newItem, setNewItem] = useState({
     name: '',
@@ -88,7 +90,7 @@ function GroupsTable({ data }) {
       <Table
         data={data} 
         columnMapping={columnMapping}
-        getRowLink={(group) => `/group/${group.id}`}  
+        getRowLink={(group) => `group/${group.id}`}  
     />
 
       <div className="add-form">
@@ -114,7 +116,6 @@ function GroupsTable({ data }) {
           ))}
         </select>
 
-        {/* 🔹 Выпадающий список для специальностей */}
         <select name="speciality" value={newItem.speciality?.id || ""} onChange={handleChange}>
           <option value="">Выберите специальность</option>
           {specialities.map(spec => (
@@ -124,7 +125,9 @@ function GroupsTable({ data }) {
 
         <button className="button add-button" onClick={handleAdd}>Добавить</button>
       </div>
+
     </div>
+    
   );
 }
 

@@ -44,6 +44,15 @@ public class StudentsService {
         return new GenericTableDataDto<Student>(headers, students);
     }
 
+    public GenericTableDataDto<Student> getStudentsByGroup(UUID groupId){
+
+
+        List<Student> students = studentRepository.findByStudentGroupId(groupId);
+
+        List<String> headers = List.of("#", "ФИО", "Почта");
+        return new GenericTableDataDto<Student>(headers, students);
+    }
+
     public Student addStudent(StudentDto dto){
 
         Student student = new Student(dto.getName(),
@@ -52,6 +61,11 @@ public class StudentsService {
                 dto.getEmail(),
                 false);
         return studentRepository.save(student);
+    }
+
+    public void deleteStudent(UUID studentId){
+
+        studentRepository.deleteById(studentId);
     }
 
     public GenericTableDataDto<Student> getHeadmen(UUID deanStaffId){

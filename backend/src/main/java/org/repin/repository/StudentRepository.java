@@ -19,6 +19,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
     @Query("SELECT s FROM Student s WHERE s.studentGroup.faculty.id = :facultyId AND s.isHeadman = true")
     List<Student> findHeadmanByFacultyId(@Param("facultyId") UUID facultyId);
+    List<Student> findByStudentGroupId(UUID studentGroup);
 
     List<Student> findByIsHeadmanTrue();
 

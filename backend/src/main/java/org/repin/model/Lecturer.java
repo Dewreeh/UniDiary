@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="lecturers")
 public class Lecturer implements AppUser{
     @Id
