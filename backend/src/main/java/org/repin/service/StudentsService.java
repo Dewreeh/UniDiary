@@ -93,7 +93,7 @@ public class StudentsService {
         student.setPassword(encodedPassword);
 
         studentRepository.save(student);
-        return new GeneratedPasswordDto(encodedPassword); //сохраняем сущность и возвращаем пароль
+        return new GeneratedPasswordDto(generatedPassword);
     }
 
 
