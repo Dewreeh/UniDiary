@@ -2,7 +2,7 @@ package org.repin.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.repin.dto.request_dto.ScheduleAddDto;
-import org.repin.dto.request_dto.StudentGroupDto;
+import org.repin.dto.response_dto.ConcreteSchedule;
 import org.repin.dto.response_dto.ScheduleResponseDto;
 import org.repin.enums.Weekday;
 import org.repin.model.*;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -153,6 +154,53 @@ public class SchedulesService {
         return scheduleItems.values().stream()
                 .map(this::mapToResponseDto)
                 .toList();
+    }
+
+    public List<ConcreteSchedule> getConcreteScheduleForWeekForGroup(
+                                                      UUID groupId,
+                                                      Weekday weekday,
+                                                      UUID lecturerId,
+                                                      UUID disciplineId){
+
+        List<ScheduleItem> items = scheduleItemRepository.findByFilters(
+                groupId,
+                null,
+                weekday,
+                lecturerId,
+                disciplineId
+        );
+
+        return(buildConcreteSchedule(items, 7));
+
+    }
+
+
+    //простраиваем конкретное расписание с конкретными датами на daysFromCurrent от текущей даты
+    private List<ConcreteSchedule> buildConcreteSchedule(List<ScheduleItem> scheduleItems, int daysFromCurrent){
+        LocalDate currentDate = LocalDate.now();
+        List<ConcreteSchedule> concreteSchedules = new ArrayList<>();
+
+        while(daysFromCurrent > 0){
+            ConcreteSchedule concreteSchedule = new ConcreteSchedule();
+
+            concreteSchedule.setDate(currentDate);
+
+            List<ScheduleResponseDto> schedulesForDay = new ArrayList<>();
+            for(ScheduleItem item: scheduleItems){
+                if(currentDate.getDayOfWeek().getValue() - 1 == item.getWeekday().ordinal()){  //TODO придумать как учитывать верхние и нижние недели, помимо дня недели...
+                    schedulesForDay.add(mapToResponseDto(item));
+                }
+            }
+
+            concreteSchedule.setSchedulesInfo(schedulesForDay.isEmpty() ? null : schedulesForDay);
+
+            concreteSchedules.add(concreteSchedule);
+            currentDate = currentDate.plusDays(
+            1);
+            daysFromCurrent--;
+        }
+
+        return concreteSchedules;
     }
 
     private ScheduleResponseDto mapToResponseDto(ScheduleItem item) {

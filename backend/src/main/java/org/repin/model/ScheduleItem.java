@@ -49,9 +49,7 @@ public class ScheduleItem {
     @JoinColumn(name = "semester")
     private Semester semester;
 
-    @OneToMany(mappedBy = "scheduleItem")
-    @JsonIgnore
-    private Set<GroupSchedule> groupSchedules = new HashSet<>();
+
 
     @ManyToMany
     @JsonIgnoreProperties("scheduleItems")

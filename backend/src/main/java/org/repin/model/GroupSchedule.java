@@ -2,8 +2,8 @@ package org.repin.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 @Entity
 @NoArgsConstructor
@@ -21,6 +21,7 @@ public class GroupSchedule {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("scheduleItemId")
     @JoinColumn(name = "schedule_id")
+    @ToStringExclude
     private ScheduleItem scheduleItem;
 
     public GroupSchedule(StudentGroup group, ScheduleItem scheduleItem) {
