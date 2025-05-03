@@ -1,12 +1,14 @@
 package org.repin.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "attendance")
+@Builder
 public class Attendance {
 
     @Id

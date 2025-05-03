@@ -92,10 +92,10 @@ public class SchedulesService {
                 .build();
     }
 
-    private List<GroupSchedule> getGroupSchdeduleList(List<UUID> groupIds, ScheduleItem schedule){
+    private List<GroupSchedule> getGroupSchdeduleList(List<UUID> groupIds, ScheduleItem scheduleItem){
         return groupIds
                 .stream()
-                .map(groupId -> new GroupSchedule(studentGroupsRepository.findById(groupId).get(), schedule))
+                .map(groupId -> new GroupSchedule(studentGroupsRepository.findById(groupId).get(), scheduleItem))
                 .toList();
     }
 
@@ -195,8 +195,8 @@ public class SchedulesService {
             concreteSchedule.setSchedulesInfo(schedulesForDay.isEmpty() ? null : schedulesForDay);
 
             concreteSchedules.add(concreteSchedule);
-            currentDate = currentDate.plusDays(
-            1);
+
+            currentDate = currentDate.plusDays(1);
             daysFromCurrent--;
         }
 
