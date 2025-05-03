@@ -6,6 +6,7 @@ import org.repin.dto.response_dto.ConcreteSchedule;
 import org.repin.enums.Weekday;
 import org.repin.model.Attendance;
 import org.repin.service.AttendanceService;
+import org.repin.service.GroupsService;
 import org.repin.service.SchedulesService;
 import org.repin.service.StudentsService;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,16 @@ public class HeadmanController {
     private final SchedulesService schedulesService;
     private final StudentsService studentsService;
     private final AttendanceService attendanceService;
+    private final GroupsService groupsService;
 
     HeadmanController(SchedulesService schedulesService,
                       StudentsService studentsService,
-                      AttendanceService attendanceService){
+                      AttendanceService attendanceService,
+                      GroupsService groupsService){
         this.schedulesService = schedulesService;
         this.studentsService = studentsService;
         this.attendanceService = attendanceService;
+        this.groupsService = groupsService;
     }
 
     @GetMapping("/get_concrete_schedules_for_group_by_filters")
@@ -42,5 +46,10 @@ public class HeadmanController {
     @PostMapping("/mark_attendance")
     ResponseEntity<List<Attendance>> markAttendance(@RequestBody List<AttendanceDto> attendanceList){
         return ResponseEntity.ok().body(attendanceService.markAttendanceForScheduleItem(attendanceList));
+    }
+
+    @GetMapping("/get_group_id_by_studentId")
+    ResponseEntity<UUID> markAttendance(@RequestParam("studentId") UUID studentId){
+        return ResponseEntity.ok().body(groupsService.getGroupIdByStudentId(studentId));
     }
 }

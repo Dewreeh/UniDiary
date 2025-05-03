@@ -151,7 +151,7 @@ public class SchedulesService {
                 ));
 
 
-        return scheduleItems.values().stream()
+        return items.stream()
                 .map(this::mapToResponseDto)
                 .toList();
     }
@@ -187,14 +187,17 @@ public class SchedulesService {
 
             List<ScheduleResponseDto> schedulesForDay = new ArrayList<>();
             for(ScheduleItem item: scheduleItems){
-                if(currentDate.getDayOfWeek().getValue() - 1 == item.getWeekday().ordinal()){  //TODO придумать как учитывать верхние и нижние недели, помимо дня недели...
+                if(currentDate.getDayOfWeek().getValue() - 1 == item.getWeekday().ordinal()
+                   && currentDate.getDayOfWeek().getValue() != 6)
+                {                                                       //TODO придумать как учитывать верхние и нижние недели, помимо дня недели...
                     schedulesForDay.add(mapToResponseDto(item));
                 }
             }
 
-            concreteSchedule.setSchedulesInfo(schedulesForDay.isEmpty() ? null : schedulesForDay);
-
-            concreteSchedules.add(concreteSchedule);
+            if(!schedulesForDay.isEmpty()) {
+                concreteSchedule.setSchedulesInfo(schedulesForDay);
+                concreteSchedules.add(concreteSchedule);
+            }
 
             currentDate = currentDate.plusDays(1);
             daysFromCurrent--;

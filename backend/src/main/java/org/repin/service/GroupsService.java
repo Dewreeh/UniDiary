@@ -7,6 +7,7 @@ import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.model.StudentGroup;
 import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.StudentGroupsRepository;
+import org.repin.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +20,15 @@ public class GroupsService {
 
     private final StudentGroupsRepository studentGroupsRepository;
     private final DeanStaffRepository deanStaffRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
     GroupsService(StudentGroupsRepository studentGroupsRepository,
-                  DeanStaffRepository deanStaffRepository){
+                  DeanStaffRepository deanStaffRepository,
+                  StudentRepository studentRepository){
         this.studentGroupsRepository = studentGroupsRepository;
         this.deanStaffRepository = deanStaffRepository;
+        this.studentRepository = studentRepository;
     }
 
     public GenericTableDataDto<StudentGroup> getStudentGroups(UUID deanStaffId) {
@@ -47,6 +51,9 @@ public class GroupsService {
         return studentGroupsRepository.save(studentGroup);
     }
 
+    public UUID getGroupIdByStudentId(UUID studentId){
+        return studentRepository.getGroupIdByStudentId(studentId);
+    }
 
 
 }

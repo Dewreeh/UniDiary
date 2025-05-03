@@ -2,7 +2,6 @@ package org.repin.repository;
 
 import org.repin.enums.Weekday;
 import org.repin.model.ScheduleItem;
-import org.repin.model.Semester;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +22,7 @@ public interface ScheduleItemRepository extends JpaRepository<ScheduleItem, UUID
 
     @EntityGraph(attributePaths = {"lecturer", "discipline", "groups.faculty"})
     @Query("""
-    SELECT DISTINCT si FROM ScheduleItem si
+    SELECT si FROM ScheduleItem si
     JOIN FETCH si.lecturer
     JOIN FETCH si.discipline
     JOIN FETCH si.groups g
