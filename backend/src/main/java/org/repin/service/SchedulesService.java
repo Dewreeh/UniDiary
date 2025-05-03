@@ -206,6 +206,10 @@ public class SchedulesService {
         return concreteSchedules;
     }
 
+    public void deleteScheduleItem(UUID id){
+         scheduleItemRepository.deleteById(id);
+    }
+
     private ScheduleResponseDto mapToResponseDto(ScheduleItem item) {
         return ScheduleResponseDto.builder()
                 .id(item.getId())

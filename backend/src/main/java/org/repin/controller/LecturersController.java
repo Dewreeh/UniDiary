@@ -18,25 +18,26 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-public class DeanStaffController {
+public class LecturersController {
 
-    private final GroupsService groupsService;
-    private final StudentsService studentsService;
-    private final DisciplinesService disciplinesService;
     private final LecturerService lecturerService;
-    private final SchedulesService schedulesService;
+
 
     @Autowired
-    DeanStaffController(GroupsService groupsService,
-                        StudentsService studentsService,
-                        DisciplinesService disciplinesService,
-                        LecturerService lecturerService,
-                        SchedulesService schedulesService){
-        this.groupsService = groupsService;
-        this.studentsService = studentsService;
-        this.disciplinesService = disciplinesService;
+    LecturersController(LecturerService lecturerService) {
         this.lecturerService = lecturerService;
-        this.schedulesService = schedulesService;
     }
 
+
+    @GetMapping("/get_lecturers")
+    ResponseEntity<GenericTableDataDto<Lecturer>> getLecturers() {
+
+        return ResponseEntity.ok().body(lecturerService.getLecturers());
+    }
+
+    @PostMapping("/add_lecturer")
+    ResponseEntity<GeneratedPasswordDto> addLecturer(@Valid @RequestBody LecturerDto lecturerDto) {
+
+        return ResponseEntity.ok().body(lecturerService.addLecturer(lecturerDto)); //сохраняем сущность и возвращаем пароль
+    }
 }

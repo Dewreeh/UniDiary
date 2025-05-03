@@ -52,4 +52,8 @@ public class DisciplinesService {
 
         return dto; //TODO тут не dto Надо возвращать, а сущность. но там пока с этим проблема из-за прокси Faculty
     }
+
+    public void deleteDiscipline(UUID id){
+        disciplineRepository.deleteById(id);
+    }
 }
