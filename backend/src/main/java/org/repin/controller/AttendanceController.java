@@ -3,7 +3,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.repin.dto.request_dto.AttendanceDto;
 import org.repin.model.Attendance;
 import org.repin.service.AttendanceService;
-import org.repin.service.SchedulesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

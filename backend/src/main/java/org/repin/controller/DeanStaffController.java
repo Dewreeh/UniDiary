@@ -1,20 +1,8 @@
 package org.repin.controller;
-
-import io.micrometer.common.lang.Nullable;
-import jakarta.validation.Valid;
-import org.repin.dto.request_dto.*;
-import org.repin.dto.response_dto.GeneratedPasswordDto;
-import org.repin.dto.response_dto.GenericTableDataDto;
-import org.repin.dto.response_dto.ScheduleResponseDto;
-import org.repin.enums.Weekday;
-import org.repin.model.*;
 import org.repin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")

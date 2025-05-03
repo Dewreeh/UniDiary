@@ -1,11 +1,8 @@
 package org.repin.controller;
 
-import io.micrometer.common.lang.Nullable;
 import jakarta.validation.Valid;
 import org.repin.dto.request_dto.*;
 import org.repin.dto.response_dto.ConcreteSchedule;
-import org.repin.dto.response_dto.GeneratedPasswordDto;
-import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.dto.response_dto.ScheduleResponseDto;
 import org.repin.enums.Weekday;
 import org.repin.model.*;

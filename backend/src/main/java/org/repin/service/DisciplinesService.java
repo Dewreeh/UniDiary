@@ -1,6 +1,4 @@
 package org.repin.service;
-
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.repin.dto.request_dto.DisciplineDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
