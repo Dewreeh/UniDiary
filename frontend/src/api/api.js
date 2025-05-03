@@ -21,10 +21,10 @@ export const request = async (endpoint, method = 'GET', body = null) => {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, options);
     if (!response.ok) {
-      throw new Error('Ошибка на сервере: ${error.message}');
+      throw new Error(`Ошибка на сервере:`);
     }
     return await response.json();
   } catch (error) {
-    throw new Error(`Ошибка при запросе: ${error.message}`);
+    throw new Error(`Ошибка при запросе: ${error}`);
   }
 };
