@@ -10,6 +10,7 @@ import HeadmanTable from './DeanStaff/HeadmanTable';
 import LecturersTable from './DeanStaff/LecturersTable';
 import SemesterTable from './Admin/SemesterTable';
 import SchedulePage from './DeanStaff/SchedulePage';
+import Attendance from './Headman/Attendance';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -64,6 +65,7 @@ function WorkFlow() {
       {section === "prepodavateli" && <LecturersTable data={data} onAdd={setData} />}
       {section === "semestry" && <SemesterTable data={data} onAdd={setData} />}
       {section === "raspisanie" && <SchedulePage data={data} onAdd={setData} />}
+      {section === "poseshchaemost" && <Attendance data={data} onAdd={setData} />}
 
     </div>
   );

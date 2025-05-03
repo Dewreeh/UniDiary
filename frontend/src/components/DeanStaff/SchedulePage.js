@@ -32,7 +32,6 @@ function ScheduleTable({ title }) {
   const [error, setError] = useState(null);
   const [dropdownActive, setDropdownActive] = useState(false);
   
-  // Состояния для фильтров
   const [filters, setFilters] = useState({
     groupId: '',
     weekday: '',
@@ -51,12 +50,10 @@ function ScheduleTable({ title }) {
     endTime: ''
   });
 
-  // Функция для построения параметров запроса
   const buildParams = () => {
     const userId = localStorage.getItem('userId');
     let params = userId ? `?userId=${userId}` : '';
     
-    // Добавляем фильтры, если они выбраны
     Object.entries(filters).forEach(([key, value]) => {
       if (value) {
         params += `&${key}=${value}`;
@@ -151,7 +148,6 @@ function ScheduleTable({ title }) {
 
       await request(`/api/add_schedule_item${params}`, 'POST', scheduleData);
       
-      // Обновляем данные после добавления
       await fetchData();
       
       setNewItem({

@@ -34,7 +34,7 @@ function App() {
         <Route path="/headman/*" element={<HeadmanPage />} />
 
         <Route path="dean_staff/workflow/gruppy/group/:groupId" element={<GroupStudentsTable />} />
-
+        <Route path="headman/workflow/poseshchaemost/schedule/:scheduleId" element={<AdminPage />}/>
       </Routes>
     </div>
 

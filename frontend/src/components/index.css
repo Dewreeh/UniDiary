@@ -248,6 +248,40 @@ color: #3A3F58;
 }
 
 
+.schedule-days{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.day-schedule{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.day-title{
+  font-style: normal;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 41px;
+  letter-spacing: 0.15em;
+  color: #FFFFFF;
+}
+
+.no-classes{
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 41px;
+  letter-spacing: 0.15em;
+  color: #FFFFFF;
+}
+
 table tbody {
   display: block;
   max-height: 300px; 
