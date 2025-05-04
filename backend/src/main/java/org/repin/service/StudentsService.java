@@ -84,6 +84,8 @@ public class StudentsService {
 
         Student student = studentRepository.findById(studentId).orElseThrow();
 
+        if(student.getIsHeadman()) throw new IllegalArgumentException("Этот студент уже староста!");
+
         String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();    //TODO вынести в отдельный сервис и сделать уведомления на почту через кафку
