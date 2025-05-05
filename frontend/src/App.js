@@ -8,6 +8,7 @@ import DeanStaffPage from './components/DeanStaff/DeanStaffPage';
 import HeadmanPage from './components/Headman/HeadmanPage';
 import StudensTable from './components/DeanStaff/StudentsTable';
 import GroupStudentsTable from './components/DeanStaff/GroupStudentsPage';
+import AttendanceMarking from './components/Headman/AttendanceMarking';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path="/headman/*" element={<HeadmanPage />} />
 
         <Route path="dean_staff/workflow/gruppy/group/:groupId" element={<GroupStudentsTable />} />
-        <Route path="headman/workflow/poseshchaemost/schedule/:scheduleId" element={<AdminPage />}/>
+        <Route path="headman/workflow/poseshchaemost/schedule/:scheduleId" element={<AttendanceMarking />}/>
       </Routes>
     </div>
 

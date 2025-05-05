@@ -21,7 +21,7 @@ export const request = async (endpoint, method = 'GET', body = null) => {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, options);
     if (!response.ok) {
-      throw new Error(`Ошибка на сервере:`);
+      throw new Error(`Ошибка на сервере:` + response.message);
     }
     return await response.json();
   } catch (error) {

@@ -1,6 +1,7 @@
 package org.repin.service;
 
 import org.repin.dto.request_dto.AttendanceDto;
+import org.repin.dto.request_dto.AttendanceRecordDto;
 import org.repin.model.Attendance;
 import org.repin.model.ScheduleItem;
 import org.repin.model.Student;
@@ -35,7 +36,8 @@ public class AttendanceService {
 
 
     @Transactional
-    public List<Attendance> markAttendanceForScheduleItem(List<AttendanceDto> attendanceList){
+    public List<Attendance> markAttendanceForScheduleItem(AttendanceRecordDto dto){
+       List<AttendanceDto> attendanceList = dto.getAttendanceList();
 
        List<UUID> studentIds = attendanceList.stream().map(AttendanceDto::getStudentId).toList();
 

@@ -8,7 +8,6 @@ function Attendance({ title }) {
     "Дисциплина": "disciplineName",
     "Преподаватель": "lecturerName",
     "Группы": "groups",
-    "День недели": "weekday",
     "Тип недели": "weekType",
     "Тип занятия": "lessonType",
     "Начало": "startTime",
@@ -63,7 +62,7 @@ function Attendance({ title }) {
         request('/api/get_disciplines'),
       ]);
 
-      // Форматируем данные для каждого дня
+
       const formattedSchedule = Array.isArray(scheduleRes) 
         ? scheduleRes.map(day => ({
             date: day.date,
