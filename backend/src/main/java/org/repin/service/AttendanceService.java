@@ -36,7 +36,9 @@ public class AttendanceService {
 
 
     @Transactional
-    public List<Attendance> markAttendanceForScheduleItem(AttendanceRecordDto dto){
+    public List<Attendance> markAttendance(AttendanceRecordDto dto){
+
+
        List<AttendanceDto> attendanceList = dto.getAttendanceList();
 
        List<UUID> studentIds = attendanceList.stream().map(AttendanceDto::getStudentId).toList();
@@ -45,7 +47,7 @@ public class AttendanceService {
                .stream()
                .collect(Collectors.toMap(Student::getId, student -> student));
 
-        ScheduleItem scheduleItemEntity = scheduleItemRepository.findById(attendanceList.getFirst().getScheduleItemId()).orElseThrow();
+       ScheduleItem scheduleItemEntity = scheduleItemRepository.findById(attendanceList.getFirst().getScheduleItemId()).orElseThrow();
 
        List<Attendance> attendances = attendanceList.stream().map(elem -> mapToEntity(elem, scheduleItemEntity, studentEntities)).toList();
 
