@@ -1,16 +1,11 @@
 package org.repin.controller;
-import org.repin.dto.request_dto.AttendanceDto;
 import org.repin.dto.request_dto.AttendanceRecordDto;
-import org.repin.model.Attendance;
+import org.repin.dto.response_dto.AttendanceFormResponse;
 import org.repin.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 
 @RestController
@@ -25,9 +20,16 @@ public class AttendanceController {
     }
 
     @PostMapping("/mark_attendance")
-    ResponseEntity<List<Attendance>> markAttendance(@RequestBody AttendanceRecordDto attendanceDto){
+    ResponseEntity<Object> markAttendance(@RequestBody AttendanceRecordDto attendanceDto){
+        attendanceService.markAttendance(attendanceDto);
+        return ResponseEntity.ok().build();
+    }
 
-        return ResponseEntity.ok().body(attendanceService.markAttendance(attendanceDto));
+    @GetMapping("/get_attendance_for_schedule")
+    ResponseEntity<AttendanceFormResponse> markAttendance(@RequestParam("scheduleId") UUID scheduleId,
+                                                          @RequestParam("groupId") UUID groupId){
+
+        return ResponseEntity.ok().body(attendanceService.getAttendanceInfo(groupId, scheduleId));
     }
 
 }

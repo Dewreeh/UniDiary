@@ -1,13 +1,16 @@
 package org.repin.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-
+import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "attendance")
+@Data
+@AllArgsConstructor
 @Builder
 public class Attendance {
 
@@ -26,4 +29,6 @@ public class Attendance {
     Boolean attendanceStatus;
 
     LocalDateTime timestamp;
+
+    public Attendance(){}
 }
