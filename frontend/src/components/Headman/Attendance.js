@@ -180,7 +180,7 @@ function Attendance({ title }) {
                   data: day.schedulesInfo 
                 }} 
                 columnMapping={columnMapping}
-                getRowLink={schedule => `schedule/${schedule.id}`}
+                getRowLink={schedule => `schedule/${schedule.id}/${day.date}`}
               />
             ) : (
               <div className="no-classes">Занятий нет</div>

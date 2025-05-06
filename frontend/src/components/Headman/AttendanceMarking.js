@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../index.css';
 
 function AttendanceMarking() {
-  const { scheduleId } = useParams();
+  const { scheduleId, date } = useParams();
   const [students, setStudents] = useState([]);
   const [groupId, setGroup] = useState(null);
   const [scheduleItem, setScheduleItem] = useState(null);
@@ -60,8 +60,7 @@ function AttendanceMarking() {
     try {
       setSubmitting(true);
       
-      const today = new Date();
-      const formattedDate = formatLocalDate(today);
+      const formattedDate = date;
       const formattedTime = padTimeWithSeconds(scheduleItem.startTime);
       const timestamp = `${formattedDate}T${formattedTime}`;
       

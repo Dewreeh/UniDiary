@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -60,15 +61,19 @@ public class AttendanceService {
 //
 //       attendanceRepository.saveAll(attendances);
 
+       if(!Objects.equals(dto.getTimestamp().getDayOfYear(), LocalDateTime.now().getDayOfYear())){
+           throw new IllegalStateException("Поставить отметку за конкретный день нельзя заранее");
+       }
+
        List<Attendance> attendances =  dto.getAttendanceList().stream().map(
                elem -> {
                    Attendance attendance = attendanceRepository.findExisting(dto.getScheduleItemId(), elem.getStudentId(), dto.getTimestamp())
                            .orElse(new Attendance());
 
                    attendance.setStudent(studentRepository.getReferenceById(elem.getStudentId()));
-                   attendance.setScheduleItem(scheduleItemRepository.getReferenceById(elem.getScheduleItemId()));
+                   attendance.setScheduleItem(scheduleItemRepository.getReferenceById(dto.getScheduleItemId()));
                    attendance.setAttendanceStatus(elem.getAttendanceStatus());
-                   attendance.setTimestamp(elem.getTimestamp());
+                   attendance.setTimestamp(dto.getTimestamp());
 
                    return attendance;
                }
@@ -109,12 +114,4 @@ public class AttendanceService {
         return new AttendanceFormResponse(scheduleId, groupId, studentAttendances);
     }
 
-    private Attendance mapToEntity(AttendanceDto dto, ScheduleItem schedule, Map<UUID, Student> students){
-        return Attendance.builder()
-                .student(students.get(dto.getStudentId()))
-                .scheduleItem(schedule)
-                .attendanceStatus(dto.getAttendanceStatus())
-                .timestamp(dto.getTimestamp())
-                .build();
-    }
 }
