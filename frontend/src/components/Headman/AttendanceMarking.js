@@ -18,19 +18,25 @@ function AttendanceMarking() {
       try {
         setLoading(true);
         
+     
         const scheduleResponse = await request(`/api/get_schedule_item?scheduleId=${scheduleId}`);
         setScheduleItem(scheduleResponse);
         
-        const groupId = await request(`/api/get_group_id_by_studentId?studentId=${localStorage.getItem('userId')}`);
-        setGroup(groupId);
-
-        const studentsResponse = await request(`/api/get_students_by_group?groupId=${groupId}`);
+        const groupIdResponse = await request(`/api/get_group_id_by_studentId?studentId=${localStorage.getItem('userId')}`);
+        setGroup(groupIdResponse);
+        
+        const studentsResponse = await request(`/api/get_students_by_group?groupId=${groupIdResponse}`);
         setStudents(studentsResponse.data);
+        
+        const attendanceResponse = await request(`/api/get_attendance_for_schedule?scheduleId=${scheduleId}&groupId=${groupIdResponse}`);
         
         const initialAttendance = {};
         studentsResponse.data.forEach(student => {
-          initialAttendance[student.id] = true; 
+          //Если есть данные о посещаемости - используем их, иначе по умолчанию true
+          const attendanceRecord = attendanceResponse.students.find(a => a.studentId === student.id);
+          initialAttendance[student.id] = attendanceRecord ? attendanceRecord.attendanceStatus : false;
         });
+        
         setAttendance(initialAttendance);
         
       } catch (err) {
@@ -55,28 +61,30 @@ function AttendanceMarking() {
       setSubmitting(true);
       
       const today = new Date();
-      const formattedDate = today.toISOString().split('T')[0];
+      const formattedDate = formatLocalDate(today);
+      const formattedTime = padTimeWithSeconds(scheduleItem.startTime);
+      const timestamp = `${formattedDate}T${formattedTime}`;
       
-      const timestamp = `${formattedDate}T${scheduleItem.startTime}`;
+      console.log(timestamp);
 
-      const attendanceData = Object.keys(attendance).map(studentId => ({
+      const attendanceList = Object.keys(attendance).map(studentId => ({
         studentId,
-        scheduleItemId: scheduleId,
-        attendanceStatus: attendance[studentId],
-        timestamp: timestamp
+        attendanceStatus: attendance[studentId] === null ? false : attendance[studentId]
       }));
       
-      const attendanceList = {
-        attendanceList: attendanceData
+      const requestData = {
+        groupId: groupId,
+        scheduleItemId: scheduleId,
+        timestamp: timestamp,
+        attendanceList: attendanceList
       };
 
-      await request('/api/mark_attendance', 'POST', attendanceList);
+      await request('/api/mark_attendance', 'POST', requestData);
       
       alert('Посещаемость успешно сохранена!');
       
     } catch (error) {
-      console.error('Ошибка при сохранении:', error);
-      alert('Произошла ошибка при сохранении');
+
     } finally {
       setSubmitting(false);
     }
@@ -101,7 +109,7 @@ function AttendanceMarking() {
         <thead className='custom-row'>
           <tr>
             <th>Студент</th>
-            <th>Посещение</th>
+            <th>Статус</th>
           </tr>
         </thead>
         <tbody>
@@ -117,7 +125,7 @@ function AttendanceMarking() {
                   />
                   <span className="slider round"></span>
                   <span className="status-text">
-                    {attendance[student.id] ? 'Присутствует' : 'Отсутствует'}
+                    {attendance[student.id] ? 'Присутствие' : 'Отсутствие'}
                   </span>
                 </label>
               </td>
@@ -137,29 +145,47 @@ function AttendanceMarking() {
   );
 }
 
+
 function formatWeekday(weekday) {
-    const days = {
-      MONDAY: 'Понедельник',
-      TUESDAY: 'Вторник',
-      WEDNESDAY: 'Среда',
-      THURSDAY: 'Четверг',
-      FRIDAY: 'Пятница',
-      SATURDAY: 'Суббота'
-    };
-    return days[weekday] || weekday;
+  const days = {
+    MONDAY: 'Понедельник',
+    TUESDAY: 'Вторник',
+    WEDNESDAY: 'Среда',
+    THURSDAY: 'Четверг',
+    FRIDAY: 'Пятница',
+    SATURDAY: 'Суббота'
+  };
+  return days[weekday] || weekday;
+}
+
+function formatWeekType(weekType) {
+  const types = {
+    HIGH: 'Верхняя неделя',
+    LOW: 'Нижняя неделя',
+    BOTH: 'Обе недели'
+  };
+  return types[weekType] || weekType;
+}
+
+function formatTime(timeString) {
+  return timeString ? timeString.slice(0, 5) : '';
+}
+
+function formatLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
   
-  function formatWeekType(weekType) {
-    const types = {
-      HIGH: 'Верхняя неделя',
-      LOW: 'Нижняя неделя',
-      BOTH: 'Обе недели'
-    };
-    return types[weekType] || weekType;
-  }
-  
-  function formatTime(timeString) {
-    return timeString ? timeString.slice(0, 5) : '';
+  function padTimeWithSeconds(timeString) {
+    if (!timeString) return '00:00:00';
+    
+    const parts = timeString.split(':');
+    if (parts.length === 2) {
+      return `${timeString}:00`; 
+    }
+    return timeString.length === 5 ? `${timeString}:00` : timeString;
   }
 
 export default AttendanceMarking;

@@ -10,7 +10,7 @@
 }
 
 .title{
-  /* UniDiary */
+
   position: absolute;;
   margin-left: 71px;
   margin-top: 19px;
@@ -20,7 +20,7 @@
   font-weight: 400;
   font-size: 40px;
   line-height: 56px;
-  /* identical to box height */
+
 
   color: #3A3F50;
 
@@ -45,7 +45,7 @@ body{
 }
 
 .change-type-of-user{
-  /* Вход для администратора */
+
 
   position: absolute;
   width: 500px;
@@ -58,7 +58,6 @@ body{
   font-weight: 400;
   font-size: 20px;
   line-height: 25px;
-  /* identical to box height */
   letter-spacing: 0.15em;
 
   color: #FFFFFF;
@@ -91,7 +90,6 @@ body{
 }
 
 .form-title{
-  /* Вход в систему */
 
   width: 406px;
   height: 100px;
