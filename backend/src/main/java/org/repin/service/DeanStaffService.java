@@ -1,6 +1,5 @@
 package org.repin.service;
 
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.repin.dto.request_dto.StaffMemberDto;
@@ -9,12 +8,8 @@ import org.repin.dto.response_dto.GenericTableDataDto;
 import org.repin.model.DeanStaffMember;
 import org.repin.repository.DeanStaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

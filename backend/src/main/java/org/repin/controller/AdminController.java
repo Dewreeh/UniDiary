@@ -2,7 +2,6 @@ package org.repin.controller;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.repin.dto.request_dto.SemesterDto;
 import org.repin.dto.response_dto.GeneratedPasswordDto;
 import org.repin.dto.response_dto.GenericTableDataDto;
@@ -12,15 +11,12 @@ import org.repin.model.DeanStaffMember;
 import org.repin.model.Faculty;
 import org.repin.model.Semester;
 import org.repin.model.Speciality;
-import org.repin.repository.DeanStaffRepository;
-import org.repin.repository.FacultyRepository;
 import org.repin.repository.SpecialityRepository;
 import org.repin.service.DeanStaffService;
 import org.repin.service.FacultyService;
 import org.repin.service.SemestersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
