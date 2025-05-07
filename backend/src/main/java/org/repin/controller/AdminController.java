@@ -15,6 +15,8 @@ import org.repin.model.Speciality;
 import org.repin.repository.DeanStaffRepository;
 import org.repin.repository.FacultyRepository;
 import org.repin.repository.SpecialityRepository;
+import org.repin.service.DeanStaffService;
+import org.repin.service.FacultyService;
 import org.repin.service.SemestersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,64 +30,47 @@ import java.util.List;
 @Slf4j
 public class AdminController {
 
-    private final FacultyRepository facultyRepository;
-    private final DeanStaffRepository deanStaffRepository;
+    private final FacultyService facultyService;
+    private final DeanStaffService deanStaffService;
     private final SpecialityRepository specialityRepository;
     private final SemestersService semestersService;
 
     @Autowired
-    AdminController(FacultyRepository facultyRepository,
-                    DeanStaffRepository deanStaffRepository,
+    AdminController(FacultyService facultyService,
+                    DeanStaffService deanStaffService,
                     SpecialityRepository specialityRepository,
                     SemestersService semestersService){
-        this.facultyRepository = facultyRepository;
-        this.deanStaffRepository = deanStaffRepository;
+        this.facultyService = facultyService;
+        this.deanStaffService = deanStaffService;
         this.specialityRepository = specialityRepository;
         this.semestersService = semestersService;
     }
 
     @GetMapping("/get_faculties")
     ResponseEntity<GenericTableDataDto<Faculty>> getFaculties(){
-        List<Faculty> faculties =  facultyRepository.findAll();
-        List<String> headers = List.of("#", "Название", "Почта", "Номер телефона");
-        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, faculties));
+        GenericTableDataDto<Faculty> faculties =  facultyService.getFaculties();
+        return ResponseEntity.ok().body(faculties);
     }
 
     @PostMapping("add_faculty")
     ResponseEntity<Faculty> addFaculty(@Valid @RequestBody FacultyDto facultyDto){
-        log.info("Запрос на API /api/add_faculty с данными: {}", facultyDto);
-        Faculty faculty = new Faculty(facultyDto.getName(),
-                facultyDto.getEmail(),
-                facultyDto.getPhoneNumber());
-        log.info("Сохранение сущности Faculty: {}", faculty);
-        return ResponseEntity.ok().body(facultyRepository.save(faculty));
+
+        return ResponseEntity.ok().body(facultyService.addFaculty(facultyDto));
     }
 
     @GetMapping("/get_staff")
     ResponseEntity<GenericTableDataDto<DeanStaffMember>> getStaff(){
-        List<DeanStaffMember> deanStaffMembers = deanStaffRepository.findAll();
-        List<String> headers = List.of("#", "ФИО", "Почта", "Факультет");
-        return ResponseEntity.ok().body(new GenericTableDataDto<>(headers, deanStaffMembers));
+        GenericTableDataDto<DeanStaffMember> deanStaffMembers = deanStaffService.getStaff();
+        return ResponseEntity.ok().body(deanStaffMembers);
     }
 
-    @PostMapping("add_staff_member")
+    @PostMapping("/add_staff_member")
     ResponseEntity<GeneratedPasswordDto> addStaffMemberAndGeneratePassword(@Valid @RequestBody StaffMemberDto staffMemberDto){
-        String generatedPassword = RandomStringUtils.randomAlphanumeric(8);
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();    //TODO вынести в отдельный сервис и сделать уведомления на почту через кафку
-        String encodedPassword = encoder.encode(generatedPassword);
-
-        DeanStaffMember deanStaffMember = new DeanStaffMember(
-                staffMemberDto.getName(),
-                staffMemberDto.getEmail(),
-                staffMemberDto.getFaculty(),
-                encodedPassword
-        );
-
-        deanStaffRepository.save(deanStaffMember);
+        GeneratedPasswordDto generatedPassword = deanStaffService.addStaffMemberAndGeneratePassword(staffMemberDto);
 
         log.info("Сохранение сущности Faculty: {}", staffMemberDto);
-        return ResponseEntity.ok().body(new GeneratedPasswordDto(generatedPassword)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(generatedPassword); //сохраняем сущность и возвращаем пароль
     }
 
     @GetMapping("/get_specialities")
