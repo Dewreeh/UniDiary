@@ -149,18 +149,6 @@ function StudensTable({ title, onAdd }) {
         <button className="button add-button" onClick={handleAdd}>Добавить</button>
       </div>
       
-      {generatedPassword && (
-        <div className="password-info">
-          <p>Сгенерированный пароль: <strong>{generatedPassword}</strong></p>
-        </div>
-      )}
-      
-      {passwordPopup && (
-        <div className="password-popup show">
-          Сгенерированный пароль: {passwordPopup}
-          <button className="close-btn" onClick={() => setPasswordPopup(null)}>OK</button>
-        </div>
-      )}
     </div>
   );
 }

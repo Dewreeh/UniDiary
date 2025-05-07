@@ -1,6 +1,5 @@
 package org.repin.service;
 
-import org.repin.dto.request_dto.AttendanceDto;
 import org.repin.dto.request_dto.AttendanceRecordDto;
 import org.repin.dto.response_dto.AttendanceFormResponse;
 import org.repin.dto.response_dto.StudentAttendanceDto;
@@ -13,7 +12,6 @@ import org.repin.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -62,7 +60,7 @@ public class AttendanceService {
 //       attendanceRepository.saveAll(attendances);
 
        if(!Objects.equals(dto.getTimestamp().getDayOfYear(), LocalDateTime.now().getDayOfYear())){
-           throw new IllegalStateException("Поставить отметку за конкретный день нельзя заранее");
+           throw new IllegalStateException("Поставить отметку за конкретный день можно только в этот же день");
        }
 
        List<Attendance> attendances =  dto.getAttendanceList().stream().map(

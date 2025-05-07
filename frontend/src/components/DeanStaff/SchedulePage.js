@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import { request } from '../../api/api';
+import * as formatters from '../General/formatters'
 import Table from '../Table';
 
 function ScheduleTable({ title }) {
@@ -72,18 +73,18 @@ function ScheduleTable({ title }) {
         request(`/api/get_schedules_for_faculty${params}`),
         request(`/api/get_lecturers${params}`),
         request('/api/get_disciplines'),
-        request(`/api/get_groups${params}`)
+        request(`/api/get_groups_by_dean_staff${params}`)
       ]);
       
       const formattedData = Array.isArray(schedule) 
         ? schedule.map(item => ({
             ...item,
             groups: item.groups?.map(g => g.name).join(', ') || '',
-            weekday: formatWeekday(item.weekday),
-            weekType: formatWeekType(item.weekType),
-            lessonType: formatLessonType(item.lessonType),
-            startTime: formatTime(item.startTime),
-            endTime: formatTime(item.endTime)
+            weekday: formatters.formatWeekday(item.weekday),
+            weekType: formatters.formatWeekType(item.weekType),
+            lessonType: formatters.formatLessonType(item.lessonType),
+            startTime: formatters.formatTime(item.startTime),
+            endTime: formatters.formatTime(item.endTime)
           }))
         : [];
 
@@ -325,37 +326,6 @@ function ScheduleTable({ title }) {
   );
 }
 
-function formatWeekday(weekday) {
-  const days = {
-    MONDAY: 'Понедельник',
-    TUESDAY: 'Вторник',
-    WEDNESDAY: 'Среда',
-    THURSDAY: 'Четверг',
-    FRIDAY: 'Пятница',
-    SATURDAY: 'Суббота'
-  };
-  return days[weekday] || weekday;
-}
 
-function formatWeekType(weekType) {
-  const types = {
-    HIGH: 'Верхняя',
-    LOW: 'Нижняя',
-    BOTH: 'Обе'
-  };
-  return types[weekType] || weekType;
-}
-
-function formatLessonType(lessonType) {
-  const types = {
-    LECTURE: 'Лекция',
-    PRACTICE: 'Практика'
-  };
-  return types[lessonType] || lessonType;
-}
-
-function formatTime(timeString) {
-  return timeString ? timeString.slice(0, 5) : '';
-}
 
 export default ScheduleTable;

@@ -11,6 +11,7 @@ import LecturersTable from './DeanStaff/LecturersTable';
 import SemesterTable from './Admin/SemesterTable';
 import SchedulePage from './DeanStaff/SchedulePage';
 import Attendance from './Headman/Attendance';
+import LecturerAttendance from './Lecturer/LecturerAttendance';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -23,7 +24,7 @@ function WorkFlow() {
       fakultety: '/api/get_faculties',
       'sotrudniki-dekanatov': '/api/get_staff',
       fakultety: '/api/get_faculties',
-      gruppy: `/api/get_groups${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
+      gruppy: `/api/get_groups_by_dean_staff${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       studenty: `/api/get_students${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       discipliny: `/api/get_disciplines${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
       starosty: `/api/get_headmen${localStorage.getItem('userRole') === 'ROLE_DEAN_STAFF' ? '?userId=' + localStorage.getItem('userId') : ''}`,
@@ -65,7 +66,7 @@ function WorkFlow() {
       {section === "prepodavateli" && <LecturersTable data={data} onAdd={setData} />}
       {section === "semestry" && <SemesterTable data={data} onAdd={setData} />}
       {section === "raspisanie" && <SchedulePage data={data} onAdd={setData} />}
-      {section === "poseshchaemost" && <Attendance data={data} onAdd={setData} />}
+      {section === "poseshchaemost" && <LecturerAttendance data={data} onAdd={setData} />}
 
     </div>
   );

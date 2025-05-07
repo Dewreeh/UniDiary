@@ -26,8 +26,8 @@ public class AttendanceController {
     }
 
     @GetMapping("/get_attendance_for_schedule")
-    ResponseEntity<AttendanceFormResponse> markAttendance(@RequestParam("scheduleId") UUID scheduleId,
-                                                          @RequestParam("groupId") UUID groupId){
+    ResponseEntity<AttendanceFormResponse> getAttendance(@RequestParam("scheduleId") UUID scheduleId,
+                                                         @RequestParam("groupId") UUID groupId){
 
         return ResponseEntity.ok().body(attendanceService.getAttendanceInfo(groupId, scheduleId));
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { request } from '../../api/api';
 import { useParams } from 'react-router-dom';
+import * as formatters from '../General/formatters'
 import '../index.css';
 
 function AttendanceMarking() {
@@ -98,8 +99,8 @@ function AttendanceMarking() {
       <h2 className="table-title">Заполнение посещаемости</h2>
       <div className="schedule-info">
         <h3>
-          {scheduleItem.disciplineName} - {formatWeekday(scheduleItem.weekday)}, 
-          {formatTime(scheduleItem.startTime)} ({formatWeekType(scheduleItem.weekType)})
+          {scheduleItem.disciplineName} - {" " + formatters.formatWeekday(scheduleItem.weekday)}, 
+          {" " + formatters.formatTime(scheduleItem.startTime) + ", " + date} ({formatters.formatWeekType(scheduleItem.weekType)})
         </h3>
         <p>Преподаватель: {scheduleItem.lecturerName}</p>
       </div>
@@ -145,38 +146,6 @@ function AttendanceMarking() {
 }
 
 
-function formatWeekday(weekday) {
-  const days = {
-    MONDAY: 'Понедельник',
-    TUESDAY: 'Вторник',
-    WEDNESDAY: 'Среда',
-    THURSDAY: 'Четверг',
-    FRIDAY: 'Пятница',
-    SATURDAY: 'Суббота'
-  };
-  return days[weekday] || weekday;
-}
-
-function formatWeekType(weekType) {
-  const types = {
-    HIGH: 'Верхняя неделя',
-    LOW: 'Нижняя неделя',
-    BOTH: 'Обе недели'
-  };
-  return types[weekType] || weekType;
-}
-
-function formatTime(timeString) {
-  return timeString ? timeString.slice(0, 5) : '';
-}
-
-function formatLocalDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
-  
   function padTimeWithSeconds(timeString) {
     if (!timeString) return '00:00:00';
     

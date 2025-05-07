@@ -21,11 +21,18 @@ public class GroupsController {
     }
 
 
-    @GetMapping("/get_groups")
-    public ResponseEntity<GenericTableDataDto<StudentGroup>> getStudentGroups(@RequestParam("userId") UUID deanStaffId) {
+    @GetMapping("/get_groups_by_dean_staff")
+    public ResponseEntity<GenericTableDataDto<StudentGroup>> getStudentGroupsByStaff(@RequestParam("userId") UUID deanStaffId) {
 
-        return ResponseEntity.ok(groupsService.getStudentGroups(deanStaffId));
+        return ResponseEntity.ok(groupsService.getStudentGroupsByStaff(deanStaffId));
     }
+
+    @GetMapping("/get_groups")
+    public ResponseEntity<GenericTableDataDto<StudentGroup>> getStudentGroups() {
+
+        return ResponseEntity.ok(groupsService.getStudentGroups());
+    }
+
 
     @PostMapping("/add_group")
     public ResponseEntity<Object> addStudentGroup(@Valid @RequestBody StudentGroupDto dto) {

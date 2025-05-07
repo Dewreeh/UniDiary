@@ -3,8 +3,6 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 
 export const request = async (endpoint, method = 'GET', body = null) => {
-  
-
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -20,11 +18,20 @@ export const request = async (endpoint, method = 'GET', body = null) => {
 
   try {
     const response = await fetch(`${API_URL}${endpoint}`, options);
+    
+    const responseData = await response.json(); 
+    
     if (!response.ok) {
-      throw new Error(`Ошибка на сервере:` + response.message);
+    
+      const errorMessage = responseData.message || response.statusText;
+      alert(errorMessage);
+      throw new Error(errorMessage);
     }
-    return await response.json();
+    
+    return responseData;
+    
   } catch (error) {
-    throw new Error(`Ошибка при запросе: ${error}`);
+    const errorMessage = error.message || 'Неизвестная ошибка при выполнении запроса';
+    throw new Error(errorMessage);
   }
 };

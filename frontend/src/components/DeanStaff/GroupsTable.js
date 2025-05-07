@@ -75,13 +75,6 @@ function GroupsTable({ data }) {
     }
   };
 
-  const dataWithLinks = {
-    ...data,
-    data: data.data.map(group => ({
-      ...group,
-      name: <Link to={`/group/${group.id}`} className="group-link">{group.name}</Link>
-    }))
-  };
 
   return (
     <div className="table-container">

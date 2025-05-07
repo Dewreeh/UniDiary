@@ -73,11 +73,9 @@ function GroupStudentsTable() {
       try {
         const response = await request(`/api/add_headman?studentId=${selectedStudentId}`, "POST");
         alert("Староста успешно добавлен!");
-        setPasswordPopup(response.generatedPassword);
         setSelectedStudentId("");
       } catch (error) {
-        console.error("Ошибка при добавлении старосты:", error);
-        alert(error.response?.data?.message || "Ошибка при добавлении");
+        alert(error.response?.message || "Ошибка при добавлении");
       }
     };
 
@@ -173,18 +171,6 @@ function GroupStudentsTable() {
         </button>
       </div>
 
-      {generatedPassword && (
-        <div className="password-info">
-          <p>Сгенерированный пароль: <strong>{generatedPassword}</strong></p>
-        </div>
-      )}
-      
-      {passwordPopup && (
-        <div className="password-popup show">
-          Сгенерированный пароль: {passwordPopup}
-          <button className="close-btn" onClick={() => setPasswordPopup(null)}>OK</button>
-        </div>
-      )}
     </div>
   );
 }

@@ -8,7 +8,6 @@ import org.repin.enums.Weekday;
 import org.repin.model.*;
 import org.repin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,8 +61,8 @@ public class SchedulesController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/get_concrete_schedules_for_group_by_filters")
-    ResponseEntity<List<ConcreteSchedule>> getSchedule(@RequestParam(name="groupId", required = true) UUID groupId,
+    @GetMapping("/get_concrete_schedules_by_filters")
+    ResponseEntity<List<ConcreteSchedule>> getSchedule(@RequestParam(name="groupId", required = false) UUID groupId,
                                                        @RequestParam(name="weekday", required = false) Weekday weekday,
                                                        @RequestParam(name="lecturerId", required = false) UUID lecturerId,
                                                        @RequestParam(name="disciplineId", required = false) UUID disciplineId){

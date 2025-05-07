@@ -16,14 +16,11 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class StudentsController {
 
-    private final GroupsService groupsService;
     private final StudentsService studentsService;
 
 
     @Autowired
-    StudentsController(GroupsService groupsService,
-                       StudentsService studentsService) {
-        this.groupsService = groupsService;
+    StudentsController(StudentsService studentsService) {
         this.studentsService = studentsService;
     }
 
@@ -61,7 +58,7 @@ public class StudentsController {
     @PostMapping("/add_headman")
     ResponseEntity<GeneratedPasswordDto> promoteStudentToHeadman(@RequestParam("studentId") UUID studentId){
 
-        return ResponseEntity.ok().body(studentsService.promoteStudentToHeadman(studentId)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(studentsService.promoteStudentToHeadman(studentId));
     }
 
 }

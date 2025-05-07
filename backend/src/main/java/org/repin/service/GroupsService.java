@@ -31,13 +31,21 @@ public class GroupsService {
         this.studentRepository = studentRepository;
     }
 
-    public GenericTableDataDto<StudentGroup> getStudentGroups(UUID deanStaffId) {
+    public GenericTableDataDto<StudentGroup> getStudentGroupsByStaff(UUID deanStaffId) {
 
         UUID facultyId = deanStaffRepository.findFacultyByStaffId(deanStaffId)
                 .orElseThrow(() -> new EntityNotFoundException("Факультет не найден"));
 
         List<StudentGroup> studentGroups = studentGroupsRepository.findByFacultyId(facultyId);
 
+
+        List<String> headers = List.of("#", "Название", "Специальность", "Факультет", "Почта группы");
+        return new GenericTableDataDto<>(headers, studentGroups);
+    }
+
+    public GenericTableDataDto<StudentGroup> getStudentGroups() {
+
+        List<StudentGroup> studentGroups = studentGroupsRepository.findAll();
 
         List<String> headers = List.of("#", "Название", "Специальность", "Факультет", "Почта группы");
         return new GenericTableDataDto<>(headers, studentGroups);
