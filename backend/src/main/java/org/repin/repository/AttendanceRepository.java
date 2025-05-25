@@ -27,8 +27,17 @@ public interface AttendanceRepository extends JpaRepository<Attendance, UUID> {
             "a.scheduleItem.id = :scheduleId AND " +
             "a.student.id IN :studentIds AND " +
             "a.timestamp = :timestamp")
-    List<Attendance> findByScheduleIdAndStudentIdInAndTimestamp(
+    List<Attendance> findByScheduleIdAndStudentIdsAndTimestamp(
             @Param("scheduleId") UUID scheduleId,
             @Param("studentIds") List<UUID> studentIds,
+            @Param("timestamp") LocalDateTime timestamp);
+
+    @Query("SELECT a FROM Attendance a WHERE " +
+            "a.scheduleItem.id = :scheduleId AND " +
+            "a.student.id = :studentId AND " +
+            "a.timestamp = :timestamp")
+    Optional<Attendance> findByScheduleIdAndStudentIdAndTimestamp(
+            @Param("scheduleId") UUID scheduleId,
+            @Param("studentId") UUID studentId,
             @Param("timestamp") LocalDateTime timestamp);
 }

@@ -51,7 +51,7 @@ public class SchedulesController {
     @GetMapping("/get_schedule_item")
     ResponseEntity<ScheduleResponseDto> addScheduleItem(@RequestParam("scheduleId") UUID scheduleId){
 
-        return ResponseEntity.ok().body(schedulesService.getScheduleItem(scheduleId)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(schedulesService.getScheduleItem(scheduleId));
     }
 
 

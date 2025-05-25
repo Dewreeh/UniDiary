@@ -17,5 +17,4 @@ public class StudentDto {
     @NotNull(message = "Поле не должно быть пустым!")
     @JsonProperty("studentGroup")
     UUID studentGroup;
-
 }

@@ -60,19 +60,18 @@ public class AttendanceService {
 //       attendanceRepository.saveAll(attendances);
 
        if(!Objects.equals(dto.getTimestamp().getDayOfYear(), LocalDateTime.now().getDayOfYear())){
-           throw new IllegalStateException("Поставить отметку за конкретный день можно только в этот же день");
+           throw new IllegalStateException("Запись недоступна");
        }
 
        List<Attendance> attendances =  dto.getAttendanceList().stream().map(
                elem -> {
                    Attendance attendance = attendanceRepository.findExisting(dto.getScheduleItemId(), elem.getStudentId(), dto.getTimestamp())
                            .orElse(new Attendance());
-
-                   attendance.setStudent(studentRepository.getReferenceById(elem.getStudentId()));
-                   attendance.setScheduleItem(scheduleItemRepository.getReferenceById(dto.getScheduleItemId()));
-                   attendance.setAttendanceStatus(elem.getAttendanceStatus());
-                   attendance.setTimestamp(dto.getTimestamp());
-
+                                   attendance.setStudent(studentRepository.getReferenceById(elem.getStudentId()));
+                                   attendance.setScheduleItem(scheduleItemRepository.getReferenceById(dto.getScheduleItemId()));
+                                   attendance.setTimestamp(dto.getTimestamp()
+                                   );
+                   attendance.setAttendanceStatus(elem.getAttendanceStatus()); // в любом случае ставим статус из запроса пользователя, т.к. возможно он поменялся
                    return attendance;
                }
        ).toList();
@@ -94,7 +93,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
 
         Map<UUID, Boolean> existingAttendance = attendanceRepository
-                .findByScheduleIdAndStudentIdInAndTimestamp(scheduleId, studentIds, timestamp)
+                .findByScheduleIdAndStudentIdsAndTimestamp(scheduleId, studentIds, timestamp)
                 .stream()
                 .collect(Collectors.toMap(
                         a -> a.getStudent().getId(),

@@ -28,8 +28,6 @@ public class StudentGroup {
 
     String email;
 
-
-
     public StudentGroup(String name, Speciality speciality, Faculty faculty, String email) {
         this.name = name;
         this.speciality = speciality;
