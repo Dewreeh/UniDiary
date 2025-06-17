@@ -5,6 +5,8 @@ import org.repin.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -27,9 +29,10 @@ public class AttendanceController {
 
     @GetMapping("/get_attendance_for_schedule")
     ResponseEntity<AttendanceFormResponse> getAttendance(@RequestParam("scheduleId") UUID scheduleId,
-                                                         @RequestParam("groupId") UUID groupId){
+                                                         @RequestParam("groupId") UUID groupId,
+                                                         @RequestParam("date") LocalDate date){
 
-        return ResponseEntity.ok().body(attendanceService.getAttendanceInfo(groupId, scheduleId));
+        return ResponseEntity.ok().body(attendanceService.getAttendanceInfo(groupId, scheduleId, date));
     }
 
 }

@@ -34,7 +34,7 @@ public class DeanStaffMember implements AppUser{
 
     @Override
     public String getRole() {
-        return "ROLE_DEAN_STAFF";
+        return "DEAN_STAFF";
     }
 
 }

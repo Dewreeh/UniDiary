@@ -3,10 +3,6 @@ package org.repin.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -27,10 +23,9 @@ public class Lecturer implements AppUser{
 
     @JsonIgnore
     String password;
-
     @Override
     public String getRole() {
-        return "ROLE_LECTURER";
+        return "LECTURER";
     }
 
     public Lecturer(String name, String email, Faculty faculty, String password) {

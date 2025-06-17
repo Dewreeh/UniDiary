@@ -38,7 +38,8 @@ public class Student implements AppUser{
     public Student(){}
     @Override
     public String getRole() {
-        return "ROLE_STUDENT";
+        if(this.isHeadman) return "HEADMAN";
+        return "STUDENT";
     }
 
 }

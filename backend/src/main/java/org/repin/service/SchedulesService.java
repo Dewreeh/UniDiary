@@ -47,7 +47,7 @@ public class SchedulesService {
 
     @Transactional
     public ScheduleItem createScheduleItem(ScheduleAddDto dto){
-        //Проверка, нет ли такого занятия
+        //Проверка, нет ли такого занятия, добавленного ранее (например, сотрудником другого деканата)
         Optional<ScheduleItem> existingSchedule = scheduleItemRepository.checkExistance(
                 dto.getLecturerId(),
                 dto.getDisciplineId(),
@@ -68,7 +68,7 @@ public class SchedulesService {
 
         List<GroupSchedule> groupScheduleList = getGroupSchdeduleList(dto.getGroupIds(), savedScheduleItem);
 
-        groupScheduleRepository.saveAll(groupScheduleList); //TODO пересмотреть, возможно можно сохранять данные в промежуточную таблицу средствами hibernate (через set<group> в сущности ScheduleItem)
+        groupScheduleRepository.saveAll(groupScheduleList);
 
         return savedScheduleItem;
     }
@@ -101,7 +101,7 @@ public class SchedulesService {
 
 
     @Transactional
-    private ScheduleItem addGroupsToExistedLesson(UUID scheduleItemId, List<UUID> groupIds){
+        private ScheduleItem addGroupsToExistedLesson(UUID scheduleItemId, List<UUID> groupIds){
         Set<UUID> existingGroupIds = groupScheduleRepository
                 .findByScheduleItemId(scheduleItemId)
                 .stream()
@@ -125,14 +125,14 @@ public class SchedulesService {
         return scheduleItem;
     }
 
-    public List<ScheduleResponseDto> getSchedulesForFaculty(UUID staffId,
+    public List<ScheduleResponseDto> getSchedules(UUID userId,
                                                             UUID groupId,
                                                             Weekday weekday,
                                                             UUID lecturerId,
                                                             UUID disciplineId) {
 
-        UUID facultyId = deanStaffRepository.findFacultyByStaffId(staffId)
-                .orElseThrow(() -> new EntityNotFoundException());
+        UUID facultyId = deanStaffRepository.findFacultyByStaffId(userId)
+                .orElseThrow(EntityNotFoundException::new);
 
         List<ScheduleItem> items = scheduleItemRepository.findByFilters(
                 groupId,
@@ -170,17 +170,16 @@ public class SchedulesService {
                 disciplineId
         );
 
-        return(buildConcreteSchedule(items, 7));
-
+        return(buildConcreteSchedule(items, LocalDate.now(), LocalDate.now().plusDays(7)));
     }
 
 
     //простраиваем конкретное расписание с конкретными датами на daysFromCurrent от текущей даты
-    private List<ConcreteSchedule> buildConcreteSchedule(List<ScheduleItem> scheduleItems, int daysFromCurrent){
-        LocalDate currentDate = LocalDate.now();
+    public List<ConcreteSchedule> buildConcreteSchedule(List<ScheduleItem> scheduleItems, LocalDate startDate, LocalDate endDate){
+        LocalDate currentDate = startDate;
         List<ConcreteSchedule> concreteSchedules = new ArrayList<>();
 
-        while(daysFromCurrent > 0){
+        while(currentDate.isBefore(endDate)){
             ConcreteSchedule concreteSchedule = new ConcreteSchedule();
 
             concreteSchedule.setDate(currentDate);
@@ -188,7 +187,7 @@ public class SchedulesService {
             List<ScheduleResponseDto> schedulesForDay = new ArrayList<>();
             for(ScheduleItem item: scheduleItems){
                 if(currentDate.getDayOfWeek().getValue() - 1 == item.getWeekday().ordinal()
-                   && currentDate.getDayOfWeek().getValue() != 6)
+                   && currentDate.getDayOfWeek().getValue() != 7)
                 {                                                       //TODO придумать как учитывать верхние и нижние недели, помимо дня недели...
                     schedulesForDay.add(mapToResponseDto(item));
                 }
@@ -200,7 +199,6 @@ public class SchedulesService {
             }
 
             currentDate = currentDate.plusDays(1);
-            daysFromCurrent--;
         }
 
         return concreteSchedules;

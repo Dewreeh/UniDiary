@@ -33,7 +33,7 @@ public class SchedulesController {
                                                            @RequestParam(name="lecturerId", required = false) UUID lecturerId,
                                                            @RequestParam(name="disciplineId", required = false) UUID disciplineId){
 
-        return ResponseEntity.ok().body(schedulesService.getSchedulesForFaculty(
+        return ResponseEntity.ok().body(schedulesService.getSchedules(
                 userId,
                 groupId,
                 weekday,
@@ -45,11 +45,11 @@ public class SchedulesController {
     @PostMapping("/add_schedule_item")
     ResponseEntity<ScheduleItem> addScheduleItem(@Valid @RequestBody ScheduleAddDto dto){
 
-        return ResponseEntity.ok().body(schedulesService.createScheduleItem(dto)); //сохраняем сущность и возвращаем пароль
+        return ResponseEntity.ok().body(schedulesService.createScheduleItem(dto));
     }
 
     @GetMapping("/get_schedule_item")
-    ResponseEntity<ScheduleResponseDto> addScheduleItem(@RequestParam("scheduleId") UUID scheduleId){
+    ResponseEntity<ScheduleResponseDto> getScheduleItem(@RequestParam("scheduleId") UUID scheduleId){
 
         return ResponseEntity.ok().body(schedulesService.getScheduleItem(scheduleId));
     }

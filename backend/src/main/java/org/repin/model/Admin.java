@@ -22,7 +22,7 @@ public class Admin implements AppUser {
 
     @Override
     public String getRole() {
-        return "ROLE_ADMIN";
+        return "ADMIN";
     }
 
 }

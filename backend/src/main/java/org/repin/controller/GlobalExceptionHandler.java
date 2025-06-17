@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.repin.dto.response_dto.ErrorMessageDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -49,6 +50,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> IllegalStateExceptionHandler(Exception e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessageDto(e.getMessage()));
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Object> BadCredentialsExceptionHandler(Exception e){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorMessageDto(e.getMessage()));
+    }
+
 
 
 }

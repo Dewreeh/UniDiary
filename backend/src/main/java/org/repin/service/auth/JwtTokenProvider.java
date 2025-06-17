@@ -2,19 +2,20 @@ package org.repin.service.auth;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.repin.dto.auth.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 
 
 @Service
 public class JwtTokenProvider {
-
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
@@ -26,16 +27,19 @@ public class JwtTokenProvider {
     }
 
     public String generateToken(Authentication authentication) {
-        String username = authentication.getName();
-        String role = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
+        String role = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .map(a -> a.replace("ROLE_", ""))
+                .collect(Collectors.joining(","));
+
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(userDetails.getUsername())
+                .claim("id", userDetails.getUserId())
                 .claim("role", role)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
@@ -44,44 +48,35 @@ public class JwtTokenProvider {
     }
 
     public String getUsernameFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(getSigningKey())
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
     }
 
-    public String getRoleFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.get("role", String.class);
+    public UUID getUserIdFromJWT(String token) {
+        return UUID.fromString(
+                Jwts.parser()
+                        .verifyWith(getSigningKey())
+                        .build()
+                        .parseSignedClaims(token)
+                        .getPayload()
+                        .get("id", String.class)
+        );
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(getSigningKey())
+                    .verifyWith(getSigningKey())
                     .build()
-                    .parseClaimsJws(token);
+                    .parseSignedClaims(token);
             return true;
-        } catch (MalformedJwtException ex) {
-            // Invalid JWT token
-        } catch (ExpiredJwtException ex) {
-            // Expired JWT token
-        } catch (UnsupportedJwtException ex) {
-            // Unsupported JWT token
-        } catch (IllegalArgumentException ex) {
-            // JWT claims string is empty
-        } catch (SecurityException ex) {
-            // Invalid signature
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
         }
-        return false;
     }
 
     public long getExpirationInSeconds() {

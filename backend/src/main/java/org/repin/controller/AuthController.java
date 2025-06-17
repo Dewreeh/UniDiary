@@ -1,14 +1,16 @@
 package org.repin.controller;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.repin.dto.auth.CustomUserDetails;
 import org.repin.dto.auth.JwtAuthResponse;
 import org.repin.dto.auth.LoginRequest;
-import org.repin.model.AppUser;
 import org.repin.service.auth.JwtTokenProvider;
 import org.repin.service.auth.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,15 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
+    @Qualifier("authenticationManager")
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
     private final UserService userService;
+
+    @Autowired
+    AuthController(AuthenticationManager authenticationManager,
+                   JwtTokenProvider tokenProvider,
+                   UserService userService){
+        this.authenticationManager = authenticationManager;
+        this.tokenProvider = tokenProvider;
+        this.userService = userService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
@@ -36,10 +49,9 @@ public class AuthController {
                 loginRequest.getRole());
 
         String usernameWithRole = loginRequest.getEmail() + ":" + loginRequest.getRole().toUpperCase();
-        log.debug("Сформированный логин с ролью: {}", usernameWithRole);
-
+        log.info("Сформированный логин с ролью: {}", usernameWithRole);
         try {
-            log.debug("Попытка аутентификации...");
+            log.info("Попытка аутентификации...");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             usernameWithRole,
@@ -51,8 +63,9 @@ public class AuthController {
             log.info("Аутентификация успешна для пользователя: {}", usernameWithRole);
 
             log.debug("Загрузка данных пользователя...");
-            AppUser appUser = userService.loadAppUserByUsername(usernameWithRole);
-            log.debug("Загружены данные пользователя: ID={}, Роль={}", appUser.getId(), appUser.getRole());
+            CustomUserDetails user = (CustomUserDetails) userService.loadUserByUsername(usernameWithRole);
+            UUID userId = user.getUserId();
+            log.debug("Загружены данные пользователя: ID={}, Роль={}", userId, user.getAuthorities());
 
             log.debug("Генерация JWT токена...");
             String token = tokenProvider.generateToken(authentication);
@@ -61,19 +74,18 @@ public class AuthController {
 
             JwtAuthResponse response = new JwtAuthResponse(
                     token,
-                    "Bearer",
                     expiresIn,
-                    appUser.getRole(),
-                    appUser.getEmail(),
-                    appUser.getId()
+                    user.getAuthorities(),
+                    user.getUsername(),
+                    userId
             );
 
-            log.info("Успешный вход для пользователя: {}", appUser.getEmail());
+            log.info("Успешный вход для пользователя: {}", user.getUsername());
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
             log.error("ОШИБКА АУТЕНТИФИКАЦИИ для {}: {}", usernameWithRole, e.getMessage());
-            throw e;
+            throw new BadCredentialsException("Неправильный логин или пароль");
         }
     }
 }

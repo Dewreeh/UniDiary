@@ -48,9 +48,8 @@ public class AdminController {
         return ResponseEntity.ok().body(faculties);
     }
 
-    @PostMapping("add_faculty")
+    @PostMapping("/add_faculty")
     ResponseEntity<Faculty> addFaculty(@Valid @RequestBody FacultyDto facultyDto){
-
         return ResponseEntity.ok().body(facultyService.addFaculty(facultyDto));
     }
 

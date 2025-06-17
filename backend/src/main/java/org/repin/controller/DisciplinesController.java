@@ -38,6 +38,7 @@ public class DisciplinesController {
 
     @DeleteMapping("/delete_discipline")
     public ResponseEntity<Object> deleteDiscipline(UUID disciplineId) {
+
         disciplinesService.deleteDiscipline(disciplineId);
         return ResponseEntity.ok().build();
     }
