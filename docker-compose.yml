@@ -1,16 +1,48 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  backend:
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "80:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/UniDiary
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: postgres:19-alpine
+    environment:
+      POSTGRES_DB: UniDiary
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
