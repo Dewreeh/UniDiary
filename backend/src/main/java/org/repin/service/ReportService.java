@@ -4,6 +4,7 @@ import org.repin.dto.response_dto.ConcreteSchedule;
 import org.repin.dto.response_dto.WeekReportGeneral;
 import org.repin.dto.response_dto.WeekReportGeneralStudent;
 import org.repin.dto.response_dto.WeekReportGeneralStudent;
+import org.repin.model.Attendance;
 import org.repin.model.ScheduleItem;
 import org.repin.model.Student;
 import org.repin.repository.AttendanceRepository;
@@ -55,6 +56,7 @@ public class ReportService {
         report.setEndDate(endDate);
         report.setDates(dates);
 
+
         List<WeekReportGeneralStudent> studentReports = students.stream().map(
                 student -> {
                     WeekReportGeneralStudent studentReport = new WeekReportGeneralStudent();
@@ -62,6 +64,9 @@ public class ReportService {
                     studentReport.setStudentName(student.getName());
 
                     Map<LocalDate, Map<String, Boolean>> attendanceByDate = new LinkedHashMap<>();
+
+                    int totalLessons = 0;
+                    int attendedLessons = 0;
 
                     for(ConcreteSchedule daySchedule: schedules){
                         LocalDate date = daySchedule.getDate();
@@ -71,20 +76,30 @@ public class ReportService {
 
                                     LocalDateTime timestamp = LocalDateTime.of(date, lesson.getStartTime());
 
-                                    Boolean status = attendanceRepository
-                                            .findByScheduleIdAndStudentIdAndTimestamp(lesson.getId(), student.getId(), timestamp)
-                                            .get().getAttendanceStatus();
+                                    Optional<Attendance> statusOpt = attendanceRepository
+                                            .findByScheduleIdAndStudentIdAndTimestamp(lesson.getId(), student.getId(), timestamp);
+                                    Boolean status = false;
+                                    if(statusOpt.isPresent()){
+                                        status = statusOpt.get().getAttendanceStatus();
+                                    }
+
 
                                     String subjectKey = lesson.getDisciplineName() + " (" +
                                             lesson.getStartTime() + ")";
 
 
                                     attendanceByDate
-                                            .computeIfAbsent(date, k -> new HashMap<>())
-                                            .put(subjectKey, status);
+                                            .computeIfAbsent(date, k -> new HashMap<>()).put(subjectKey, status);
+
                                 });
+                        Map<String, Boolean> dayAttendance = attendanceByDate.get(date);
+                        if (dayAttendance != null) {
+                            totalLessons += dayAttendance.size();
+                            attendedLessons += (int) dayAttendance.values().stream().filter(Boolean::booleanValue).count();
+                        }
 
                     }
+                    studentReport.setAttendanceRate(getAttendanceRate(totalLessons, attendedLessons));
                     studentReport.setAttendanceByDate(attendanceByDate);
                     return studentReport;
                 }
@@ -92,5 +107,9 @@ public class ReportService {
 
         report.setStudents(studentReports);
         return report;
+    }
+
+    private Double getAttendanceRate(int countOfLessons, int countOfAttendance){
+        return countOfLessons != 0 ? (double) Math.round(((double) countOfAttendance / countOfLessons) * 10000) / 100 : 0;
     }
 }
