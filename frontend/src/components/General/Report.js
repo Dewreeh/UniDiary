@@ -69,44 +69,26 @@ function Report() {
     return new Date(dateStr).toLocaleDateString('ru-RU', options);
   };
 
-  const calculateAttendancePercentage = (attendanceByDate) => {
-    let total = 0;
-    let present = 0;
-    
-    Object.values(attendanceByDate).forEach(dateAttendance => {
-      Object.values(dateAttendance).forEach(isPresent => {
-        total++;
-        if (isPresent) present++;
-      });
-    });
-    
-    return total > 0 ? Math.round((present / total) * 100) : 0;
-  };
-
   const renderTableRows = () => {
-    return reportData.students.map(student => {
-      const studentAttendance = calculateAttendancePercentage(student.attendanceByDate);
-      
-      return (
-        <tr key={student.studentId}>
-          <td className="sticky-col">{student.studentName}</td>
-          {reportData.dates.flatMap(date => {
-            const lessons = student.attendanceByDate[date] || {};
-            return Object.entries(lessons).map(([lesson, isPresent]) => (
-              <td 
-                key={`${student.studentId}-${date}-${lesson}`}
-                className={isPresent ? 'present' : 'absent'}
-              >
-                {isPresent ? '✓' : '✗'}
-              </td>
-            ));
-          })}
-          <td className="sticky-col-right attendance-percentage">
-            {studentAttendance}%
-          </td>
-        </tr>
-      );
-    });
+    return reportData.students.map(student => (
+      <tr key={student.studentId}>
+        <td className="sticky-col">{student.studentName}</td>
+        {reportData.dates.flatMap(date => {
+          const lessons = student.attendanceByDate[date] || {};
+          return Object.entries(lessons).map(([lesson, isPresent]) => (
+            <td 
+              key={`${student.studentId}-${date}-${lesson}`}
+              className={isPresent ? 'present' : 'absent'}
+            >
+              {isPresent ? '✓' : '✗'}
+            </td>
+          ));
+        })}
+        <td className="sticky-col-right attendance-percentage">
+          {student.attendanceRate}%
+        </td>
+      </tr>
+    ));
   };
 
   return (
@@ -176,7 +158,7 @@ function Report() {
                     <th rowSpan="2" className="sticky-col">Студент</th>
                     {reportData.dates.map(date => (
                       <th key={date} colSpan={Object.keys(reportData.students[0]?.attendanceByDate[date] || {}).length}>
-                        {formatDate(date)}
+                        {date}
                       </th>
                     ))}
                     <th rowSpan="2" className="sticky-col-right">Посещаемость</th>
