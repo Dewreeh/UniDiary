@@ -15,22 +15,17 @@ function FormAdmin() {
                 email, 
                 password, 
                 role: "ADMIN" 
-            });
+            }, false);
     
-            if (response.role !== 'ROLE_ADMIN') {
-                setError('Недостаточно прав');
-                return;
-            }
     
-            localStorage.setItem('accessToken', response.accessToken);
-            localStorage.setItem('userRole', response.role); 
+            localStorage.setItem('accessToken', response.access_token);
+            localStorage.setItem('userRole', response.role[0].authority); 
             navigate('/admin');
         } catch (err) {
             setError('Ошибка входа. Проверьте почту и пароль.');
         }
     };
     
-
     return (
         <div className="form-user">
             <div className="login-horisontal-elems">

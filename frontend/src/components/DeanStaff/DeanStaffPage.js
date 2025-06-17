@@ -6,7 +6,7 @@ import AdminLogin from '../Login/AdminLogin';
 import ScheduleTable from './SchedulePage';
 
 function DeanStaffPage() {
-  const menuData = ["Группы", "Студенты", "Преподаватели", "Расписание", "Старосты", "Дисциплины"];
+  const menuData = ["Группы", "Студенты", "Преподаватели", "Расписание", "Старосты", "Дисциплины", "Отчёты"];
   const role = "dean_staff"
   return (
     <div className="DeanStaffPage">

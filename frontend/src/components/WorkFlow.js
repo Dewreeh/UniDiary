@@ -10,8 +10,9 @@ import HeadmanTable from './DeanStaff/HeadmanTable';
 import LecturersTable from './DeanStaff/LecturersTable';
 import SemesterTable from './Admin/SemesterTable';
 import SchedulePage from './DeanStaff/SchedulePage';
-import Attendance from './Headman/Attendance';
-import LecturerAttendance from './Lecturer/LecturerAttendance';
+import ScheduleView from './General/ScheduleView';
+import AttendanceMarking from './General/AttendanceMarking';
+import Report from './General/Report';
 
 function WorkFlow() {
   const { section } = useParams();
@@ -66,7 +67,16 @@ function WorkFlow() {
       {section === "prepodavateli" && <LecturersTable data={data} onAdd={setData} />}
       {section === "semestry" && <SemesterTable data={data} onAdd={setData} />}
       {section === "raspisanie" && <SchedulePage data={data} onAdd={setData} />}
-      {section === "poseshchaemost" && <LecturerAttendance data={data} onAdd={setData} />}
+      {section === "otchyoty" && <Report />}
+
+
+      {section === "poseshchaemost" && (
+          localStorage.getItem('userRole') === "ROLE_LECTURER" ? (
+          <ScheduleView title="Мои занятия" userRole="ROLE_LECTURER" showLecturerFilter={false} data={data} onAdd={setData}/>
+        ) : localStorage.getItem('userRole') === "ROLE_HEADMAN" ? (
+          <ScheduleView title="Мое расписание" userRole="ROLE_HEADMAN" showGroupsFilter={false} data={data}onAdd={setData}/>
+        ) : null
+      )}
 
     </div>
   );

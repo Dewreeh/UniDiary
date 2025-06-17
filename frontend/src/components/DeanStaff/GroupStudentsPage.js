@@ -72,7 +72,7 @@ function GroupStudentsTable() {
       
       try {
         const response = await request(`/api/add_headman?studentId=${selectedStudentId}`, "POST");
-        alert("Староста успешно добавлен!");
+        alert("Староста успешно добавлен!" + ", его сгенерированный пароль: " + response.generatedPassword);
         setSelectedStudentId("");
       } catch (error) {
         alert(error.response?.message || "Ошибка при добавлении");

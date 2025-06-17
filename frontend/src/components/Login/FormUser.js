@@ -28,10 +28,10 @@ function FormUser() {
         email, 
         password, 
         role: selectedRole 
-      });
+      }, false);
 
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('userRole', response.role);
+      localStorage.setItem('accessToken', response.access_token);
+      localStorage.setItem('userRole', response.role[0].authority);
       localStorage.setItem('userId', response.userId);
       
       navigate(`/${selectedRole.toLowerCase()}`);
